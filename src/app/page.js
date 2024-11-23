@@ -1,101 +1,59 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className="min-h-screen w-full">
+      <div className="relative">
+        <div
+          className="absolute z-0 inset-0 w-full h-full bg-cover bg-center"
+          style={{
+            backgroundImage: "url('https://thegameawards.com/jpegs/home-banner-poster.jpg')",
+          }}
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+        <video playsInline autoPlay preload="auto" loop muted className="absolute inset-0 z-0 object-cover w-full h-full">
+          <source src="https://cdn.thegameawards.com/frontend/video/tga-bg-video-2024.webm" type="video/webm" />
+          <source src="https://cdn.thegameawards.com/frontend/video/tga-bg-video-2024.mp4" type="video/mp4" />
+          <p className="flex items-center justify-center text-xl text-white max-w-1/2">
+            Seu navegador não suporta essa tag de vídeo.
+          </p>
+        </video>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <div className="relative z-10 min-h-[700px] w-full">
+          <div className="z-10 p-20 lg:p-[20vh]">
+            <Image src="/brand_logo.png" alt="PPDC Awards Brand Logo" width={500} height={500} quality={100} className="mb-5 lg:mb-0" />
+            <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-white">EM DEZEMBRO</h1>
+            <h2 className="mt-2 text-4xl font-bold text-yellow-100">POWERPOINT DISCORD</h2>
+            <div className="mt-10 flex items-center gap-4 flex-wrap">
+              <button className="bg-yellow-200 p-4 text-gray-900 font-bold transition-colors hover:bg-yellow-100">
+                CONHEÇA A NOSSA EQUIPE
+              </button>
+              <button className="bg-gray-900 p-4 text-white font-bold transition-colors hover:bg-gray-800">
+                VOTE AGORA
+              </button>
+            </div>
+          </div>
+          <div className="relative mt-auto p-4 flex flex-col justify-center min-h-[100px] text-center backdrop-blur-lg bg-black/30">
+            <h3 className="font-extrabold text-white">NOSSOS PATROCINADORES</h3>
+            <div className="mt-4 flex justify-center items-center gap-4 flex-wrap">
+              <Image src="/patrocinadores/bedrock.jfif" alt="Bedrock" width={30} height={30} quality={100} className="rounded-lg" />
+              <Image src="/patrocinadores/erilab.png" alt="Erilab" width={30} height={30} quality={100} />
+              <Image src="/patrocinadores/brother_corporation.png" alt="Brother Corporation" width={30} height={30} quality={100} />
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div className="relative">
+        <div className="relative z-10 p-10">
+          <h1 className="text-yellow-200 font-extrabold text-5xl">VEJA</h1>
+          <div className="mt-5">
+            <p className="font-extrabold text-white">Sem nada por enquanto...</p>
+          </div>
+        </div>
+        <div className="top-0 left-0 z-[-10] h-screen w-full bg-[url('https://cdn.thegameawards.com/frontend/jpegs/mid-section-bg_24.jpg')] bg-center bg-cover bg-no-repeat pointer-events-none fixed">
+          <div className="absolute inset-0 bg-black opacity-70" />
+        </div>
+      </div>
     </div>
   );
 }
