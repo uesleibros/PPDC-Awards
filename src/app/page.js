@@ -38,7 +38,7 @@ export default function Home() {
             <div className="mt-4 flex justify-center items-center gap-4 flex-wrap">
               <Image src="/patrocinadores/bedrock.png" alt="Bedrock" width={30} height={30} quality={100} />
               <Image src="/patrocinadores/erilab.png" alt="Erilab" width={30} height={30} quality={100} />
-              <Image src="/patrocinadores/brother_corporation.png" alt="Brother Corporation" width={30} height={30} quality={100} />
+              <Image src="/patrocinadores/pptgames.png" alt="PPTGames" width={30} height={30} quality={100} />
             </div>
           </div>
         </div>
