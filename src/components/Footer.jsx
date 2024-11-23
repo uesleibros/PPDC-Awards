@@ -11,12 +11,10 @@ export default function Footer() {
 					<Image src="/brand_logo.png" alt="PPDC Awards Brand Logo" width={350} height={350} quality={100} />
 				</Link>
 				<div className="-mt-2">
-					<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10 lg:w-[600px]">
+					<div className="flex items-center gap-10 flex-wrap lg:w-[600px] mb-10">
 						<Link href="/sobre" className="font-bold w-[max-content] text-slate-300 transition-colors hover:text-white hover:underline">SOBRE</Link>
 						<Link href="/faq" className="font-bold w-[max-content] text-slate-300 transition-colors hover:text-white hover:underline">FAQ</Link>
-						<Link href="/contato" className="font-bold w-[max-content] text-slate-300 transition-colors hover:text-white hover:underline">CONTATO</Link>
 						<Link href="/classe-do-futuro" className="font-bold w-[max-content] text-slate-300 transition-colors hover:text-white hover:underline">CLASSE DO FUTURO</Link>
-						<Link href="/jurados" className="font-bold w-[max-content] text-slate-300 transition-colors hover:text-white hover:underline">JURADOS</Link>
 						<Link href="/termos-e-condicoes" className="font-bold w-[max-content] text-slate-300 transition-colors hover:text-white hover:underline">TERMOS</Link>
 					</div>
 					<p className="font-semibold text-white">© {currentYear}, PPDC Awards</p>

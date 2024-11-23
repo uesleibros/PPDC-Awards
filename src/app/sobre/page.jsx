@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { headers } from "next/headers";
 
 export const metadata = {
 	title: "Sobre | PPDC Awards"
 };
 
-export default function Indicados() {
+export default async function Indicados() {
   const mediaKits = [
     {
       image: "/poster.png",
@@ -14,44 +15,17 @@ export default function Indicados() {
     }
   ]
 
-  const advisors = [
-    {
-      team: "ERILAB",
-      image: "/os-cabra/erick.png",
-      member: "ERICK LUIZ VB",
-      role: "CEO"
-    },
-    {
-      team: "PPTGAMES",
-      image: "/os-cabra/daniel-climaco.png",
-      member: "DANIEL CLÍMACO",
-      role: "CEO"
-    },
-    {
-      team: "ONEGAMES",
-      image: "/os-cabra/fabinho.png",
-      member: "FABINHO",
-      role: "CEO"
-    },
-    {
-      team: "BEDROCK",
-      image: "/os-cabra/ueslei.png",
-      member: "UESLEI PAIM",
-      role: "CEO"
-    },
-    {
-      team: null,
-      image: "/os-cabra/filipotopo.png",
-      member: "Filipotopo",
-      role: "CRIADOR DE JOGOS"
-    },
-    {
-      team: "Gabbs Basement",
-      image: "/os-cabra/gabb.jpg",
-      member: "Gabb",
-      role: "CEO"
-    }
-  ];
+  const headersList = await headers();
+  const protocol = headersList.get("x-forwarded-proto");
+  const host = headersList.get("host");
+
+  const req = await fetch(`${protocol}://${host}/api/advisors`);
+  const body = await req.json();
+  let advisors = [];
+
+  if (req.ok) {
+    advisors = body.advisors;
+  }
 
 	return (
 		<div className="min-h-screen w-full">
@@ -103,7 +77,7 @@ export default function Indicados() {
       </div>
       <div className="min-h-[700px] bg-[#6588ba] flex flex-col lg:flex-row justify-between lg:p-10">
         <div className="flex justify-center items-center p-10 lg:w-[550px] lg:h-[550px] clip-path-diamond relative">
-          <Image src="/os-cabra/erick-2.png" alt="Erick" width={1000} height={1000} quality={100} />
+          <Image src="/os-cabra/erick.png" alt="Erick" width={1000} height={1000} quality={100} />
         </div>
         <div className="mr-auto p-10 lg:p-20">
           <h3 className="font-bold text-3xl text-gray-900">CRIADOR</h3>
@@ -132,7 +106,7 @@ export default function Indicados() {
                 <Image className="object-cover lg:object-fill h-[250px] lg:h-full w-full lg:w-[250px] transition-all duration-400 filter grayscale group-hover:grayscale-0" src={advisor.image} alt={advisor.member} width={1000} height={1000} quality={100} />
                 <div className="p-5 border border-[#6588ba] w-full select-none transition-colors group-hover:bg-[#6588ba]">
                   {advisor.team && (
-                    <h3 className="transition-colors group-hover:text-black text-gray-400 font-bold">
+                    <h3 className="uppercase transition-colors group-hover:text-black text-gray-400 font-bold">
                       {advisor.team}
                       <div 
                         className="mt-2 w-auto h-[0.9px] transition-all duration-300 bg-gradient-to-r from-transparent via-white to-transparent group-hover:bg-gradient-to-r group-hover:from-transparent group-hover:via-black group-hover:to-transparent"
@@ -140,16 +114,26 @@ export default function Indicados() {
                     </h3>
                   )}
                   <div className="mt-auto">
-                    <h2 className="transition-colors group-hover:text-black text-white font-extrabold text-xl mt-3">{advisor.member}</h2>
-                    {advisor.role && <h3 className="mt-2 transition-colors group-hover:text-black text-gray-500 font-bold">{advisor.role}</h3>}
+                    <h2 className="uppercase transition-colors group-hover:text-black text-white font-extrabold text-xl mt-3">{advisor.member}</h2>
+                    {advisor.role && <h3 className="uppercase mt-2 transition-colors group-hover:text-black text-gray-500 font-bold">{advisor.role}</h3>}
                   </div>
                 </div>
               </div>
             ))}
           </div>
+          {advisors.length === 0 && <p className="mt-10 font-extrabold text-xl">SEM CONSELHEIROS NO MOMENTO.</p>}
         </div>
         <div className="top-0 left-0 z-[-10] h-screen w-full bg-[url('https://cdn.thegameawards.com/frontend/jpegs/mid-section-bg_24.jpg')] bg-center bg-cover bg-no-repeat pointer-events-none fixed">
           <div className="absolute inset-0 bg-black opacity-70" />
+        </div>
+      </div>
+      <div className="p-10 lg:p-20 min-h-[200px] bg-[#f2a366] flex gap-10 flex-col lg:flex-row justify-between">
+        <div>
+          <h1 className="font-extrabold text-6xl text-gray-900">ENTRE EM CONTATO</h1>
+          <h3 className="uppercase mt-5 max-w-[700px] font-bold text-xl text-gray-900">Se você tiver alguma dúvida ou solicitação, entre em contato por e-mail ou siga-nos nas redes sociais.</h3>
+        </div>
+        <div>
+          <Image src="/ajudantico/boqueaberto.png" width={200} height={200} quality={100} alt="Ajudantico Boqueaberto" />
         </div>
       </div>
     </div>
