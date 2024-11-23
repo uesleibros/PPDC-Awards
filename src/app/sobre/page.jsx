@@ -115,7 +115,7 @@ export default function Indicados() {
           <p className="mt-5 text-lg text-gray-900 max-w-[700px]">
             Nos últimos anos, Erick atuou como criador de jogos, apresentador e produtor de programação de videogame em diversas plataformas, incluindo, único e honorado PowerPoint.
 
-            Luiz é mais conhecido por seu trabalho com Erilab (equipe de jogos), bem como desenvolvimento de jogos, conhecida como "Cão the Game". Luiz também produz atualmente o jogo "Muito Muito Minimalista".
+            Luiz é mais conhecido por seu trabalho com Erilab (equipe de jogos), bem como desenvolvimento de jogos, conhecida como &quot;Cão the Game&quot;. Luiz também produz atualmente o jogo &quot;Muito Muito Minimalista&quot;.
           </p>
         </div>
       </div>
