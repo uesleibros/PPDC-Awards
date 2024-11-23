@@ -10,7 +10,7 @@ export default function Home() {
     },
     {
       "id": "erilab",
-      "title": "Erilab",
+      "title": "EriLab",
       "size": 30
     },
     {

@@ -59,7 +59,7 @@ export default async function Indicados() {
       <div className="relative">
         <div className="relative z-10 p-10">
           <h1 className="text-yellow-200 font-extrabold text-5xl">KIT DE MÍDIA</h1>
-          <div className="mt-20 grid grid-cols-3 gap-4">
+          <div className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-4">
             {mediaKits.map((kit, index) => (
               <div key={index} className="flex flex-col gap-2">
                 <Link href={`/_next/image?url=${encodeURIComponent(kit.image)}&w=640&q=100`}>
@@ -75,11 +75,27 @@ export default async function Indicados() {
           <div className="absolute inset-0 bg-black opacity-70" />
         </div>
       </div>
-      <div className="min-h-[700px] bg-[#6588ba] flex flex-col lg:flex-row justify-between lg:p-10">
-        <div className="flex justify-center items-center p-10 lg:w-[550px] lg:h-[550px] clip-path-diamond relative">
-          <Image src="/os-cabra/erick.png" alt="Erick" width={1000} height={1000} quality={100} />
+      <div className="min-h-[700px] bg-gradient-to-r from-[#6588ba] to-[#305f91] flex flex-col lg:flex-row justify-between lg:p-10 relative overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="w-[300px] h-[300px] bg-[#4d719e] blur-[150px] rounded-full absolute top-20 left-20" />
+          <div className="w-[200px] h-[200px] bg-[#5e82ad] blur-[100px] rounded-full absolute bottom-20 right-20" />
+          <div className="w-[150px] h-[150px] bg-[#507da2] blur-[100px] rounded-full absolute top-10 right-10" />
+          <div className="w-[250px] h-[250px] bg-[#3e668d] blur-[120px] rounded-full absolute bottom-10 left-10" />
+
+          <div className="w-[400px] h-[400px] border-[5px] border-[#90b4d4] rounded-full absolute top-1/3 left-1/3 mix-blend-overlay" />
+          <div className="w-[150px] h-[150px] border-[3px] border-[#8da3c4] rounded-full absolute bottom-10 right-1/3 mix-blend-overlay" />
+          <div className="w-[200px] h-[200px] border-[4px] border-[#7098bd] rounded-full absolute top-5 left-1/4 mix-blend-overlay" />
+          <div className="w-[180px] h-[180px] border-[4px] border-[#779ebf] rounded-full absolute bottom-5 right-1/4 mix-blend-overlay" />
+
+          <div className="absolute w-[2px] h-full bg-[#90b4d4] left-[10%] opacity-20" />
+          <div className="absolute w-[2px] h-full bg-[#90b4d4] right-[10%] opacity-20" />
+          <div className="absolute h-[2px] w-full bg-[#90b4d4] top-[10%] opacity-20" />
+          <div className="absolute h-[2px] w-full bg-[#90b4d4] bottom-[10%] opacity-20" />
         </div>
-        <div className="mr-auto p-10 lg:p-20">
+
+        <Image className="p-10 lg:p-0 z-10" src="/criador.png" alt="Erick Luiz VB" width={600} height={600} quality={100} />
+
+        <div className="z-10 mr-auto p-10 lg:p-20">
           <h3 className="font-bold text-3xl text-gray-900">CRIADOR</h3>
           <h1 className="font-extrabold text-5xl text-white">ERICK</h1>
           <h1 className="font-semibold text-5xl text-white">LUIZ VB</h1>
@@ -87,12 +103,12 @@ export default async function Indicados() {
             O PPDC Awards foi fundado em 2022 pelo empresário de mídia Erick, que também apresenta e produz o programa.
           </p>
           <p className="mt-5 text-lg text-gray-900 max-w-[700px]">
-            Nos últimos anos, Erick atuou como criador de jogos, apresentador e produtor de programação de videogame em diversas plataformas, incluindo, único e honorado PowerPoint.
-
-            Luiz é mais conhecido por seu trabalho com Erilab (equipe de jogos), bem como desenvolvimento de jogos, conhecida como &quot;Cão the Game&quot;. Luiz também produz atualmente o jogo &quot;Muito Muito Minimalista&quot;.
+            Nos últimos anos, Erick atuou como criador de jogos, apresentador e produtor de programação de videogame em diversas plataformas, incluindo o único e honorado PowerPoint.
+            Luiz é mais conhecido por seu trabalho com Erilab (equipe de jogos), bem como desenvolvimento de jogos, incluindo &quot;Cão the Game&quot;. Luiz também produz atualmente o jogo &quot;Muito Muito Minimalista&quot;.
           </p>
         </div>
       </div>
+
       <div className="relative">
         <div className="relative z-10 p-10">
           <h1 className="text-yellow-200 font-extrabold text-5xl">CONSELHO CONSULTIVO</h1>

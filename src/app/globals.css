@@ -1,9 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@layer utilities {
-  .clip-path-diamond {
-    clip-path: polygon(50% 10%, 100% 50%, 50% 90%, 0% 50%);
-  }
-}

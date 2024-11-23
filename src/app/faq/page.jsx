@@ -20,7 +20,7 @@ export default function FAQ() {
 	  },
 	  {
 	    title: "QUAIS SÃO OS CRITÉRIOS DE AVALIAÇÃO PARA OS JOGOS?",
-	    description: "Os jogos serão avaliados com base em inovação, jogabilidade, design gráfico e impacto na comunidade. Além disso, os jogos precisam ser lançados no último ano para serem elegíveis."
+	    description: "Os jogos serão avaliados com base em inovação, jogabilidade, design gráfico, impacto na comunidade e etc. Além disso, os jogos precisam ser lançados nos últimos três anos para serem elegíveis."
 	  },
 	  {
 	    title: "COMO POSSO PARTICIPAR COMO DESENVOLVEDOR?",
