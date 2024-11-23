@@ -35,7 +35,7 @@ export default function Home() {
     },
     {
       "id": "peedroproductions",
-      "title": "Peedro Productions",
+      "title": "Peedrostudios",
       "size": 30
     },
     {
