@@ -34,6 +34,11 @@ export default function Home() {
       "size": 30
     },
     {
+      "id": "peedroproductions",
+      "title": "Peedro Productions",
+      "size": 30
+    },
+    {
       "id": "alabo",
       "title": "Alabo",
       "size": 30
@@ -62,7 +67,7 @@ export default function Home() {
             <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-white">EM DEZEMBRO</h1>
             <h2 className="mt-2 text-4xl font-bold text-yellow-100">POWERPOINT DISCORD</h2>
             <div className="mt-10 flex items-center gap-4 flex-wrap">
-              <Button variant={true} content="CONHEÇA A NOSSA EQUIPE" />
+              <Button url="/sobre#conselho-consultivo" variant={true} content="CONHEÇA O NOSSO CONSELHO CONSULTIVO" />
               <Button url="/indicados" content="VOTE AGORA" />
             </div>
           </div>

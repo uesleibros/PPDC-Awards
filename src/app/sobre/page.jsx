@@ -111,7 +111,7 @@ export default async function Indicados() {
 
       <div className="relative">
         <div className="relative z-10 p-10">
-          <h1 className="text-yellow-200 font-extrabold text-5xl">CONSELHO CONSULTIVO</h1>
+          <h1 id="conselho-consultivo" className="text-yellow-200 font-extrabold text-5xl">CONSELHO CONSULTIVO</h1>
           <h3 className="mt-5 uppercase text-white font-bold text-2xl">O conselho consultivo ajuda a orientar e promover a missão do PPDC Awards.</h3>
           <p className="mt-5 font-semibold text-white max-w-[700px]">
             O Conselho não está envolvido na seleção dos indicados ou vencedores dos prêmios e toma conhecimento dos resultados da votação ao mesmo tempo que o público em geral. O conselho consultivo inclui:

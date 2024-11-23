@@ -1,5 +1,6 @@
 import { Open_Sans } from "next/font/google";
 import Footer from "@/components/Footer";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 const font = Open_Sans({ subsets: ["latin"] });
@@ -21,12 +22,17 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: "#000000",
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body
         className={`${font.className} antialiased`}
       >
+        <NextTopLoader showSpinner={false} color="orange" zIndex="9999" />
         <div className="z-10 w-full p-5 text-center bg-blue-600">
           <p className="font-extrabold text-2xl">ALGUM DIA INICIA</p>
         </div>
