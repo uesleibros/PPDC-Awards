@@ -1,5 +1,9 @@
 import Button from "@/components/ui/Button";
 
+export const metadata = {
+	title: "Indicados | PPDC Awards"
+};
+
 export default function Indicados() {
 	return (
 		<div className="min-h-screen w-full">
