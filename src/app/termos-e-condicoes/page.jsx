@@ -22,7 +22,7 @@ export default function TermosECondicoes() {
         <div className="relative z-10 p-10">
           <div className="mt-5 p-10">
             <p className="font-semibold text-white">
-            	Leia atentamente estes Termos e Condições ("Termos") antes de usar o site oficial do PPDC Awards (o "Serviço") operado pela equipe organizadora do evento ("nós", "nosso").<br /><br />
+            	Leia atentamente estes Termos e Condições (&quot;Termos&quot;) antes de usar o site oficial do PPDC Awards (o &quot;Serviço&quot;) operado pela equipe organizadora do evento (&quot;nós&quot;, &quot;nosso&quot;).<br /><br />
 
             	<strong>Aceitação dos Termos</strong> <br />
             	Ao acessar ou usar o Serviço, você concorda em cumprir estes Termos. Caso não concorde com algum dos termos apresentados, você não tem permissão para acessar o Serviço. <br /><br />
