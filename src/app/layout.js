@@ -1,4 +1,5 @@
 import { Open_Sans } from "next/font/google";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const font = Open_Sans({ subsets: ["latin"] });
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
           <p className="font-extrabold text-2xl">ALGUM DIA INICIA</p>
         </div>
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -1,7 +1,44 @@
 import Image from "next/image";
-import Link from "next/link";
+import Button from "@/components/ui/Button";
 
 export default function Home() {
+  const partners = [
+    {
+      "id": "bedrock",
+      "title": "Bedrock",
+      "size": 30
+    },
+    {
+      "id": "erilab",
+      "title": "Erilab",
+      "size": 30
+    },
+    {
+      "id": "brother_corporation",
+      "title": "Brother Corporation",
+      "size": 30
+    },
+    {
+      "id": "digisoft",
+      "title": "Digisoft",
+      "size": 20
+    },
+    {
+      "id": "pptgames",
+      "title": "PPTGames",
+      "size": 20
+    },
+    {
+      "id": "vineos",
+      "title": "Vine OS",
+      "size": 30
+    },
+    {
+      "id": "alabo",
+      "title": "Alabo",
+      "size": 30
+    }
+  ]
   return (
     <div className="min-h-screen w-full">
       <div className="relative">
@@ -20,28 +57,24 @@ export default function Home() {
         </video>
 
         <div className="relative z-10 min-h-[700px] w-full">
-          <div className="z-10 p-20 lg:p-[20vh]">
+          <div className="z-10 p-10 lg:p-[20vh]">
             <Image src="/brand_logo.png" alt="PPDC Awards Brand Logo" width={500} height={500} quality={100} className="mb-5 lg:mb-0" />
             <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-white">EM DEZEMBRO</h1>
             <h2 className="mt-2 text-4xl font-bold text-yellow-100">POWERPOINT DISCORD</h2>
             <div className="mt-10 flex items-center gap-4 flex-wrap">
-              <button className="bg-yellow-200 p-4 text-gray-900 font-bold transition-colors hover:bg-yellow-100">
-                CONHEÇA A NOSSA EQUIPE
-              </button>
-              <button className="bg-gray-900 p-4 text-white font-bold transition-colors hover:bg-gray-800">
-                VOTE AGORA
-              </button>
+              <Button variant={true} content="CONHEÇA A NOSSA EQUIPE" />
+              <Button url="/indicados" content="VOTE AGORA" />
             </div>
           </div>
           <div className="relative mt-auto p-4 flex flex-col justify-center min-h-[100px] text-center backdrop-blur-lg bg-black/30">
             <h3 className="font-extrabold text-white">NOSSOS PATROCINADORES</h3>
-            <div className="mt-4 flex justify-center items-center gap-4 flex-wrap">
-              <Image src="/patrocinadores/bedrock.png" alt="Bedrock" width={30} height={30} quality={100} />
-              <Image src="/patrocinadores/erilab.png" alt="Erilab" width={30} height={30} quality={100} />
-              <Image src="/patrocinadores/brother_corporation.png" alt="Brother Corporation" width={30} height={30} quality={100} />
-              <Image src="/patrocinadores/digisoft.png" alt="Digisoft" width={20} height={20} quality={100} />
-              <Image src="/patrocinadores/pptgames.png" alt="PPTGames" width={20} height={20} quality={100} />
-              <Image src="/patrocinadores/Alabo.png" alt="Alabo" width={30} height={30} quality={100} />
+            <div className="mt-5 mx-auto grid grid-cols-3 lg:grid-cols-4 justify-center items-center gap-4">
+              {partners.map((partner, index) => (
+                <div key={index} className="flex flex-col items-center h-full">
+                  <Image className="object-contain" src={`/patrocinadores/${partner.id}.png`} alt={partner.title} width={partner.size} height={partner.size} quality={100} />
+                  <p className="font-bold text-white mt-auto text-xs">{partner.title}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
