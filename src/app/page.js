@@ -42,6 +42,11 @@ export default function Home() {
       "id": "alabo",
       "title": "Alabo",
       "size": 30
+    },
+    {
+      "id": "garica-inc",
+      "title": "Garica Inc.",
+      "size": 30
     }
   ]
   return (
