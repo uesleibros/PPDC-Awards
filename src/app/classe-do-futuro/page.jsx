@@ -35,7 +35,7 @@ export default async function ClasseDoFuturo() {
             </h1>
             <h2 className="uppercase mt-2 max-w-[700px] text-lg font-bold text-gray-900">Indivíduos inspiradores que representam o futuro brilhante, ousado e inclusivo dos videogames.</h2>
             <p className="mt-5 text-xs text-gray-700 max-w-[700px]">
-              Esta seção foi criada para esclarecer dúvidas sobre os critérios de premiação, o processo de votação e as regras do evento. Nosso compromisso é garantir que os prêmios sejam atribuídos de maneira justa e transparente, celebrando os jogos e desenvolvedores que mais impactaram a indústria. Priorizamos o mérito, a criatividade e a relevância, com o objetivo de reconhecer aqueles que estão impulsionando o futuro dos games.
+              Esta seção é dedicada a homenagear todos os membros de nossa comunidade que contribuíram com sua criatividade e inovação para desenvolver jogos e sistemas no PowerPoint. Além disso, celebramos aqueles que, de alguma forma, continuam a explorar o potencial dessa ferramenta, inspirando novos projetos e mantendo vivo o espírito de criação no PowerPoint. Ou não, vai saber.
             </p>
           </div>
         </div>
