@@ -1,11 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
+import { headers } from "next/headers";
 
-export default function Footer() {
+export default async function Footer() {
 	const currentYear = new Date().getFullYear();
+	const headersList = await headers();
+	const protocol = headersList.get("x-forwarded-proto");
+	const host = headersList.get("host");
+
+	const req = await fetch(`${protocol}://${host}/api/partners`);
+	const body = await req.json();
+	let partners = [];
+
+	if (req.ok) {
+	  partners = body.partners;
+	}
+
 
 	return (
-		<footer className="min-h-[400px] bg-gray-900 p-10 flex flex-col lg:flex-row justify-between">
+		<footer className="min-h-[400px] bg-[#0a0e13] p-10 flex flex-col lg:flex-row justify-between">
 			<div>
 				<Link href="/">
 					<Image src="/brand_logo.png" alt="PPDC Awards Brand Logo" width={350} height={350} quality={100} />
@@ -27,6 +40,14 @@ export default function Footer() {
 
 					Explore nossas iniciativas, conheça os indicados e faça parte desta jornada incrível!
 				</p>
+				{partners.length > 0 && <h3 className="mt-5 font-extrabold text-white">NOSSOS PATROCINADORES</h3>}
+				<div className="mt-5 flex items-center gap-4 flex-wrap">
+					{partners.map((partner, index) => (
+						<div key={index}>
+							<Image className="object-contain" style={{ width: `${partner.size}px`, height: `${partner.size}px` }} src={partner.image} width={1000} height={1000} quality={100} alt={partner.partner} />
+						</div>
+					))}
+				</div>
 			</div>
 		</footer>
 	);

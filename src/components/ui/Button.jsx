@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Button({ variant, url, content }) {
+export default function Button({ variant, url, content, ...props }) {
   const button = (
     <button
       className={`p-4 font-bold transition-colors ${
@@ -8,6 +8,7 @@ export default function Button({ variant, url, content }) {
           ? "text-gray-900 bg-yellow-200 hover:bg-yellow-100"
           : "text-white bg-gray-900 hover:bg-gray-800"
       }`}
+      {...props}
     >
       {content}
     </button>

@@ -20,7 +20,7 @@ export default function TermosECondicoes() {
       </div>
       <div className="relative">
         <div className="relative z-10 p-10">
-          <div className="mt-5 p-10">
+          <div className="mt-5 lg:p-10">
             <p className="font-semibold text-white">
             	Leia atentamente estes Termos e Condições (&quot;Termos&quot;) antes de usar o site oficial do PPDC Awards (o &quot;Serviço&quot;) operado pela equipe organizadora do evento (&quot;nós&quot;, &quot;nosso&quot;).<br /><br />
 

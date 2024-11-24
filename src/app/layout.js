@@ -1,4 +1,5 @@
 import { Open_Sans } from "next/font/google";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
         className={`${font.className} antialiased`}
       >
         <NextTopLoader showSpinner={false} color="orange" zIndex="9999" />
+        <Header />
         <div className="z-10 w-full p-5 text-center bg-blue-600">
           <p className="font-extrabold text-2xl">ALGUM DIA INICIA</p>
         </div>
