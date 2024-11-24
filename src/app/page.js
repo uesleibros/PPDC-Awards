@@ -108,6 +108,7 @@ export default function Home() {
   ];
   const randomFactIndex = Math.floor(Math.random() * funFacts.length);
   const randomFact = funFacts[randomFactIndex];
+
   return (
     <div className="min-h-screen w-full">
       <div className="relative">
@@ -150,7 +151,7 @@ export default function Home() {
                   {randomFact}
                 </p>
                 <p className="text-white font-semibold text-xl mt-3">
-                  Este evento conecta desenvolvedores, jogadores e visionários, criando um espaço onde o passado, presente e futuro do entretenimento digital se encontram em harmonia. 
+                  Este evento é muito mais do que uma premiação; é uma celebração vibrante da criatividade e do impacto dos games no mundo. Conectamos desenvolvedores, jogadores e visionários, criando um espaço onde o passado, o presente e o futuro do entretenimento digital se encontram em perfeita harmonia. Aqui, histórias de dedicação e inovação ganham vida, enquanto reconhecemos os talentos que moldam a indústria com suas ideias ousadas e cativantes. Mais do que troféus, entregamos reconhecimento e inspiração, celebrando o poder dos jogos de unir pessoas, transcender barreiras e transformar vidas. O PPDC Awards é o palco onde paixão e inovação se encontram, onde cada frame, cada ideia e cada conquista são valorizados. Somos uma comunidade, uma força, um movimento que honra o que é brilhante hoje e desafia o que pode ser ainda mais extraordinário amanhã. Bem-vindo ao futuro dos games. Bem-vindo ao PPDC Awards.
                 </p>
               </div>
               <Image src="/ajudantico/boqueaberto.png" width={200} height={200} alt="Ajudantico Boqueaberto" />
