@@ -8,6 +8,7 @@ export async function createClient() {
     "https://doqpwhcglnhkftttcluc.supabase.co",
     process.env.NEXT_PUBLIC_SUPABASE_KEY,
     {
+      persistSession: false,
       cookies: {
         getAll() {
           return cookieStore.getAll();

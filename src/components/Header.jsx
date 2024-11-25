@@ -17,6 +17,7 @@ const getURL = () => {
 
 export default function Header() {
 	const [account, setAccount] = useState(null);
+	const [loaded, setLoaded] = useState(false);
 
 	async function signInWithDiscord() {
 	  const { data, error } = await supabase.auth.signInWithOAuth({
@@ -31,6 +32,7 @@ export default function Header() {
 		async function getLogin() {
 			const { data: { user } } = await supabase.auth.getUser();
 			setAccount(user);
+			setLoaded(true);
 		}
 
 		getLogin();
@@ -50,13 +52,14 @@ export default function Header() {
 				</div>
 			</div>
 			<div className="mt-5 lg:mt-0">
-				{account ? (
-					<Image className="rounded-full" src={account.user_metadata.avatar_url} alt={account.user_metadata.full_name} width={50} height={50} />
+				{loaded ? (
+					account ? (
+						<Image className="rounded-full" src={account.user_metadata.avatar_url} alt={account.user_metadata.full_name} width={50} height={50} />
 					) : (
 						<p className="cursor-pointer uppercase font-extrabold text-white text-lg" onClick={signInWithDiscord}>Entrar com o Discord</p>
 					)
-				}
+				) : <p className="font-extrabold text-white">...</p>}
 			</div>
-		</header>
+ 		</header>
 	);
 }

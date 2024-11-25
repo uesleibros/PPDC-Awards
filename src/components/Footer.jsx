@@ -16,7 +16,6 @@ export default async function Footer() {
 	  partners = body.partners;
 	}
 
-
 	return (
 		<footer className="min-h-[400px] bg-[#0a0e13] p-10 flex flex-col lg:flex-row justify-between">
 			<div>

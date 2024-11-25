@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import Categories from "@/components/ui/Categories";
 
 export const metadata = {
 	title: "Indicados | PPDC Awards"
@@ -27,7 +28,7 @@ export default function Indicados() {
             <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-yellow-200">INDICADOS</h1>
             <h2 className="mt-2 max-w-[700px] text-2xl font-bold text-slate-300">Vote agora ou veja os indicados deste ano. Descubra os vencedores ao vivo no PowerPoint Discord</h2>
             <div className="mt-10 flex items-center gap-4 flex-wrap">
-              <Button variant={true} content="VER TODAS AS CATEGORIAS" />
+              <Categories />
               <Button url="/indicados" content="COMECE A VOTAR" />
             </div>
           </div>
