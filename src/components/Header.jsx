@@ -23,7 +23,7 @@ export default function Header() {
 	return (
 		<header className="bg-slate-900 min-h-[100px] p-4 flex flex-col lg:flex-row items-center justify-between">
 			<div className="flex gap-4 items-center">
-				<div className="flex flex-wrap items-center gap-4">
+				<div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
 					<Link href="/" className="font-bold w-[max-content] text-white hover:underline">INÍCIO</Link>
 					<Link href="/sobre" className="font-bold w-[max-content] text-white hover:underline">SOBRE</Link>
 					<Link href="/faq" className="font-bold w-[max-content] text-white hover:underline">FAQ</Link>
