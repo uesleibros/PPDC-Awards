@@ -116,7 +116,7 @@ export default function FAQ() {
       <div className="p-10 lg:p-20 min-h-[200px] bg-[#f2a366] flex gap-10 flex-col lg:flex-row justify-between">
         <div>
           <h1 className="font-extrabold text-6xl text-gray-900 break-words">NÃO ENCONTROU A RESPOSTA PARA A SUA PERGUNTA?</h1>
-          <h3 className="uppercase mt-5 max-w-[700px] font-bold text-xl text-gray-900">Pergunte para um dos conselheiros consultativos, nós nos responsabilizamos por qualquer dúvida sua, é nosso trabalho ajudar.</h3>
+          <h3 className="uppercase mt-5 max-w-[700px] font-bold text-xl text-gray-900">Pergunte para um dos conselheiros consultivos, nós nos responsabilizamos por qualquer dúvida sua, é nosso trabalho ajudar.</h3>
         </div>
         <div>
           <Image src="/ajudantico/meh.png" width={250} height={250} quality={100} alt="Ajudantico Meh" />
