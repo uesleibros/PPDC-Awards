@@ -69,7 +69,7 @@ export default async function IndicadosCategoria({ params }) {
 								Sair da votação
 							</Link>
 						</div>
-						<div className="flex gap-10 items-center">
+						<div className="flex flex-col lg:flex-row gap-10 items-center">
 							{currentCategory.prev ? ( 
 								<Link className="uppercase hover:underline transition-colors hover:text-slate-300 flex items-center gap-2 font-bold text-white text-lg" href={`/indicados/${currentCategory.prev.title.toLowerCase().replaceAll(' ', '-')}`}>
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" className="transition group-hover:-translate-x-5"><path d="M15.8332 9.99996H4.1665M4.1665 9.99996L9.99984 15.8333M4.1665 9.99996L9.99984 4.16663" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path></svg>
