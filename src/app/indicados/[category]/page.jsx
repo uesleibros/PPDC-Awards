@@ -106,7 +106,7 @@ export default async function IndicadosCategoria({ params }) {
 						<p className="mt-5 text-2xl text-white font-semibold max-w-[700px]">{currentCategory.current.description}</p>
 					</div>
 				</div>
-				<div className="p-5 lg:p-10 my-5 grid gap-5 grid-cols-1 lg:grid-cols-3">
+				<div className="p-5 lg:p-10 my-5 grid gap-4 grid-cols-1 lg:grid-cols-3">
 					<div className="lg:w-[400px] h-[max-content] shadow-sm transition duration-200 hover:-translate-y-4">
 						<div>
 							<Image className="object-cover w-full lg:h-[219px] transition ease-in-out opacity-100" src="https://res.cloudinary.com/dxwfrujwa/image/upload/v1731417524/projetos/recursos-graficos/388941_6c1542a141c3447a8524338c034c5a21_mv2_skisdz.png" width={1000} height={1000} alt="teste" quality={100} />
