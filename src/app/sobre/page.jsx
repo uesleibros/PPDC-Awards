@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { headers } from "next/headers";
 
 export const metadata = {
@@ -62,9 +61,9 @@ export default async function Indicados() {
           <div className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-4">
             {mediaKits.map((kit, index) => (
               <div key={index} className="flex flex-col gap-2">
-                <Link href={`/_next/image?url=${encodeURIComponent(kit.image)}&w=640&q=100`}>
+                <a href={`/_next/image?url=${encodeURIComponent(kit.image)}&w=640&q=100`}>
                   <Image src={kit.image} alt={kit.title} width={500} height={500} quality={100} />
-                </Link>
+                </a>
                 <h2 className="mt-2 font-bold text-3xl text-yellow-200">{kit.title}</h2>
                 <h2 className="-mt-2 font-bold text-lg text-white">{kit.about}</h2>
               </div>
