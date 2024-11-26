@@ -23,7 +23,7 @@ export async function GET(request) {
 
   if (error) {
     console.error("Erro na autenticação:", error.message);
-    return NextResponse.redirect("/error");
+    return NextResponse.redirect('/');
   }
 
   if (data?.url) {

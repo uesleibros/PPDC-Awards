@@ -35,9 +35,6 @@ export default function RootLayout({ children }) {
       >
         <NextTopLoader showSpinner={false} color="orange" zIndex="9999" />
         <Header />
-        <div className="z-10 w-full p-5 text-center bg-blue-600">
-          <p className="font-extrabold text-2xl">ALGUM DIA INICIA</p>
-        </div>
         {children}
         <Footer />
       </body>

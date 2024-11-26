@@ -44,7 +44,7 @@ export default async function Indicados() {
         </video>
 
         <div className="relative z-10 min-h-[700px] w-full">
-          <div className="z-10 p-10 lg:px-[20vh] py-[40vh]">
+          <div className="z-10 p-5 lg:px-[20vh] py-[40vh]">
             <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-yellow-200">SOBRE</h1>
             <h2 className="mt-2 max-w-[700px] text-2xl font-bold text-slate-300">O PPDC Awards reconhece e defende a excelência criativa e técnica na indústria global de videogames.</h2>
             <p className="mt-5 text-xs text-white max-w-[700px]">
@@ -56,7 +56,7 @@ export default async function Indicados() {
         </div>
       </div>
       <div className="relative">
-        <div className="relative z-10 p-10">
+        <div className="relative z-10 p-5">
           <h1 className="text-yellow-200 font-extrabold text-5xl">KIT DE MÍDIA</h1>
           <div className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-4">
             {mediaKits.map((kit, index) => (
@@ -64,8 +64,8 @@ export default async function Indicados() {
                 <a href={`/_next/image?url=${encodeURIComponent(kit.image)}&w=640&q=100`}>
                   <Image src={kit.image} alt={kit.title} width={500} height={500} quality={100} />
                 </a>
-                <h2 className="mt-2 font-bold text-3xl text-yellow-200">{kit.title}</h2>
-                <h2 className="-mt-2 font-bold text-lg text-white">{kit.about}</h2>
+                <h2 className="mt-2 font-bold text-2xl text-yellow-200">{kit.title}</h2>
+                <h2 className="-mt-2 font-bold text-sm text-white">{kit.about}</h2>
               </div>
             ))}
           </div>
@@ -74,11 +74,11 @@ export default async function Indicados() {
           <div className="absolute inset-0 bg-black opacity-70" />
         </div>
       </div>
-      <div className="min-h-[700px] bg-gradient-to-r from-[#6588ba] to-[#305f91] flex flex-col lg:flex-row justify-between lg:p-10 relative overflow-hidden">
+      <div className="min-h-[700px] bg-gradient-to-r from-[#6588ba] to-[#305f91] flex flex-col lg:flex-row justify-between lg:p-5 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="w-[300px] h-[300px] bg-[#4d719e] blur-[150px] rounded-full absolute top-20 left-20" />
           <div className="w-[200px] h-[200px] bg-[#5e82ad] blur-[100px] rounded-full absolute bottom-20 right-20" />
-          <div className="w-[150px] h-[150px] bg-[#507da2] blur-[100px] rounded-full absolute top-10 right-10" />
+          <div className="w-[150px] h-[150px] bg-[#507da2] blur-[100px] rounded-full absolute top-5 right-10" />
           <div className="w-[250px] h-[250px] bg-[#3e668d] blur-[120px] rounded-full absolute bottom-10 left-10" />
 
           <div className="w-[400px] h-[400px] border-[5px] border-[#90b4d4] rounded-full absolute top-1/3 left-1/3 mix-blend-overlay" />
@@ -92,9 +92,9 @@ export default async function Indicados() {
           <div className="absolute h-[2px] w-full bg-[#90b4d4] bottom-[10%] opacity-20" />
         </div>
 
-        <Image className="p-10 lg:p-0 z-10" src="/criador.png" alt="Erick Luiz VB" width={600} height={600} quality={100} />
+        <Image className="p-5 lg:p-0 z-10" src="/criador.png" alt="Erick Luiz VB" width={600} height={600} quality={100} />
 
-        <div className="z-10 mr-auto p-10 lg:p-20">
+        <div className="z-10 mr-auto p-5 lg:p-20">
           <h3 className="font-bold text-3xl text-gray-900">CRIADOR</h3>
           <h1 className="font-extrabold text-5xl text-white">ERICK</h1>
           <h1 className="font-semibold text-5xl text-white">LUIZ VB</h1>
@@ -109,7 +109,7 @@ export default async function Indicados() {
       </div>
 
       <div className="relative">
-        <div className="relative z-10 p-10">
+        <div className="relative z-10 p-5 lg:p-10">
           <h1 id="conselho-consultivo" className="text-yellow-200 font-extrabold text-5xl">CONSELHO CONSULTIVO</h1>
           <h3 className="mt-5 uppercase text-white font-bold text-2xl">O conselho consultivo ajuda a orientar e promover a missão do PPDC Awards.</h3>
           <p className="mt-5 font-semibold text-white max-w-[700px]">
@@ -119,7 +119,7 @@ export default async function Indicados() {
             {advisors.map((advisor, index) => (
               <div key={index} className="flex flex-col lg:flex-row min-h-[200px] w-auto group">
                 <Image className="object-cover lg:object-fill h-[250px] lg:h-full w-full lg:w-[250px] transition-all duration-400 filter grayscale group-hover:grayscale-0" src={advisor.image} alt={advisor.member} width={1000} height={1000} quality={100} />
-                <div className="p-5 border border-[#6588ba] w-full select-none transition-colors group-hover:bg-[#6588ba]">
+                <div className="p-5 lg:p-10 border border-[#6588ba] w-full select-none transition-colors group-hover:bg-[#6588ba]">
                   {advisor.team && (
                     <h3 className="uppercase transition-colors group-hover:text-black text-gray-400 font-bold">
                       {advisor.team}
@@ -142,10 +142,10 @@ export default async function Indicados() {
           <div className="absolute inset-0 bg-black opacity-70" />
         </div>
       </div>
-      <div className="p-10 lg:p-20 min-h-[200px] bg-[#f2a366] flex gap-10 flex-col lg:flex-row justify-between">
+      <div className="p-5 lg:p-20 min-h-[200px] bg-[#f2a366] flex gap-5 flex-col lg:flex-row justify-between">
         <div>
           <h1 className="font-extrabold text-6xl text-gray-900">ENTRE EM CONTATO</h1>
-          <h3 className="uppercase mt-5 max-w-[700px] font-bold text-xl text-gray-900">Se você tiver alguma dúvida ou solicitação, entre em contato por e-mail ou siga-nos nas redes sociais.</h3>
+          <h3 className="uppercase mt-5 max-w-[700px] font-bold text-xl text-gray-900">Se você tiver alguma dúvida ou solicitação, entre em contato pelo discord.</h3>
         </div>
         <div>
           <Image src="/ajudantico/boqueaberto.png" width={200} height={200} quality={100} alt="Ajudantico Boqueaberto" />

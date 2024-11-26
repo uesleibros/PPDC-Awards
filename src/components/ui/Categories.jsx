@@ -4,7 +4,7 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { useState, useEffect } from "react";
 
-export default function Categories() {
+export default function Categories({ minimalist }) {
 	const [openedCategories, setOpenedCategories] = useState(false);
 	const [categoriesList, setCategoriesList] = useState([]);
 	const [searchCategory, setSearchCategory] = useState('');
@@ -28,10 +28,15 @@ export default function Categories() {
 	return (
 		<div>
 			<div>
-				<Button onClick={() => setOpenedCategories(true)} variant={true} content="VER TODAS AS CATEGORIAS" />
+				{!minimalist 
+					?
+					<Button onClick={() => setOpenedCategories(true)} variant={true} content="VER TODAS AS CATEGORIAS" />
+					:
+					<h1 className="cursor-pointer transition-colors hover:text-slate-300 text-lg font-extrabold text-[#a3b8d6]" onClick={() => setOpenedCategories(true)}>VER TODAS AS CATEGORIAS</h1>
+				}
 			</div>
 			{openedCategories && (
-				<div className="fixed z-10 top-0 left-0 w-full h-full p-10 lg:px-[22vh] overflow-y-auto">
+				<div className="fixed inset-0 z-50 top-0 left-0 w-full h-full p-10 lg:px-[22vh] overflow-y-auto">
 					<div>
 						<div className="mb-20 flex justify-end">
 							<h2 onClick={() => setOpenedCategories(false)} className="text-xl w-[max-content] font-bold text-right text-white cursor-pointer">FECHAR</h2>
@@ -44,7 +49,7 @@ export default function Categories() {
 
 							<div className="mt-10 grid grid-cols-1 lg:grid-cols-5 gap-4">
 								{categoriasFiltradas.map((category, index) => (
-									<Link key={index} href={`/indicados/${category.title.toLowerCase().replace(' ', '-')}`}>
+									<Link key={index} href={`/indicados/${category.title.toLowerCase().replaceAll(' ', '-')}`}>
 										<div className="h-full lg:aspect-square cursor-pointer flex flex-col lg:justify-center border border-[#6588ba] p-4 lg:py-14 lg:px-17 lg:text-center lg:min-h-[100px] min-w-[100px] bg-[#0a0e13b3] transition-colors hover:bg-[#1e2938] hover:border-[#1e2938]">
 											<h3 className="uppercase text-white font-semibold">{category.title}</h3>
 										</div>

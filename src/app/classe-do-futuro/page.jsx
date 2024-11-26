@@ -28,7 +28,7 @@ export default async function ClasseDoFuturo() {
       	  }}
       	/>
         <div className="relative z-10 min-h-[700px] w-full">
-          <div className="z-10 p-10 lg:px-[20vh] py-[40vh]">
+          <div className="z-10 p-5 lg:px-[20vh] py-[40vh]">
             <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-[#f2a366]">
             	CONHEÇA NOSSA<br />
             	<p className="text-gray-900">CLASSE DO FUTURO</p>
@@ -41,7 +41,7 @@ export default async function ClasseDoFuturo() {
         </div>
       </div>
       <div className="relative">
-        <div className="relative z-10 p-10">
+        <div className="relative z-10 p-5 lg:p-10">
           <h1 className="text-yellow-200 font-extrabold text-5xl">O NOSSO FUTURO</h1>
           <div className="mt-10 grid grid-cols-1 lg:grid-cols-4 gap-4">
             {futureClass.map((individual, index) => (

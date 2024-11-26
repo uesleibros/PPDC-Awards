@@ -127,7 +127,7 @@ export default function Home() {
         </video>
 
         <div className="relative z-10 min-h-[700px] w-full">
-          <div className="z-10 p-10 lg:p-[20vh]">
+          <div className="z-10 p-5 lg:p-[20vh]">
             <Image src="/brand_logo.png" alt="PPDC Awards Brand Logo" width={500} height={500} quality={100} className="mb-5 lg:mb-0" />
             <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-white">EM DEZEMBRO</h1>
             <h2 className="mt-2 text-4xl font-bold text-yellow-100">POWERPOINT DISCORD</h2>
@@ -142,10 +142,10 @@ export default function Home() {
         </div>
       </div>
       <div className="relative">
-        <div className="relative z-10 p-10">
+        <div className="relative z-10 p-5 lg:p-10">
           <h1 className="text-yellow-200 font-extrabold text-5xl">CURIOSIDADE</h1>
           <div className="mt-5">
-            <div className="p-10 border rounded-lg border-[#6588ba] w-full flex gap-5 flex-col lg:flex-row justify-between">
+            <div className="p-10 bg-[#0a0e13b3] border rounded-lg border-[#6588ba] w-full flex gap-5 flex-col lg:flex-row justify-between">
               <div>
                 <p className="text-white font-extrabold text-2xl">
                   {randomFact}

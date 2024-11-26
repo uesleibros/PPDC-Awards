@@ -73,7 +73,7 @@ export default function FAQ() {
       	  }}
       	/>
         <div className="relative z-10 min-h-[700px] w-full">
-          <div className="z-10 p-10 lg:px-[20vh] py-[40vh]">
+          <div className="z-10 p-5 lg:px-[20vh] py-[40vh]">
             <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-yellow-200">FAQ &<br />REGRAS</h1>
             <h2 className="mt-2 max-w-[700px] text-lg font-bold text-slate-300">ESTA FAQ FOI PROJETADA PARA RESPONDER MUITAS PERGUNTAS COMUNS SOBRE OS PRÊMIOS DO JOGO, AS REGRAS E O PROCESSO DE VOTAÇÃO.</h2>
             <p className="mt-5 text-xs text-white max-w-[700px]">
@@ -83,11 +83,11 @@ export default function FAQ() {
         </div>
       </div>
       <div className="relative">
-        <div className="relative z-10 p-10">
+        <div className="relative z-10 p-5">
           <h1 className="text-yellow-200 font-extrabold text-5xl">O EVENTO</h1>
           <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
           	{eventFaqs.map((faq, index) => (
-          		<div key={index} className="p-4 border border-[#6588ba] rounded-lg">
+          		<div key={index} className="p-4 bg-[#0a0e13b3] border border-[#6588ba] rounded-lg">
           			<h2 className="text-[#6588ba] text-2xl max-w-[700px] font-extrabold">{faq.title}</h2>
           			<p className="font-semibold max-w-[700px] text-white mt-2">
           				{faq.description}
@@ -96,11 +96,11 @@ export default function FAQ() {
           	))}
           </div>
         </div>
-        <div className="relative z-10 p-10">
+        <div className="relative z-10 p-5">
           <h1 className="text-yellow-200 font-extrabold text-5xl break-words">PROCEDIMENTO DO EVENTO</h1>
           <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
           	{awardFaqs.map((faq, index) => (
-          		<div key={index} className="p-4 border border-[#6588ba] rounded-lg">
+          		<div key={index} className="p-4 bg-[#0a0e13b3] border border-[#6588ba] rounded-lg">
           			<h2 className="text-[#6588ba] text-2xl max-w-[700px] font-extrabold">{faq.title}</h2>
           			<p className="font-semibold max-w-[700px] text-white mt-2">
           				{faq.description}
@@ -113,7 +113,7 @@ export default function FAQ() {
           <div className="absolute inset-0 bg-black opacity-70" />
         </div>
       </div>
-      <div className="p-10 lg:p-20 min-h-[200px] bg-[#f2a366] flex gap-10 flex-col lg:flex-row justify-between">
+      <div className="p-5 lg:p-20 min-h-[200px] bg-[#f2a366] flex gap-5 flex-col lg:flex-row justify-between">
         <div>
           <h1 className="font-extrabold text-6xl text-gray-900 break-words">NÃO ENCONTROU A RESPOSTA PARA A SUA PERGUNTA?</h1>
           <h3 className="uppercase mt-5 max-w-[700px] font-bold text-xl text-gray-900">Pergunte para um dos conselheiros consultivos, nós nos responsabilizamos por qualquer dúvida sua, é nosso trabalho ajudar.</h3>

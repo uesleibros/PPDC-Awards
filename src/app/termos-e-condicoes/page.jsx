@@ -13,13 +13,13 @@ export default function TermosECondicoes() {
       	  }}
       	/>
         <div className="relative z-10 min-h-[700px] w-full">
-          <div className="z-10 p-10 lg:px-[20vh] py-[40vh]">
+          <div className="z-10 p-5 lg:px-[20vh] py-[40vh]">
             <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-yellow-200">TERMOS &<br />CONDIÇÕES</h1>
           </div>
         </div>
       </div>
       <div className="relative">
-        <div className="relative z-10 p-10">
+        <div className="relative z-10 p-5 lg:p-10">
           <div className="mt-5 lg:p-10">
             <p className="font-semibold text-white">
             	Leia atentamente estes Termos e Condições (&quot;Termos&quot;) antes de usar o site oficial do PPDC Awards (o &quot;Serviço&quot;) operado pela equipe organizadora do evento (&quot;nós&quot;, &quot;nosso&quot;).<br /><br />

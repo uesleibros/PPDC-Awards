@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import supabase from "@/lib/supabase";
+import supabase from "@/lib/supabase-ssr-client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,7 +12,6 @@ export default function Header() {
 	useEffect(() => {
 		async function getLogin() {
 			const { data: { user } } = await supabase.auth.getUser();
-			console.log(await supabase.auth.getUser())
 			setAccount(user);
 			setLoaded(true);
 		}
@@ -36,7 +35,7 @@ export default function Header() {
 					account ? (
 						<Image className="rounded-full" src={account.user_metadata.avatar_url} alt={account.user_metadata.full_name} width={50} height={50} />
 					) : (
-						<Link href="/api/auth/discord" className="cursor-pointer uppercase font-extrabold text-white text-lg">Entrar com o Discord</Link>
+						<a href="/api/auth/discord" className="cursor-pointer uppercase font-extrabold text-white text-lg">Entrar com o Discord</a>
 					)
 				) : <p className="font-extrabold text-white">...</p>}
 			</div>
