@@ -8,7 +8,7 @@ export default function FAQ() {
 	const eventFaqs = [
 	  {
 	    title: "QUANDO COMEÇA O PPDC AWARDS?",
-	    description: "O PPDC Awards será transmitido ao vivo em algum dia de dezembro."
+	    description: "O PPDC Awards será transmitido ao vivo em algum dia entre dezembro e janeiro."
 	  },
 	  {
 	    title: "COMO POSSO ASSISTIR A LIVE?",
@@ -23,16 +23,12 @@ export default function FAQ() {
 	    description: "Os jogos serão avaliados com base em inovação, jogabilidade, design gráfico, impacto na comunidade e etc. Além disso, os jogos precisam ser lançados nos últimos três anos para serem elegíveis."
 	  },
 	  {
-	    title: "COMO POSSO PARTICIPAR COMO DESENVOLVEDOR?",
-	    description: "Desenvolvedores interessados em inscrever seus jogos para o prêmio devem se inscrever por meio de nosso site oficial até a data limite especificada no anúncio."
+	    title: "COMO OS JOGOS SÃO PUBLICADOS?",
+	    description: "Utilizamos o Banco de Dados do Crate da PPTGames como fornecedora dos jogos, não há a necessidade de publicar nada, tudo estará no site quando o momento chegar."
 	  },
 	  {
-	    title: "O PPDC AWARDS ACEITA JOGOS EM DESENVOLVIMENTO?",
-	    description: "Sim, jogos em fase de desenvolvimento podem ser inscritos, desde que tenham uma versão jogável disponível para avaliação durante o evento."
-	  },
-	  {
-	    title: "POSSO INSCREVER MAIS DE UM JOGO?",
-	    description: "Sim, desenvolvedores podem inscrever mais de um jogo, desde que cada inscrição esteja em conformidade com as regras do evento e tenha sido inscrito separadamente."
+	    title: "O PPDC AWARDS PERMITE JOGOS EM DESENVOLVIMENTO?",
+	    description: "Sim, jogos em fase de desenvolvimento podem ser votados, contudo, limitado apenas a categoria 'Mais Aguardado', ao menos que lance uma versão jogável."
 	  },
 	  {
 	    title: "QUAL A DURAÇÃO DO EVENTO DE PREMIAÇÃO?",
@@ -40,30 +36,22 @@ export default function FAQ() {
 	  },
 	  {
 	    title: "QUAL A FAIXA ETÁRIA DOS JOGOS ACEITOS?",
-	    description: "Os jogos submetidos ao PPDC Awards devem ser adequados para maiores de 12 anos, podendo variar dependendo da categoria. O conteúdo será avaliado antes do evento."
+	    description: "Não há uma faixa etária, todos os jogos podem concorrer sem problemas."
 	  },
 	  {
-	    title: "POSSO ALTERAR MEU JOGO APÓS A INSCRIÇÃO?",
-	    description: "Sim, você pode atualizar ou modificar seu jogo até a data limite de inscrição. Após essa data, não serão aceitas alterações nas inscrições."
+	    title: "POSSO ALTERAR MEU JOGO APÓS O INÍCIO DO EVENTO?",
+	    description: "Não, após iniciar o evento nós fazemos uma colheita de todos os jogos existentes e salvamos temporariamente como um cache, o que torna qualquer atualização ou publicação de jogos inúteis já que não serão atualizados."
 	  }
 	];
 
 	const awardFaqs = [
 	  {
-	    "title": "COMO OS JOGOS NOMEADOS SÃO SELECIONADOS?",
-	    "description": "Os indicados para a maioria das categorias do PPDC Awards são publicados por vocês, usuários do site. Os desenvolvedores e usuários têm a oportunidade de inscrever seus jogos, e com base em um processo de votação transparente, serão selecionados os melhores títulos. Os participantes podem enviar seus jogos para diversas categorias. Após o período de inscrição, os jogos são avaliados por um júri composto por especialistas, incluindo influenciadores e veículos de mídia relevantes da indústria de jogos. Além disso, a comunidade tem voz ativa, podendo votar em seus jogos favoritos para várias categorias. A votação é realizada por meio de cédulas confidenciais, nas quais cada jurado e membro da comunidade seleciona os cinco melhores jogos de cada categoria. As cédulas são tabuladas e os jogos que mais aparecem nas cédulas tornam-se os indicados. Em caso de empate, pode haver a inclusão de mais jogos na lista de indicados. É importante ressaltar que o produtor do evento e o Conselho Consultivo do PPDC Awards não têm envolvimento direto no processo de votação e seleção dos vencedores. Todos os resultados são revelados simultaneamente ao público no dia da cerimônia."
-	  },
+			"title": "COMO FUNCIONAM AS FASES?",
+			"description": "São no total duas fases, ambas com métodos de avaliação diferente. A primeira fase, é a famosa classificação, você escolhe os jogos que devem concorrer em uma determinada categoria, cada jogo tendo um máximo de três votos para cada, passando disso ele já é classificado para concorrer na categoria mais votada. Já a segunda e última fase, você vai votar para o jogo que merece ganhar aquela categoria, tendo limite de um voto por jogo por categoria. O jogo mais votado é o vencedor."
+		},
 	  {
 	    "title": "COMO OS GANHADORES SÃO SELECIONADOS?",
 	    "description": "Os vencedores do PPDC Awards são escolhidos 100% por voto dos fãs. Nenhum júri ou conselho consultivo pode alterar os resultados."
-	  },
-	  {
-	    "title": "QUAIS SÃO OS CRITÉRIOS DE AVALIAÇÃO PARA OS JOGOS?",
-	    "description": "Os jogos são avaliados em várias áreas. Cada categoria tem seus critérios específicos, com foco em destacar os melhores aspectos de cada título."
-	  },
-	  {
-	    "title": "COMO POSSO INSCRIVER MEU JOGO PARA O PPDC AWARDS?",
-	    "description": "Os desenvolvedores interessados em inscrever seus jogos podem fazer isso através do nosso portal oficial. Certifique-se de atender aos requisitos específicos para cada categoria antes de submeter sua inscrição."
 	  },
 	  {
 	    "title": "POSSO VOTAR EM JOGOS QUE NÃO ESTÃO NA MINHA CATEGORIA PREFERIDA?",
