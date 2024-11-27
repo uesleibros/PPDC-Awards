@@ -106,56 +106,6 @@ export default async function IndicadosCategoria({ params }) {
 						<p className="mt-5 text-2xl text-white font-semibold max-w-[700px]">{currentCategory.current.description}</p>
 					</div>
 				</div>
-				<div className="p-5 lg:p-10 my-5 grid gap-5 grid-cols-1 lg:grid-cols-3">
-					<div className="lg:w-[400px] h-[max-content] shadow-sm transition duration-200 hover:-translate-y-4">
-						<div>
-							<Image className="object-cover w-full lg:h-[219px] transition ease-in-out opacity-100" src="https://res.cloudinary.com/dxwfrujwa/image/upload/v1731417524/projetos/recursos-graficos/388941_6c1542a141c3447a8524338c034c5a21_mv2_skisdz.png" width={1000} height={1000} alt="teste" quality={100} />
-							<div className="w-full bg-[#f2a366] text-center p-7">
-								<h1 className="font-bold text-sm">VOTAR</h1>
-							</div>
-						</div>
-						<div className="mt-5">
-							<h1 className="uppercase font-extrabold text-2xl text-white">eu tenho que fazer um jogo pq em 4 horas eu tenho prova</h1>
-							<h1 className="font text-lg text-zinc-200">Fabinho</h1>
-						</div>
-					</div>
-					<div className="lg:w-[400px] h-[max-content] shadow-sm transition duration-200 hover:-translate-y-4">
-						<div>
-							<Image className="object-cover w-full lg:h-[219px] transition ease-in-out opacity-100" src="https://res.cloudinary.com/dxwfrujwa/image/upload/v1716163464/projetos/recursos-graficos/c7be03_f09252b90f9d40d58a7586a1572be9fc_mv2_sy9mx2.png" width={1000} height={1000} alt="teste" quality={100} />
-							<div className="w-full bg-[#f2a366] text-center p-7">
-								<h1 className="font-bold text-sm">VOTAR</h1>
-							</div>
-						</div>
-						<div className="mt-5">
-							<h1 className="uppercase font-extrabold text-2xl text-white">JantaRHub</h1>
-							<h1 className="font text-lg text-zinc-200">agt</h1>
-						</div>
-					</div>
-					<div className="lg:w-[400px] h-[max-content] shadow-sm transition duration-200 hover:-translate-y-4">
-						<div>
-							<Image className="object-cover w-full lg:h-[219px] transition ease-in-out opacity-100" src="https://res.cloudinary.com/dxwfrujwa/image/upload/v1731417524/projetos/recursos-graficos/388941_6c1542a141c3447a8524338c034c5a21_mv2_skisdz.png" width={1000} height={1000} alt="teste" quality={100} />
-							<div className="w-full bg-[#f2a366] text-center p-7">
-								<h1 className="font-bold text-sm">VOTAR</h1>
-							</div>
-						</div>
-						<div className="mt-5">
-							<h1 className="uppercase font-extrabold text-2xl text-white">eu tenho que fazer um jogo pq em 4 horas eu tenho prova</h1>
-							<h1 className="font text-lg text-zinc-200">Fabinho</h1>
-						</div>
-					</div>
-					<div className="lg:w-[400px] h-[max-content] shadow-sm transition duration-200 hover:-translate-y-4">
-						<div>
-							<Image className="object-cover w-full lg:h-[219px] transition ease-in-out opacity-100" src="https://res.cloudinary.com/dxwfrujwa/image/upload/v1701487131/projetos/recursos-graficos/b4408d_0352c32b3a1e45fd9a4e9cbc5329af72_mv2_wsm2jo.png" width={1000} height={1000} alt="teste" quality={100} />
-							<div className="w-full bg-[#f2a366] text-center p-7">
-								<h1 className="font-bold text-sm">VOTAR</h1>
-							</div>
-						</div>
-						<div className="mt-5">
-							<h1 className="uppercase font-extrabold text-2xl text-white">Quiz Genial</h1>
-							<h1 className="font text-lg text-zinc-200">Abryp</h1>
-						</div>
-					</div>
-				</div>
 				<div className="top-0 left-0 z-[-10] h-screen w-full bg-[url('https://cdn.thegameawards.com/frontend/jpegs/mid-section-bg_24.jpg')] bg-center bg-cover bg-no-repeat pointer-events-none fixed">
 	        <div className="absolute inset-0 bg-black opacity-70" />
 	      </div>
