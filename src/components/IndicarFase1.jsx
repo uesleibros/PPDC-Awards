@@ -64,7 +64,7 @@ export default function IndicarFase1() {
                   <div
                     className={`w-full text-center p-8 ${
                       isGameDisabled(game.publishedDate)
-                        ? "bg-gray-500"
+                        ? "bg-gray-500 text-gray-800"
                         : "bg-[#f2a366]"
                     }`}
                   >
