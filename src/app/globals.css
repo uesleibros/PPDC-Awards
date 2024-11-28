@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-	--start-angle:0deg;
-	--angle-180:180deg;
+:root {
+	--start-angle: 0deg;
+	--angle-180: 180deg;
 	--radial-gradient-gold: #f2a36600 25deg,#f2a366 43.4deg, #fbe3d100 60deg, #101419cc 0, #fff0 310deg, #101419cc 408.4deg;
 	--radial-gradient-blue: #f2a36600 25deg, #a3b8d6 43.4deg, #fbe3d100 60deg, #101419cc 0, #fff0 310deg, #101419cc 408.4deg;
 	--conic-gradient-white:#ffffff14 -54deg, #f7c8a3 50.4deg, #fbe3d10d 126deg, #fbe3d1 234deg, #ffffff14 306deg, #f7c8a3 410.4deg;
