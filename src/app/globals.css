@@ -52,7 +52,7 @@
   }
 
   20% {
-      background: conic-gradient(from calc(var(--start-angle) + 72deg) at 50% 50%,var(--radial-gradient-blue))
+    background: conic-gradient(from calc(var(--start-angle) + 72deg) at 50% 50%,var(--radial-gradient-blue));
   }
 
   22% {
