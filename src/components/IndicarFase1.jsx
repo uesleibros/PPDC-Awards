@@ -97,7 +97,7 @@ export default function IndicarFase1() {
         )}
       </div>
       {openendInvalidGame && selectedGame && (
-        <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-md">
+        <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-md p-5 lg:p-0">
           <div className="bg-slate-900 border border-yellow-200 shadow-lg max-w-[700px] w-full p-8">
             <h1 className="text-yellow-200 font-extrabold text-3xl mb-6">JOGO INCAPACITADO</h1>
             <p className="text-white text-lg mb-6">
