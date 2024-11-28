@@ -5,12 +5,9 @@ export async function POST(request) {
 
   if (req.ok) {
     const data = await req.json();
-    return new Response(JSON.stringify(data.items), { status: 200 });
+    const filteredItems = data.items.filter(item => !item.icon.startsWith("wix:image://v1"));
 
-    return new Response(
-      JSON.stringify({ error: "Dados inválidos na resposta da API." }),
-      { status: 200 }
-    );
+    return new Response(JSON.stringify(filteredItems), { status: 200 });
   } else {
     return new Response(
       JSON.stringify({ error: "Falhou ao buscar por esse jogo." }),
