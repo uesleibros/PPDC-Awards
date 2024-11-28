@@ -28,7 +28,7 @@ export default function VoteCategory({ game, disabled, children }) {
 				children
 			) : (
 				<>
-					<children className="mb-auto" onClick={() => setOpenedChooseCategory(true)}>
+					<div className="mb-auto" onClick={() => setOpenedChooseCategory(true)}>
 						{children}
 					</div>
 					{openedChooseCategory && (
