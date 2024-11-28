@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-	--start-angle: 0deg;
-	--angle-180: 180deg;
-	--radial-gradient-gold: #f2a36600 25deg,#f2a366 43.4deg, #fbe3d100 60deg, #101419cc 0, #fff0 310deg, #101419cc 408.4deg;
-	--radial-gradient-blue: #f2a36600 25deg, #a3b8d6 43.4deg, #fbe3d100 60deg, #101419cc 0, #fff0 310deg, #101419cc 408.4deg;
-	--conic-gradient-white:#ffffff14 -54deg, #f7c8a3 50.4deg, #fbe3d10d 126deg, #fbe3d1 234deg, #ffffff14 306deg, #f7c8a3 410.4deg;
+  --start-angle: 0deg;
+  --angle-180: 180deg;
+  --radial-gradient-gold: #f2a36600 25deg,#f2a366 43.4deg, #fbe3d100 60deg, #101419cc 0, #fff0 310deg, #101419cc 408.4deg;
+  --radial-gradient-blue: #f2a36600 25deg, #a3b8d6 43.4deg, #fbe3d100 60deg, #101419cc 0, #fff0 310deg, #101419cc 408.4deg;
+  --conic-gradient-white:#ffffff14 -54deg, #f7c8a3 50.4deg, #fbe3d10d 126deg, #fbe3d1 234deg, #ffffff14 306deg, #f7c8a3 410.4deg;
 }
 
 @keyframes goldToblue-gradient-rotate {
@@ -235,17 +235,17 @@
   }
 }
 
-.glow-card--hover: before,.glow-card:hover: before {
+.glow-card--hover:before, .glow-card:hover:before {
   position: absolute;
   inset: 0;
   padding: 3px;
   background-image: none;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   z-index: -1;
-  background-image: conic-gradient(from var(--start-angle) at 50% 50%,var(--gradients));
+  background-image: conic-gradient(from var(--start-angle) at 50% 50%, var(--gradients));
   -webkit-animation: goldToblue-gradient-rotate 2s ease infinite;
   animation: goldToblue-gradient-rotate 2s ease infinite;
 }
