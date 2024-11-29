@@ -48,7 +48,7 @@ export default function IndicarFase1() {
       const body = await req.json();
 
       if (req.ok)
-        setVotedCategories(body.votes.map(vote => vote.category_id));
+        setVotedCategories(body.votes);
     }
 
     fetchCategories();
