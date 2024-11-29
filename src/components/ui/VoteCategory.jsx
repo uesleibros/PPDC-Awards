@@ -117,7 +117,7 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
 										{categoriesList.map((category) => {
 										  const isBlocked = blockedCategories.includes(category.id);
 										  const isVoted = votedCategories.includes(category.id);
-										  const isClickable = !isBlocked && !isVoted && game.released && category.id !== 2;
+										  const isClickable = !isBlocked && !isVoted && (game.released || category.id === 2);
 
 										  return (
 										    <div
