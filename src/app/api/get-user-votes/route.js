@@ -18,7 +18,7 @@ export async function POST(request) {
 
   const { data: votes } = await supabase
     .from("votes")
-    .select("category_id")
+    .select("project_id, category_id")
     .eq("phase", phase)
     .eq("author_id", user.id);
 
