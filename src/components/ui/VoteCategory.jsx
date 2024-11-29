@@ -51,7 +51,7 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
     if (req.ok) {
     	setVotedCategories((prevVotedCategories) => [
 	      ...prevVotedCategories,
-	      selectedCategory
+				{ category_id: selectedCategory, project_id: game.id }
 	    ]);
 	    setSelectedCategory(null);
     } else {
@@ -116,7 +116,9 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
                   <div className="mt-5 grid grid-cols-1 lg:grid-cols-5 gap-4">
 										{categoriesList.map((category) => {
 										  const isBlocked = blockedCategories.includes(category.id);
-										  const isVoted = votedCategories.includes(category.id);
+										  const isVoted = votedCategories.some(
+  (vote) => vote.category_id === category.id && vote.project_id === game.id
+);
 										  const isClickable = !isBlocked && !isVoted && (game.released || category.id === 2);
 
 										  return (
