@@ -119,9 +119,7 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
 										  const isVoted = votedCategories.some(
   (vote) => vote.category_id === category.id && vote.project_id === game.id
 );
-										  const isClickable =
-  (!game.released && category.id === 2) || 
-  (!isBlocked && !isVoted && game.released && category.id !== 2);
+										  const isClickable = !isBlocked && !isVoted;
 
 
 										  return (
