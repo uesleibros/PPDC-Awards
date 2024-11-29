@@ -10,6 +10,7 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
   const [blockedCategories, setBlockedCategories] = useState([]);
   const [votedCategories, setVotedCategories] = useState(preVotedCategories || []);
   const [openedChooseCategory, setOpenedChooseCategory] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
     async function fetchBlockedCategories() {
@@ -23,6 +24,13 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
       	setBlockedCategories(body);
     }
 
+    async function getIsAuth() {
+    	const { data: { user } } = await supabase.auth.getUser();
+    	if (user)
+    		setIsAuth(true);
+    }
+
+    getIsAuth();
     fetchBlockedCategories();
   }, []);
 
@@ -55,13 +63,21 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
     setSelectedCategory(null);
   };
 
+  const handleOpenChooseCategory = () => {
+  	if (!isAuth) {
+  		alert("Você precisa logar com sua conta do Discord antes de votar.");
+  	} else {
+  		setOpenedChooseCategory(true);
+  	}
+  }
+
   return (
     <>
       {disabled ? (
         children
       ) : (
         <>
-          <div className="mb-auto" onClick={() => setOpenedChooseCategory(true)}>
+          <div className="mb-auto" onClick={handleOpenChooseCategory}>
             {children}
           </div>
           {openedChooseCategory && (
