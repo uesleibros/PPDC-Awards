@@ -11,6 +11,8 @@ export default function IndicarFase1() {
   const [searchGame, setSearchGame] = useState("");
   const [loading, setLoading] = useState(false);
   const [games, setGames] = useState([]);
+  const [votedCategories, setVotedCategories] = useState([]);
+  const [categoriesList, setCategoriesList] = useState([]);
 
   async function fetchSearchGame() {
     setLoading(true);
@@ -27,6 +29,31 @@ export default function IndicarFase1() {
 
     setLoading(false);
   }
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const req = await fetch("/api/categories");
+      const body = await req.json();
+
+      if (req.ok) {
+        setCategoriesList(body.categories);
+      }
+    }
+
+    async function fetchUserVotes() {
+      const req = await fetch("/api/get-user-votes", {
+        method: "POST",
+        body: JSON.stringify({ phase: "PHASE_1" })
+      });
+      const body = await req.json();
+
+      if (req.ok)
+        setVotedCategories(body.votes.map(vote => vote.category_id));
+    }
+
+    fetchCategories();
+    fetchUserVotes();
+  }, []);
 
   const isGameDisabled = (releaseDate) => {
     const releaseYear = new Date(releaseDate).getFullYear();
@@ -56,7 +83,7 @@ export default function IndicarFase1() {
         {!loading ? (
           <div className="my-5 gap-4 w-full items-center grid gap-4 grid-cols-1 lg:grid-cols-5">
             {games.map((game, index) => (
-              <VoteCategory key={index} game={game} disabled={isGameDisabled(game.publishedDate)}>
+              <VoteCategory key={index} game={game} preCategoriesList={categoriesList} preVotedCategories={votedCategories} disabled={isGameDisabled(game.publishedDate)}>
                 <div onClick={() => {
                   setSelectedGame(game);
                     if (isGameDisabled(game.publishedDate)) {

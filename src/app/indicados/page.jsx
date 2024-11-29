@@ -29,7 +29,7 @@ export default function Indicados() {
             <h2 className="mt-2 max-w-[700px] text-2xl font-bold text-slate-300">Vote agora ou veja os indicados deste ano. Descubra os vencedores ao vivo no PowerPoint Discord</h2>
             <div className="mt-10 flex items-center gap-4 flex-wrap">
               <Categories />
-              <Button url="/indicados" content="COMECE A VOTAR" />
+              <Button url="/indicados/fase1" content="COMECE A VOTAR" />
             </div>
           </div>
         </div>

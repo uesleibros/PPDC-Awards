@@ -22,7 +22,7 @@ export async function GET(request) {
   });
 
   if (error) {
-    console.error("Erro na autenticação:", error.message);
+    console.error("Error on auth:", error.message);
     return NextResponse.redirect('/');
   }
 
