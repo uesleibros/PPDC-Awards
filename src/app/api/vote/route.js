@@ -50,6 +50,7 @@ export async function POST(request) {
   const { data: voteCount, error: countError } = await supabase
     .from("votes")
     .select("id", { count: "exact" })
+    .eq("project_id", project_id)
     .eq("category_id", category_id)
 
   if (countError) {
@@ -70,6 +71,7 @@ export async function POST(request) {
     .from("votes")
     .select("*")
     .eq("author_id", user.id)
+    .eq("project_id", project_id)
     .eq("category_id", category_id)
     .single();
 
