@@ -43,7 +43,7 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
 	  .subscribe()
 
     fetchBlockedCategories();
-  }, []);
+  }, [game]);
 
   const categoriasFiltradas = preCategoriesList.filter((category) =>
     category.title.toLowerCase().includes(searchCategory.toLowerCase().trim())
@@ -137,7 +137,7 @@ const handleConfirmDelete = async () => {
                     concorrer na categoria escolhida.
                   </p>
                   <p className="font-semibold text-xs text-white mt-5">
-                    As categorias que estão meio apagadas se deve a alguns motivos. Primeiro, se o seu jogo não foi lançado, apenas a categoria "Mais Aguardado" estará disponível para voto. Caso o jogo a ser votado já lançou, a categoria "Mais Aguardado" ficará indisponível para voto.
+                    As categorias que estão meio apagadas se deve a alguns motivos. Primeiro, se o seu jogo não foi lançado, apenas a categoria &quot;Mais Aguardado&quot; estará disponível para voto. Caso o jogo a ser votado já lançou, a categoria &quot;Mais Aguardado&quot; ficará indisponível para voto.
                   </p> 
                   <input
                     value={searchCategory}
