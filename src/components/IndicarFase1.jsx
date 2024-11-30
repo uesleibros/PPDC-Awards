@@ -27,8 +27,8 @@ export default function IndicarFase1() {
   };
 
   async function fetchSearchGame() {
-    if (searchGame.trim().length < 3) {
-      addNotification("Para a busca ser mais precisa, tem que ter no mínimo 3 caracteres.", "warning", "bottom-right");
+    if (searchGame.trim().length < 2) {
+      addNotification("Para a busca ser mais precisa, tem que ter no mínimo 2 caracteres.", "warning", "bottom-right");
       return;
     }
 
