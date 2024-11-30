@@ -200,11 +200,11 @@ const handleConfirmDelete = async () => {
 											        <p className="uppercase font-bold text-xs text-green-500 mt-2">
 											          {isVoted ? "VOTADO" : "CLASSIFICADO"}
 											        </p>
-											        <p className="uppercase font-bold text-xs text-yellow-200 mt-2">
+												{/*<p className="uppercase font-bold text-xs text-yellow-200 mt-2">
 											          {preLastVotes.find(
 											            (lastVote) => lastVote.category_id === category.id && lastVote.project_id === game.id
 											          )?.id}
-											        </p>
+											        </p>*/}
 											      </>
 											    )}
 											  </div>
