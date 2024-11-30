@@ -6,12 +6,12 @@ export async function POST(request) {
 	const { data: { user }, error } = await supabase.auth.getUser();
 
   if (error || !user) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+    return new Response(JSON.stringify({ error: "Você não está conectado na sua conta do Discord. Entre usando ela e tente votar novamente." }), { status: 401 });
   }
 
   if (!phase) {
     return new Response(
-      JSON.stringify({ error: "Missing required field phase" }),
+      JSON.stringify({ error: "Falta do campo phase" }),
       { status: 400 }
     );
   }

@@ -18,7 +18,7 @@ async function fetchClassifiedCategories(projectId) {
   }, {});
 
   const classifiedCategories = Object.keys(categoryCounts)
-    .filter(categoryId => categoryCounts[categoryId] > 3)
+    .filter(categoryId => categoryCounts[categoryId] >= 3)
     .map(categoryId => ({ category_id: categoryId, votes: categoryCounts[categoryId] }));
 
   return classifiedCategories;
@@ -30,11 +30,11 @@ export async function POST(request) {
 
   if (!project_id) {
     return new Response(
-      JSON.stringify({ error: "Missing required field project_id" }),
+      JSON.stringify({ error: "Falta do campo project_id" }),
       { status: 400 }
     );
   }
 
   const data = await fetchClassifiedCategories(project_id);
-  return new Response(JSON.stringify(data), { status: 200 });
+  return new Response(JSON.stringify(data.map(category => category.category_id)), { status: 200 });
 }

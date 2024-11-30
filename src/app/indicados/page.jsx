@@ -25,7 +25,7 @@ export default function Indicados() {
 
         <div className="relative z-10 min-h-[700px] w-full">
           <div className="z-10 p-5 lg:px-[20vh] py-[40vh]">
-            <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-yellow-200">INDICADOS</h1>
+            <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-yellow-200">INDICADOS - FASE 1</h1>
             <h2 className="mt-2 max-w-[700px] text-2xl font-bold text-slate-300">Vote agora ou veja os indicados deste ano. Descubra os vencedores ao vivo no PowerPoint Discord</h2>
             <div className="mt-10 flex items-center gap-4 flex-wrap">
               <Categories />

@@ -1,16 +1,24 @@
 "use client";
 
-import supabase from "@/lib/supabase-ssr-client";
+import supabase from "@/lib/supabase";
 import { useState, useEffect } from "react";
+import Notification from "@/components/ui/Notification";
 
 export default function VoteCategory({ game, preCategoriesList, preVotedCategories, disabled, children }) {
-  const [categoriesList, setCategoriesList] = useState(preCategoriesList || []);
   const [searchCategory, setSearchCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedRemoveCategory, setSelectedRemoveCategory] = useState(null);
   const [blockedCategories, setBlockedCategories] = useState([]);
-  const [votedCategories, setVotedCategories] = useState(preVotedCategories || []);
   const [openedChooseCategory, setOpenedChooseCategory] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+
+  const addNotification = (message, type, position) => {
+    const id = Math.random().toString(36).substring(2, 9);
+    setNotifications((prev) => [...prev, { id, message, type, position }]);
+    setTimeout(() => {
+      setNotifications((prev) => prev.filter((n) => n.id !== id));
+    }, 4000);
+  };
 
   useEffect(() => {
     async function fetchBlockedCategories() {
@@ -24,52 +32,81 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
       	setBlockedCategories(body);
     }
 
-    async function getIsAuth() {
-    	const { data: { user } } = await supabase.auth.getUser();
-    	if (user)
-    		setIsAuth(true);
-    }
+		supabase.channel("custom-update-channel")
+		.on(
+	    "postgres_changes",
+	    { event: '*', schema: "public", table: "votes" },
+	    (payload) => {
+	      fetchBlockedCategories();
+	    }
+	  )
+	  .subscribe()
 
-    getIsAuth();
     fetchBlockedCategories();
   }, []);
 
-  const categoriasFiltradas = categoriesList.filter((category) =>
+  const categoriasFiltradas = preCategoriesList.filter((category) =>
     category.title.toLowerCase().includes(searchCategory.toLowerCase().trim())
   );
 
-  const handleConfirm = async () => {
-    const req = await fetch("/api/vote", {
-    	method: "POST",
-    	body: JSON.stringify({ 
-    		project_id: game.id,
-    		category_id: selectedCategory,
-    		phase: "PHASE_1"
-    	})
-    });
+const handleConfirm = async () => {
+  const req = await fetch("/api/vote", {
+    method: "POST",
+    body: JSON.stringify({
+      project_id: game.id,
+      category_id: selectedCategory,
+      phase: "PHASE_1"
+    })
+  });
+  const body = await req.json();
 
-    if (req.ok) {
-    	setVotedCategories((prevVotedCategories) => [
-	      ...prevVotedCategories,
-				{ category_id: selectedCategory, project_id: game.id }
-	    ]);
-	    setSelectedCategory(null);
-    } else {
-    	alert("Houve um erro ao votar, tente novamente.");
-    }
-  };
+  if (req.ok) {
+    addNotification(
+      `Obrigado por votar na categoria "${preCategoriesList.find(category => category.id === selectedCategory)?.title}", seu voto faz a diferença.`,
+      "success",
+      "bottom-right"
+    );
+    setSelectedCategory(null);
+  } else {
+    addNotification(body.error, "warning", "bottom-right");
+  }
+};
+
+const handleConfirmDelete = async () => {
+  const req = await fetch("/api/vote", {
+    method: "DELETE",
+    body: JSON.stringify({
+      project_id: game.id,
+      category_id: selectedRemoveCategory,
+      phase: "PHASE_1"
+    })
+  });
+  const body = await req.json();
+
+  if (req.ok) {
+    addNotification(
+      `Voto removido da categoria "${preCategoriesList.find(category => category.id === selectedRemoveCategory)?.title}", seu voto não fez a diferença.`,
+      "success",
+      "bottom-right"
+    );
+    setSelectedRemoveCategory(null);
+  } else {
+    addNotification(body.error, "warning", "bottom-right");
+  }
+};
+
 
   const handleCancel = () => {
     setSelectedCategory(null);
   };
 
   const handleOpenChooseCategory = () => {
-  	if (!isAuth) {
-  		alert("Você precisa logar com sua conta do Discord antes de votar.");
-  	} else {
-  		setOpenedChooseCategory(true);
-  	}
+  	setOpenedChooseCategory(true);
   }
+
+  const handleCancelDelete = () => {
+  	setSelectedRemoveCategory(null);
+  };
 
   return (
     <>
@@ -99,6 +136,9 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
                     Ao escolher, você estará indicando o <strong>{game.title}</strong> para
                     concorrer na categoria escolhida.
                   </p>
+                  <p className="font-semibold text-xs text-white mt-5">
+                    As categorias que estão meio apagadas se deve a alguns motivos. Primeiro, se o seu jogo não foi lançado, apenas a categoria "Mais Aguardado" estará disponível para voto. Caso o jogo a ser votado já lançou, a categoria "Mais Aguardado" ficará indisponível para voto.
+                  </p> 
                   <input
                     value={searchCategory}
                     onChange={(e) => setSearchCategory(e.target.value)}
@@ -106,42 +146,58 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
                     type="text"
                     placeholder="Procure por uma categoria"
                   />
-                  {selectedCategory && (
-                    <div className="mt-5 flex items-center gap-4">
-                      <p onClick={handleConfirm} className="p-4 bg-slate-900 transition-colors hover:bg-slate-800 uppercase cursor-pointer font-extrabold text-lg text-white">Confirmar</p>
-                      <p onClick={handleCancel} className="p-4 bg-gray-200 transition-colors hover:bg-gray-400 uppercase cursor-pointer font-extrabold text-lg text-black">Cancelar</p>
+                  {(selectedCategory || selectedRemoveCategory) && (
+                  	<div>
+	                    <div className="mt-5 flex items-center gap-4">
+	                      <p onClick={selectedCategory ? handleConfirm : selectedRemoveCategory ? handleConfirmDelete : null} className="select-none p-4 bg-slate-900 transition-colors hover:bg-slate-800 uppercase cursor-pointer font-extrabold text-lg text-white">Confirmar</p>
+	                      <p onClick={selectedCategory ? handleCancel : selectedRemoveCategory ? handleCancelDelete : null} className="select-none p-4 bg-gray-200 transition-colors hover:bg-gray-400 uppercase cursor-pointer font-extrabold text-lg text-black">Cancelar</p>
+	                    </div>
+	                    <p className="font-semibold text-xs text-white mt-5">
+	                      {selectedCategory ? "Ao confirmar, você estará votando na categoria escolhida." : selectedRemoveCategory ? "Ao confirmar, você estará removendo seu voto da categoria escolhida." : ''}
+	                    </p>
                     </div>
                   )}
 
                   <div className="mt-5 grid grid-cols-1 lg:grid-cols-5 gap-4">
-										{categoriesList.map((category) => {
-										  const isBlocked = blockedCategories.includes(category.id);
-										  const isVoted = votedCategories.some(
-  (vote) => vote.category_id === category.id && vote.project_id === game.id
-);
-										  const isClickable = !isBlocked && !isVoted;
+										{preCategoriesList.map((category) => {
+										  const isBlocked = blockedCategories.includes(String(category.id));
+										  const isVoted = preVotedCategories.some(
+										    (vote) => vote.category_id === category.id && vote.project_id === game.id
+										  );
+										  const isMostAnticipated = category.id === 2;
+										  const isGameReleased = game.released;
 
+										  const isClickable =
+										    !isBlocked &&
+										    ((isGameReleased && !isMostAnticipated) || (!isGameReleased && isMostAnticipated));
+
+										  const handleClick = () => {
+										    if (isBlocked) return;
+										    if (isVoted) {
+										      setSelectedRemoveCategory(category.id);
+										    } else if (isClickable && selectedCategory === null) {
+										      setSelectedCategory(category.id);
+										    }
+										  };
+
+										  const containerClass = `select-none h-full lg:aspect-square flex flex-col lg:justify-center border border-[#6588ba] p-4 lg:py-14 lg:px-17 lg:text-center lg:min-h-[100px] min-w-[100px] bg-[#0a0e13b3] transition-all ${(isClickable && (selectedCategory === category.id || selectedRemoveCategory === category.id)) && "bg-[#1e2938] transform scale-105 border-none" } ${
+										    isBlocked
+										      ? "cursor-not-allowed opacity-50"
+										      : isClickable
+										      ? "cursor-pointer hover:bg-[#1e2938] hover:border-[#1e2938]"
+										      : isVoted
+										      ? "cursor-pointer hover:bg-[#1e2938] hover:border-[#1e2938]"
+										      : selectedCategory === category.id
+										      ? "bg-[#1e2938] transform scale-105"
+										      : "cursor-not-allowed opacity-50"
+										  }`;
 
 										  return (
-										    <div
-										      onClick={() =>
-										        isClickable && selectedCategory === null
-										          ? setSelectedCategory(category.id)
-										          : null
-										      }
-										      key={category.id}
-										      className={`h-full lg:aspect-square flex flex-col lg:justify-center border border-[#6588ba] p-4 lg:py-14 lg:px-17 lg:text-center lg:min-h-[100px] min-w-[100px] bg-[#0a0e13b3] transition-all ${
-										        !isClickable
-										          ? "cursor-not-allowed opacity-50"
-										          : selectedCategory === category.id
-										          ? "bg-[#1e2938] transform scale-105"
-										          : "cursor-pointer hover:bg-[#1e2938] hover:border-[#1e2938]"
-										      }`}
-										    >
+										    <div key={category.id} onClick={handleClick} className={containerClass}>
 										      <h3 className="uppercase text-white font-semibold">{category.title}</h3>
 										      {(isVoted || isBlocked) && (
-										        <p className="uppercase font-bold text-sm text-yellow-200 mt-2">
-										          {isVoted ? "VOTO REALIZADO" : "CLASSIFICADA"}
+										        <p className="uppercase font-bold text-xs text-yellow-200 mt-2">
+										          {isVoted ? game.title : "CLASSIFICADO"}
 										        </p>
 										      )}
 										    </div>
@@ -157,6 +213,17 @@ export default function VoteCategory({ game, preCategoriesList, preVotedCategori
           )}
         </>
       )}
+			{notifications.map((notif) => (
+        <Notification
+          key={notif.id}
+          message={notif.message}
+          type={notif.type}
+          position={notif.position}
+          onClose={() =>
+            setNotifications((prev) => prev.filter((n) => n.id !== notif.id))
+          }
+        />
+      ))}
     </>
   );
 }

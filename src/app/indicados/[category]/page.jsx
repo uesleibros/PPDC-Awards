@@ -102,6 +102,7 @@ export default async function IndicadosCategoria({ params }) {
 				</div>
 				<div className="mt-10 p-5 lg:p-10">
 					<div>
+						<h1 className="uppercase text-6xl text-white font-extrabold max-w-[700px]">FASE 2</h1>
 						<h1 className="uppercase text-6xl text-yellow-200 font-extrabold max-w-[700px]">{currentCategory.current.title}</h1>
 						<p className="mt-5 text-2xl text-white font-semibold max-w-[700px]">{currentCategory.current.description}</p>
 					</div>

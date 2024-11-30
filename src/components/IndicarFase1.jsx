@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import supabase from "@/lib/supabase";
 import VoteCategory from "@/components/ui/VoteCategory";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
@@ -50,6 +51,16 @@ export default function IndicarFase1() {
       if (req.ok)
         setVotedCategories(body.votes);
     }
+
+    supabase.channel("custom-insert-channel")
+    .on(
+      "postgres_changes",
+      { event: '*', schema: "public", table: "votes" },
+      (payload) => {
+        fetchUserVotes();
+      }
+    )
+    .subscribe()
 
     fetchCategories();
     fetchUserVotes();
