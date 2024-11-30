@@ -4,7 +4,7 @@ import supabase from "@/lib/supabase";
 import { useState, useEffect } from "react";
 import Notification from "@/components/ui/Notification";
 
-export default function VoteCategory({ game, preCategoriesList, preVotedCategories, disabled, children }) {
+export default function VoteCategory({ game, preLastVotes, preCategoriesList, preVotedCategories, disabled, children }) {
   const [searchCategory, setSearchCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedRemoveCategory, setSelectedRemoveCategory] = useState(null);
@@ -196,9 +196,12 @@ const handleConfirmDelete = async () => {
 										    <div key={category.id} onClick={handleClick} className={containerClass}>
 										      <h3 className="uppercase text-white font-semibold">{category.title}</h3>
 										      {(isVoted || isBlocked) && (
-										        <p className="uppercase font-bold text-xs text-yellow-200 mt-2">
-										          {isVoted ? game.title : "CLASSIFICADO"}
+										        <p className="uppercase font-bold text-xs text-green-500 mt-2">
+										          {isVoted ? "VOTADO" : "CLASSIFICADO"}
 										        </p>
+													<p className="uppercase font-bold text-xs text-yellow-200 mt-2">
+													{preLastVotes.find(lastVote => lastVote.category_id === category.id && lastVote.project_id === game.id)?.id
+													</p>
 										      )}
 										    </div>
 										  );
