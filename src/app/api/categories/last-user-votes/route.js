@@ -40,8 +40,35 @@ export async function POST(request) {
     return result;
   }, {});
 
+  const votesWithTitles = await Promise.all(
+    Object.values(lastVotesByCategory).map(async (vote) => {
+      try {
+        const response = await fetch(
+          `https://pptgamespt.wixsite.com/crate/_functions/api/v3/projects/id/${vote.project_id}`
+        );
+        if (!response.ok) {
+          throw new Error(`Erro ao buscar o título do projeto ${vote.project_id}`);
+        }
+        const projectData = await response.json();
+        return {
+          category_id: vote.category_id,
+          project_id: vote.project_id,
+          title: projectData.title || "Título indisponível",
+          created_at: vote.created_at
+        };
+      } catch (error) {
+        return {
+          category_id: vote.category_id,
+          project_id: vote.project_id,
+          title: "Erro ao buscar título",
+          created_at: vote.created_at
+        };
+      }
+    })
+  );
+
   return new Response(
-    JSON.stringify({ lastVotes: Object.values(lastVotesByCategory) }),
+    JSON.stringify({ lastVotes: votesWithTitles }),
     { status: 200, headers: { "Content-Type": "application/json" } }
   );
 }
