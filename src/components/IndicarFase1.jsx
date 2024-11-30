@@ -5,6 +5,7 @@ import supabase from "@/lib/supabase";
 import VoteCategory from "@/components/ui/VoteCategory";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
+import Notification from "@/components/ui/Notification";
 
 export default function IndicarFase1() {
   const [openendInvalidGame, setOpenedInvalidGame] = useState(false);
@@ -15,17 +16,33 @@ export default function IndicarFase1() {
   const [votedCategories, setVotedCategories] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
   const [lastVotes, setLastVotes] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+
+  const addNotification = (message, type, position) => {
+    const id = Math.random().toString(36).substring(2, 9);
+    setNotifications((prev) => [...prev, { id, message, type, position }]);
+    setTimeout(() => {
+      setNotifications((prev) => prev.filter((n) => n.id !== id));
+    }, 4000);
+  };
 
   async function fetchSearchGame() {
+    if (searchGame.trim().length < 3) {
+      addNotification("Para a busca ser mais precisa, tem que ter no mínimo 3 caracteres.", "warning", "bottom-right");
+      return;
+    }
+
     setLoading(true);
     const req = await fetch("/api/crate/search", {
       method: "POST",
-      body: JSON.stringify({ searchGame }),
+      body: JSON.stringify({ searchGame: searchGame.trim() }),
     });
 
     const body = await req.json();
 
     if (req.ok) {
+      if (body.length === 0)
+        addNotification(`A busca do jogo ${searchGame.trim()} não deu resultados.`, "default", "bottom-right");
       setGames(body);
     }
 
@@ -61,7 +78,7 @@ export default function IndicarFase1() {
       const body = await req.json();
 
       if (req.ok)
-        setLastVotes(body.votes);
+        setLastVotes(body.lastVotes);
     }
 
     supabase.channel("custom-insert-channel")
@@ -166,6 +183,17 @@ export default function IndicarFase1() {
           </div>
         </div>
       )}
+      {notifications.map((notif) => (
+        <Notification
+          key={notif.id}
+          message={notif.message}
+          type={notif.type}
+          position={notif.position}
+          onClose={() =>
+            setNotifications((prev) => prev.filter((n) => n.id !== notif.id))
+          }
+        />
+      ))}
     </div>
   );
 }

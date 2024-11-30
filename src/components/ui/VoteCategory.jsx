@@ -49,52 +49,51 @@ export default function VoteCategory({ game, preLastVotes, preCategoriesList, pr
     category.title.toLowerCase().includes(searchCategory.toLowerCase().trim())
   );
 
-const handleConfirm = async () => {
-  const req = await fetch("/api/vote", {
-    method: "POST",
-    body: JSON.stringify({
-      project_id: game.id,
-      category_id: selectedCategory,
-      phase: "PHASE_1"
-    })
-  });
-  const body = await req.json();
+	const handleConfirm = async () => {
+	  const req = await fetch("/api/vote", {
+	    method: "POST",
+	    body: JSON.stringify({
+	      project_id: game.id,
+	      category_id: selectedCategory,
+	      phase: "PHASE_1"
+	    })
+	  });
+	  const body = await req.json();
 
-  if (req.ok) {
-    addNotification(
-      `Obrigado por votar na categoria "${preCategoriesList.find(category => category.id === selectedCategory)?.title}", seu voto faz a diferença.`,
-      "success",
-      "bottom-right"
-    );
-    setSelectedCategory(null);
-  } else {
-    addNotification(body.error, "warning", "bottom-right");
-  }
-};
+	  if (req.ok) {
+	    addNotification(
+	      `Obrigado por votar na categoria "${preCategoriesList.find(category => category.id === selectedCategory)?.title}", seu voto faz a diferença.`,
+	      "success",
+	      "bottom-right"
+	    );
+	    setSelectedCategory(null);
+	  } else {
+	    addNotification(body.error, "warning", "bottom-right");
+	  }
+	};
 
-const handleConfirmDelete = async () => {
-  const req = await fetch("/api/vote", {
-    method: "DELETE",
-    body: JSON.stringify({
-      project_id: game.id,
-      category_id: selectedRemoveCategory,
-      phase: "PHASE_1"
-    })
-  });
-  const body = await req.json();
+	const handleConfirmDelete = async () => {
+	  const req = await fetch("/api/vote", {
+	    method: "DELETE",
+	    body: JSON.stringify({
+	      project_id: game.id,
+	      category_id: selectedRemoveCategory,
+	      phase: "PHASE_1"
+	    })
+	  });
+	  const body = await req.json();
 
-  if (req.ok) {
-    addNotification(
-      `Voto removido da categoria "${preCategoriesList.find(category => category.id === selectedRemoveCategory)?.title}", seu voto não fez a diferença.`,
-      "success",
-      "bottom-right"
-    );
-    setSelectedRemoveCategory(null);
-  } else {
-    addNotification(body.error, "warning", "bottom-right");
-  }
-};
-
+	  if (req.ok) {
+	    addNotification(
+	      `Voto removido da categoria "${preCategoriesList.find(category => category.id === selectedRemoveCategory)?.title}", seu voto não fez a diferença.`,
+	      "success",
+	      "bottom-right"
+	    );
+	    setSelectedRemoveCategory(null);
+	  } else {
+	    addNotification(body.error, "warning", "bottom-right");
+	  }
+	};
 
   const handleCancel = () => {
     setSelectedCategory(null);
@@ -137,12 +136,15 @@ const handleConfirmDelete = async () => {
                     concorrer na categoria escolhida.
                   </p>
                   <p className="font-semibold text-xs text-white mt-5">
-                    As categorias que estão meio apagadas se deve a alguns motivos. Primeiro, se o seu jogo não foi lançado, apenas a categoria &quot;Mais Aguardado&quot; estará disponível para voto. Caso o jogo a ser votado já lançou, a categoria &quot;Mais Aguardado&quot; ficará indisponível para voto.
+                    As categorias que estão meio apagadas se deve a alguns motivos. Primeiro, se o jogo não foi lançado, apenas a categoria &quot;Mais Aguardado&quot; estará disponível para voto. Caso o jogo a ser votado já lançou, a categoria &quot;Mais Aguardado&quot; ficará indisponível para voto.
+                  </p> 
+                  <p className="font-semibold text-xs text-white mt-5">
+                    O texto amarelo que aparece com o nome de algum outro jogo em uma das categorias, remete ao último jogo que você votou para essa categoria. Essa feature foi feita para lhe ajudar nos votos e ter uma noção dos jogos que você está votando.
                   </p> 
                   <input
                     value={searchCategory}
                     onChange={(e) => setSearchCategory(e.target.value)}
-                    className="outline-none py-3 px-4 text-xs border border-yellow-200 text-white bg-slate-900 w-full rounded-sm mt-5 placeholder-white"
+                    className="outline-none py-3 px-4 text-sm border border-yellow-200 text-white bg-slate-900 w-full rounded-sm mt-5 placeholder-white"
                     type="text"
                     placeholder="Procure por uma categoria"
                   />
@@ -166,6 +168,7 @@ const handleConfirmDelete = async () => {
 										  );
 										  const isMostAnticipated = category.id === 2;
 										  const isGameReleased = game.released;
+										  const lastVoted = preLastVotes.length > 0 ? preLastVotes.find((lastVote) => lastVote.category_id === category.id) : null;
 
 										  const isClickable =
 										    !isBlocked &&
@@ -194,18 +197,16 @@ const handleConfirmDelete = async () => {
 
 										  return (
 											  <div key={category.id} onClick={handleClick} className={containerClass}>
-											    <h3 className="uppercase text-white font-semibold">{category.title}</h3>
-											    {(isVoted || isBlocked) && (
-											      <>
-											        <p className="uppercase font-bold text-xs text-green-500 mt-2">
-											          {isVoted ? "VOTADO" : "CLASSIFICADO"}
-											        </p>
-												{/*<p className="uppercase font-bold text-xs text-yellow-200 mt-2">
-											          {preLastVotes.find(
-											            (lastVote) => lastVote.category_id === category.id && lastVote.project_id === game.id
-											          )?.id}
-											        </p>*/}
-											      </>
+											    <h3 className={`uppercase font-bold ${isVoted ? "text-yellow-200 line-through" : "text-white"}`}>{category.title}</h3>
+											    {isBlocked && (
+										        <p className="uppercase font-bold text-yellow-200 mt-2">
+										          CLASSIFICADO
+										        </p>
+											    )}
+											    {lastVoted && (
+							    					<p className="uppercase font-bold text-xs text-yellow-200 mt-2">
+							    	          {lastVoted.title}
+							    	        </p>
 											    )}
 											  </div>
 											);

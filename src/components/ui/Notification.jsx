@@ -30,7 +30,7 @@ const Notification = ({
       case "warning":
         return "bg-yellow-500 text-black";
       default:
-        return "bg-blue-500 text-white";
+        return "bg-gray-600 text-white";
     }
   };
 
