@@ -14,6 +14,7 @@ export default function IndicarFase1() {
   const [games, setGames] = useState([]);
   const [votedCategories, setVotedCategories] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
+  const [lastVotes, setLastVotes] = useState([]);
 
   async function fetchSearchGame() {
     setLoading(true);
@@ -52,17 +53,30 @@ export default function IndicarFase1() {
         setVotedCategories(body.votes);
     }
 
+    async function fetchLastUserVotes() {
+      const req = await fetch("/api/categories/last-user-votes", {
+        method: "POST",
+        body: JSON.stringify({ phase: "PHASE_1" })
+      });
+      const body = await req.json();
+
+      if (req.ok)
+        setLastVotes(body.votes);
+    }
+
     supabase.channel("custom-insert-channel")
     .on(
       "postgres_changes",
       { event: '*', schema: "public", table: "votes" },
       (payload) => {
         fetchUserVotes();
+        fetchLastUserVotes();
       }
     )
     .subscribe()
 
     fetchCategories();
+    fetchLastUserVotes();
     fetchUserVotes();
   }, []);
 
@@ -94,7 +108,7 @@ export default function IndicarFase1() {
         {!loading ? (
           <div className="my-5 gap-4 w-full items-center grid gap-4 grid-cols-1 lg:grid-cols-5">
             {games.map((game, index) => (
-              <VoteCategory key={index} game={game} preCategoriesList={categoriesList} preVotedCategories={votedCategories} disabled={isGameDisabled(game.publishedDate)}>
+              <VoteCategory key={index} game={game} preLastVotes={lastVotes} preCategoriesList={categoriesList} preVotedCategories={votedCategories} disabled={isGameDisabled(game.publishedDate)}>
                 <div onClick={() => {
                   setSelectedGame(game);
                     if (isGameDisabled(game.publishedDate)) {
