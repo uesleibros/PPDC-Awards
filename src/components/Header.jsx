@@ -20,7 +20,7 @@ export default function Header() {
 	}, []);
 
 	return (
-		<header className="bg-slate-900 min-h-[100px] p-4 flex flex-col lg:flex-row items-center justify-between">
+		<header className="bg-slate-900 min-h-[100px] py-4 px-5 lg:px-10 flex flex-col lg:flex-row items-center justify-between">
 			<div className="flex gap-4 items-center">
 				<div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
 					<Link href="/" className="font-bold w-[max-content] text-white hover:underline">INÍCIO</Link>

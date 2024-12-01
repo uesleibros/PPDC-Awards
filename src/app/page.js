@@ -136,7 +136,7 @@ export default function Home() {
               <Button url="/indicados" content="VOTE AGORA" />
             </div>
           </div>
-          <div className="relative mt-auto p-4 flex flex-col justify-center min-h-[100px] text-center backdrop-blur-lg bg-black/30">
+          <div className="relative mt-[20vh] lg:mt-0 p-4 flex flex-col justify-center min-h-[100px] text-center backdrop-blur-lg bg-black/30">
             <h2 className="uppercase font-extrabold text-xl text-white">A celebração global dos videogames</h2>
           </div>
         </div>

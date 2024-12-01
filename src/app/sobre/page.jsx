@@ -56,7 +56,7 @@ export default async function Indicados() {
         </div>
       </div>
       <div className="relative">
-        <div className="relative z-10 p-5">
+        <div className="relative z-10 p-5 lg:p-10">
           <h1 className="text-yellow-200 font-extrabold text-5xl">KIT DE MÍDIA</h1>
           <div className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-4">
             {mediaKits.map((kit, index) => (
@@ -74,7 +74,7 @@ export default async function Indicados() {
           <div className="absolute inset-0 bg-black opacity-70" />
         </div>
       </div>
-      <div className="min-h-[700px] bg-gradient-to-r from-[#6588ba] to-[#305f91] flex flex-col lg:flex-row justify-between lg:p-5 relative overflow-hidden">
+      <div className="min-h-[700px] bg-gradient-to-r from-[#6588ba] to-[#305f91] flex flex-col lg:flex-row justify-between lg:p-10 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="w-[300px] h-[300px] bg-[#4d719e] blur-[150px] rounded-full absolute top-20 left-20" />
           <div className="w-[200px] h-[200px] bg-[#5e82ad] blur-[100px] rounded-full absolute bottom-20 right-20" />
@@ -115,10 +115,10 @@ export default async function Indicados() {
           <p className="mt-5 font-semibold text-white max-w-[700px]">
             O Conselho não está envolvido na seleção dos indicados ou vencedores dos prêmios e toma conhecimento dos resultados da votação ao mesmo tempo que o público em geral. O conselho consultivo inclui:
           </p>
-          <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4">
             {advisors.map((advisor, index) => (
               <div key={index} className="flex flex-col lg:flex-row min-h-[200px] w-auto group">
-                <Image className="object-cover lg:object-fill h-[250px] lg:h-full w-full lg:w-[250px] transition-all duration-400 filter grayscale group-hover:grayscale-0" src={advisor.image} alt={advisor.member} width={1000} height={1000} quality={100} />
+                <Image className="object-cover h-[250px] lg:h-full w-full lg:w-[250px] transition-all duration-400 filter grayscale group-hover:grayscale-0" src={advisor.image} alt={advisor.member} width={1000} height={1000} quality={100} />
                 <div className="p-5 lg:p-10 border border-[#6588ba] w-full select-none transition-colors group-hover:bg-[#6588ba]">
                   {advisor.team && (
                     <h3 className="uppercase transition-colors group-hover:text-black text-gray-400 font-bold">
