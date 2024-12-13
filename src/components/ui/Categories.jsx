@@ -42,8 +42,8 @@ export default function Categories({ minimalist }) {
 							<h2 onClick={() => setOpenedCategories(false)} className="text-xl w-[max-content] font-bold text-right text-white cursor-pointer">FECHAR</h2>
 						</div>
 						<div>
-							<h1 className="text-5xl font-extrabold text-yellow-200">
-								<span className="text-white">{currentYear}</span> INDICADOS
+							<h1 className="text-5xl text-start font-extrabold text-yellow-200">
+								<span className="text-start text-white">{currentYear}</span> INDICADOS
 							</h1>
 							<input value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} className="outline-none py-3 px-4 text-sm border border-yellow-200 text-white bg-slate-900 w-full rounded-sm mt-5 placeholder-white" type="text" placeholder="Procure por uma categoria" />
 

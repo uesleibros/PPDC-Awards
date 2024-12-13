@@ -1,6 +1,10 @@
 import { createClient } from "@/lib/supabase-ssr";
+import { headers } from "next/headers";
 
 export async function POST(request) {
+  const headersList = await headers();
+  const protocol = headersList.get("x-forwarded-proto");
+  const host = headersList.get("host");
   const supabase = await createClient();
 	const { project_id, category_id, phase } = await request.json();
 	const { data: { user }, error } = await supabase.auth.getUser();
@@ -52,6 +56,25 @@ export async function POST(request) {
   const validPhases = ["PHASE_1", "PHASE_2"];
   if (!validPhases.includes(phase)) {
     return new Response(JSON.stringify({ error: "Fase inválida." }), { status: 400 });
+  }
+
+  const reqstatus = await fetch(`${protocol}://${host}/api/programing/check-available`);
+  const status = await reqstatus.json();
+
+  if (phase === "PHASE_1") {
+    if (status.first_stage_status !== "rolando") {
+      return new Response(
+        JSON.stringify({ error: `Não é possível votar, essa fase está listada como "${status.first_stage_status}".` }),
+        { status: 400 }
+      );
+    }
+  } else {
+    if (status.last_stage_status !== "rolando") {
+      return new Response(
+        JSON.stringify({ error: `Não é possível votar, essa fase está listada como "${status.first_stage_status}".` }),
+        { status: 400 }
+      );
+    }
   }
 
   const { data: voteCount, error: countError } = await supabase
@@ -113,6 +136,9 @@ export async function POST(request) {
 }
 
 export async function DELETE(request) {
+  const headersList = await headers();
+  const protocol = headersList.get("x-forwarded-proto");
+  const host = headersList.get("host");
   const supabase = await createClient();
   const { project_id, category_id, phase } = await request.json();
   const { data: { user }, error } = await supabase.auth.getUser();
@@ -164,6 +190,25 @@ export async function DELETE(request) {
   const validPhases = ["PHASE_1", "PHASE_2"];
   if (!validPhases.includes(phase)) {
     return new Response(JSON.stringify({ error: "Fase inválida." }), { status: 400 });
+  }
+
+  const reqstatus = await fetch(`${protocol}://${host}/api/programing/check-available`);
+  const status = await reqstatus.json();
+
+  if (phase === "PHASE_1") {
+    if (status.first_stage_status !== "rolando") {
+      return new Response(
+        JSON.stringify({ error: `Não é possível votar, essa fase está listada como "${status.first_stage_status}".` }),
+        { status: 400 }
+      );
+    }
+  } else {
+    if (status.last_stage_status !== "rolando") {
+      return new Response(
+        JSON.stringify({ error: `Não é possível votar, essa fase está listada como "${status.first_stage_status}".` }),
+        { status: 400 }
+      );
+    }
   }
 
   const { data: existingVote, error: voteError } = await supabase

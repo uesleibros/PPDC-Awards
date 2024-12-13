@@ -1,10 +1,30 @@
+import { headers } from "next/headers";
 import IndicarFase1 from "@/components/IndicarFase1";
+import WaitingRoom from "@/components/WaitingRoom";
 
 export const metadata = {
 	title: "Indicar Jogo - Fase 1 | PPDC Awards"
 };
 
-export default function IndicadosFase1() {
+export default async function IndicadosFase1() {
+	const headersList = await headers();
+  const protocol = headersList.get("x-forwarded-proto");
+  const host = headersList.get("host");
+
+	const reqstatus = await fetch(`${protocol}://${host}/api/programing/check-available`);
+	const bodystatus = await reqstatus.json();
+	let status = [];
+
+	if (reqstatus.ok) {
+	  status = bodystatus;
+	}
+
+	if (status.last_stage_status !== "rolando") {
+		return (
+			<WaitingRoom phase="Fase 1" />
+		);
+	}
+
 	return (
 		<div className="min-h-screen max-w-7xl mx-auto">
 			<div className="mt-10 p-5 lg:p-10">

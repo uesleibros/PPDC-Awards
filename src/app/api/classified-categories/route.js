@@ -24,7 +24,6 @@ async function fetchClassifiedCategories(projectId) {
   return classifiedCategories;
 }
 
-
 export async function POST(request) {
   const { project_id } = await request.json();
 

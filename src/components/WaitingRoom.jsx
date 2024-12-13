@@ -25,7 +25,7 @@ const phrases = [
   "Lorem Ipsum Dolor Sit Amet..."
 ];
 
-export default function Teste() {
+export default function WaitingRoom({ phase }) {
   const [currentPhrase, setCurrentPhrase] = useState(phrases[0]);
   const [fade, setFade] = useState(true);
   let index = 0;
@@ -64,7 +64,7 @@ export default function Teste() {
           >
             {currentPhrase}
           </h1>
-          <p className="text-xl select-none text-white mt-5 font-semibold">Ainda não começou. Ajeitem suas cadeiras, peguem a pipoca, e aguardem eternamente para o começo da fase 2.</p>
+          <p className="text-xl select-none text-white mt-5 font-semibold">Ainda não começou. Ajeitem suas cadeiras, peguem a pipoca, e aguardem eternamente para o começo da {phase}.</p>
         </div>
       </div>
     </div>

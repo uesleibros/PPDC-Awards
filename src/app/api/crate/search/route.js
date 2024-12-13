@@ -11,7 +11,7 @@ export async function POST(request) {
   } else {
     return new Response(
       JSON.stringify({ error: "Falhou ao buscar por esse jogo." }),
-      { status: 200 }
+      { status: 400 }
     );
   }
 }
