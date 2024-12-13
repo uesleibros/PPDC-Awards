@@ -1,40 +1,46 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+  <img src="./public/logo.png" width="100" height="100" />
 
-## Getting Started
+  # PPDC Awards
+</div>
 
-First, run the development server:
+> *"eu faço jogo no powerpoint mas eu juro que nao sou doente" - Primagi, Matheus*.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O **PPDC Awards** é uma premiação inovadora que celebra os melhores e mais criativos jogos feitos utilizando o **PowerPoint**. Este evento foi inspirado pelos grandes prêmios de jogos como o **The Game Awards**, mas com uma reviravolta única: reconhecer e premiar jogos criados dentro de uma ferramenta tradicionalmente usada para apresentações e não para o desenvolvimento de jogos.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## O Projeto
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+O **PPDC Awards** tem como objetivo dar visibilidade à comunidade de desenvolvedores de jogos no PowerPoint, incentivando a criatividade e a inovação. Embora o PowerPoint seja uma ferramenta amplamente reconhecida por seu uso em apresentações, muitos desenvolvedores têm explorado suas capacidades de forma criativa, criando experiências interativas que impressionam pela originalidade e pela utilização engenhosa dos recursos da plataforma.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+A premiação serve como um palco para esses desenvolvedores, permitindo que seus jogos sejam reconhecidos por sua inventividade. O evento busca destacar que, com a visão certa, qualquer ferramenta pode ser transformada em uma plataforma poderosa para criação de entretenimento digital.
 
-## Learn More
+## O Criador da Ideia
 
-To learn more about Next.js, take a look at the following resources:
+**Erick Luiz VB**, o criador do **PPDC Awards**, é um desenvolvedor de jogos apaixonado e apresentador que tem se destacado pela sua abordagem criativa no uso de plataformas não convencionais para o desenvolvimento de jogos. Nos últimos anos, Erick tem se dedicado à criação de jogos, produção de conteúdo relacionado à programação e desenvolvimento de novas ideias para o mundo dos videogames.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Luiz é mais conhecido pelo seu trabalho com o **EriLab**, uma equipe de desenvolvimento de jogos, e por suas criações, incluindo o famoso jogo **"Cão the Game"**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+A ideia por trás do **PPDC Awards** surgiu da vontade de Erick de demonstrar ao mundo as incríveis possibilidades do PowerPoint como plataforma de criação de jogos. A premiação não apenas celebra esses jogos inovadores, mas também promove a ideia de que qualquer plataforma, mesmo as mais inesperadas, pode ser usada para criar experiências de jogo imersivas e únicas.
 
-## Deploy on Vercel
+## Como Funciona?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+O **PPDC Awards** é um evento anual, e a participação é aberta para todos os desenvolvedores que criam jogos no PowerPoint. A premiação envolve um processo de inscrição, onde os desenvolvedores submetem seus jogos para avaliação e reconhecimento. Jogos são selecionados com base em critérios como originalidade, qualidade de execução e uso criativo das ferramentas do PowerPoint.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# PPDC-Awards
->>>>>>> ca18da70ffbba36e678bedb403ae78892964aadd
+Além disso, o evento não se limita a premiar apenas os jogos. Ele também serve como uma vitrine para as ideias mais inovadoras e criativas, fornecendo uma plataforma para que desenvolvedores e entusiastas compartilhem seu trabalho com o mundo.
+
+## A Missão do PPDC Awards
+
+O **PPDC Awards** visa:
+
+- Promover a **criatividade** e a **inovação** dentro da comunidade de desenvolvedores do PowerPoint.
+- Celebrar a **diversidade** de estilos e abordagens na criação de jogos.
+- Provar que qualquer ferramenta pode ser transformada em uma plataforma de criação de jogos incríveis.
+- Inspirar novos desenvolvedores a explorarem o potencial do PowerPoint de maneiras inesperadas e únicas.
+
+## Contribua com o PPDC Awards
+
+O **PPDC Awards** é uma celebração da criatividade coletiva. Se você deseja apoiar ou se envolver com o evento, há várias maneiras de contribuir:
+
+- **Participar**: Se você é um desenvolvedor, publique seu jogo e tenha a chance de ser premiado.
+- **Apoiar**: Ajude a divulgar o evento e os jogos premiados para que mais pessoas conheçam esse mundo criativo.
+- **Contribuir com ideias**: Se você tem sugestões de novas categorias ou formas de melhorar o evento, sua opinião é sempre bem-vinda.

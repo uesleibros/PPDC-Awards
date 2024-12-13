@@ -1,13 +1,72 @@
 import Button from "@/components/ui/Button";
 import Categories from "@/components/ui/Categories";
+import { headers } from "next/headers";
 
 export const metadata = {
-	title: "Indicados | PPDC Awards"
+  title: "Indicados | PPDC Awards"
 };
 
-export default function Indicados() {
-	return (
-		<div className="min-h-screen w-full">
+export default async function Indicados() {
+  const headersList = await headers();
+  const protocol = headersList.get("x-forwarded-proto");
+  const host = headersList.get("host");
+
+  const req = await fetch(`${protocol}://${host}/api/programing/check-available`);
+  const body = await req.json();
+  let status = [];
+
+  if (req.ok) {
+    status = body;
+  }
+
+  const getContent = () => {
+    if (status.event_ended) {
+      return (
+        <div className="text-center text-white">
+          <h1 className="font-extrabold text-5xl lg:text-7xl text-red-500">EVENTO ENCERRADO</h1>
+          <h2 className="mt-2 max-w-[700px] text-center mx-auto text-2xl font-bold text-slate-300">Obrigado por participar! Confira os vencedores em breve.</h2>
+        </div>
+      );
+    }
+
+    if (status.last_stage_status === "rolando") {
+      return (
+        <div className="text-center text-white">
+          <h1 className="font-extrabold text-5xl lg:text-7xl text-yellow-200">FASE 2 EM ANDAMENTO</h1>
+          <h2 className="mt-2 max-w-[700px] mx-auto text-center text-2xl font-bold text-slate-300">Vote agora na segunda fase e ajude a decidir os vencedores.</h2>
+          <div className="mt-10 flex justify-center items-center gap-4 flex-wrap">
+            <Categories />
+            <Button className="w-full" url="/indicados/votar/o-melhor-jogo" content="COMECE A VOTAR" />
+          </div>
+        </div>
+      );
+    }
+
+    if (status.first_stage_status === "rolando") {
+      return (
+        <div className="text-center text-white">
+          <h1 className="font-extrabold text-5xl lg:text-7xl text-yellow-200">FASE 1 EM ANDAMENTO</h1>
+          <h2 className="mt-2 max-w-[700px] mx-auto text-center text-2xl font-bold text-slate-300">Vote agora nos seus jogos favoritos para colocá-los na categoria que você acredita ser ideal para a Fase 2.</h2>
+          <div className="mt-10 flex justify-center items-center gap-4 flex-wrap">
+            <Button className="w-full" url="/indicados/votar" content="COMECE A VOTAR" />
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="text-center text-white">
+        <h1 className="font-extrabold text-5xl lg:text-7xl text-gray-500">EVENTO NÃO INICIADO</h1>
+        <h2 className="mt-2 max-w-[700px] text-center mx-auto text-2xl font-bold text-slate-300">Aguarde o início do evento para participar da votação.</h2>
+        <div className="mt-10 flex justify-center items-center gap-4 flex-wrap">
+          <Button className="w-full" url="/faq" content="VEJA O FAQS" />
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen w-full">
       <div className="relative">
         <div
           className="absolute z-0 inset-0 w-full h-full bg-cover bg-center"
@@ -25,15 +84,10 @@ export default function Indicados() {
 
         <div className="relative z-10 min-h-[700px] w-full">
           <div className="z-10 p-5 lg:px-[20vh] py-[40vh]">
-            <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-yellow-200">INDICADOS - FASE 1</h1>
-            <h2 className="mt-2 max-w-[700px] text-2xl font-bold text-slate-300">Vote agora ou veja os indicados deste ano. Descubra os vencedores ao vivo no PowerPoint Discord</h2>
-            <div className="mt-10 flex items-center gap-4 flex-wrap">
-              <Categories />
-              <Button url="/indicados/fase1" content="COMECE A VOTAR" />
-            </div>
+            {getContent()}
           </div>
         </div>
       </div>
     </div>
-	);
+  );
 }

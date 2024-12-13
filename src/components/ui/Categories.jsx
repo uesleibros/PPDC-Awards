@@ -49,7 +49,7 @@ export default function Categories({ minimalist }) {
 
 							<div className="mt-10 grid grid-cols-1 lg:grid-cols-5 gap-4">
 								{categoriasFiltradas.map((category, index) => (
-									<Link key={index} href={`/indicados/${category.title.toLowerCase().replaceAll(' ', '-')}`}>
+									<Link key={index} href={`/indicados/votar/${category.title.toLowerCase().replaceAll(' ', '-')}`}>
 										<div className="h-full lg:aspect-square cursor-pointer flex flex-col lg:justify-center border border-[#6588ba] p-4 lg:py-14 lg:px-17 lg:text-center lg:min-h-[100px] min-w-[100px] bg-[#0a0e13b3] transition-colors hover:bg-[#1e2938] hover:border-[#1e2938]">
 											<h3 className="uppercase text-white font-bold">{category.title}</h3>
 										</div>
