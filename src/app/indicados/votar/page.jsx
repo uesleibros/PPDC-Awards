@@ -19,7 +19,7 @@ export default async function IndicadosFase1() {
 	  status = bodystatus;
 	}
 
-	if (status.last_stage_status !== "rolando") {
+	if (status.first_stage_status !== "rolando") {
 		return (
 			<WaitingRoom phase="Fase 1" />
 		);
