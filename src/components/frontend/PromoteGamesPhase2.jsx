@@ -94,8 +94,8 @@ export default function PromoteGamesPhase2({ games, classifiedGamesCount, select
       <div className="max-w-7xl w-full mx-auto">
         <div className="mt-10 p-5 lg:p-10">
           <div>
-            <h1 className="uppercase text-6xl text-yellow-200 font-extrabold max-w-[700px]">{selectedCategory.current.title}</h1>
-            <p className="mt-5 text-2xl text-white font-semibold max-w-[700px]">{selectedCategory.current.description}</p>
+            <h1 className="uppercase text-6xl text-yellow-200 font-extrabold max-w-2xl">{selectedCategory.current.title}</h1>
+            <p className="mt-5 text-2xl text-white font-semibold max-w-2xl">{selectedCategory.current.description}</p>
           </div>
         </div>
         <div className="p-5 lg:p-10">
