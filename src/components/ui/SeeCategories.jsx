@@ -4,7 +4,7 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { useState, useEffect } from "react";
 
-export default function Categories({ minimalist }) {
+export default function SeeCategories({ minimalist }) {
 	const [openedCategories, setOpenedCategories] = useState(false);
 	const [categoriesList, setCategoriesList] = useState([]);
 	const [searchCategory, setSearchCategory] = useState('');

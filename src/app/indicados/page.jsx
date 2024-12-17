@@ -1,5 +1,5 @@
 import Button from "@/components/ui/Button";
-import Categories from "@/components/ui/Categories";
+import SeeCategories from "@/components/ui/SeeCategories";
 import { headers } from "next/headers";
 
 export const metadata = {
@@ -24,7 +24,10 @@ export default async function Indicados() {
       return (
         <div className="text-center text-white">
           <h1 className="font-extrabold text-5xl lg:text-7xl text-red-500">EVENTO ENCERRADO</h1>
-          <h2 className="mt-2 max-w-[700px] text-center mx-auto text-2xl font-bold text-slate-300">Obrigado por participar! Confira os vencedores em breve.</h2>
+          <h2 className="mt-2 max-w-[700px] text-center mx-auto text-2xl font-bold text-slate-300">Obrigado por participar! Confira os vencedores.</h2>
+          <div className="mt-10 flex justify-center items-center gap-4 flex-wrap">
+            <Button className="w-full" url="/indicados/vencedores/o-melhor-jogo" content="VENCEDORES" />
+          </div>
         </div>
       );
     }
@@ -35,7 +38,7 @@ export default async function Indicados() {
           <h1 className="font-extrabold text-5xl lg:text-7xl text-yellow-200">FASE 2 EM ANDAMENTO</h1>
           <h2 className="mt-2 max-w-[700px] mx-auto text-center text-2xl font-bold text-slate-300">Vote agora na segunda fase e ajude a decidir os vencedores.</h2>
           <div className="mt-10 flex justify-center items-center gap-4 flex-wrap">
-            <Categories />
+            <SeeCategories />
             <Button className="w-full" url="/indicados/votar/o-melhor-jogo" content="COMECE A VOTAR" />
           </div>
         </div>
@@ -46,9 +49,9 @@ export default async function Indicados() {
       return (
         <div className="text-center text-white">
           <h1 className="font-extrabold text-5xl lg:text-7xl text-yellow-200">FASE 1 EM ANDAMENTO</h1>
-          <h2 className="mt-2 max-w-[700px] mx-auto text-center text-2xl font-bold text-slate-300">Vote agora nos seus jogos favoritos para colocá-los na categoria que você acredita ser ideal para a Fase 2.</h2>
+          <h2 className="mt-2 max-w-[700px] mx-auto text-center text-2xl font-bold text-slate-300">Vote agora nos seus jogos favoritos para classificá-los na categoria que você acredita ser ideal para a Fase 2.</h2>
           <div className="mt-10 flex justify-center items-center gap-4 flex-wrap">
-            <Button className="w-full" url="/indicados/votar" content="COMECE A VOTAR" />
+            <Button className="w-full" url="/indicados/classificar" content="COMECE A VOTAR" />
           </div>
         </div>
       );

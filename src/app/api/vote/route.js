@@ -58,6 +58,21 @@ export async function POST(request) {
     return new Response(JSON.stringify({ error: "Fase inválida." }), { status: 400 });
   }
 
+  if (phase === "PHASE_2") {
+    const { data: votes } = await supabase
+      .from("votes")
+      .select("project_id")
+      .eq("project_id", project_id)
+      .eq("phase", "PHASE_1");
+
+    if (votes.length < 3) {
+      return new Response(
+        JSON.stringify({ error: "Você não pode votar em um jogo que não está classificado para a fase 2." }),
+        { status: 400 }
+      );
+    }
+  }
+
   const reqstatus = await fetch(`${protocol}://${host}/api/programing/check-available`);
   const status = await reqstatus.json();
 

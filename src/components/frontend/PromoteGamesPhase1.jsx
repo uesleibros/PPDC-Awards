@@ -7,7 +7,7 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Notification from "@/components/ui/Notification";
 
-export default function IndicarFase1() {
+export default function PromoteGamesPhase1() {
   const [openendInvalidGame, setOpenedInvalidGame] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [searchGame, setSearchGame] = useState("");

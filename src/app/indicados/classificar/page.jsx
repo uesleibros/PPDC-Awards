@@ -1,12 +1,12 @@
 import { headers } from "next/headers";
-import IndicarFase1 from "@/components/IndicarFase1";
+import PromoteGamesPhase1 from "@/components/frontend/PromoteGamesPhase1";
 import WaitingRoom from "@/components/WaitingRoom";
 
 export const metadata = {
-	title: "Indicar Jogo - Fase 1 | PPDC Awards"
+	title: "Classificar Jogo - Fase 1 | PPDC Awards"
 };
 
-export default async function IndicadosFase1() {
+export default async function ClassificarJogo() {
 	const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto");
   const host = headersList.get("host");
@@ -21,7 +21,7 @@ export default async function IndicadosFase1() {
 
 	if (status.first_stage_status !== "rolando") {
 		return (
-			<WaitingRoom phase="Fase 1" />
+			<WaitingRoom status={status.first_stage_status} phase="Fase 1" />
 		);
 	}
 
@@ -34,7 +34,7 @@ export default async function IndicadosFase1() {
 				</div>
 			</div>
 			<div className="p-5 lg:p-10">
-				<IndicarFase1 />
+				<PromoteGamesPhase1 />
 			</div>
 			<div className="top-0 left-0 z-[-10] h-screen w-full bg-[url('https://cdn.thegameawards.com/frontend/jpegs/mid-section-bg_24.jpg')] bg-center bg-cover bg-no-repeat pointer-events-none fixed">
 			  <div className="absolute inset-0 bg-black opacity-70" />
