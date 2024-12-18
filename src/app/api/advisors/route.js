@@ -1,10 +1,11 @@
-import supabase from "@/lib/supabase";
+import { getMiscAll } from "@/domain/usecases/get-misc-all-usecase";
 
 export async function GET() {
-	const { data: advisors, error } = await supabase.from("advisors").select('*');
-
-	if (error)
-		return Response.json({ error: "Failed to fetch advisors." }, { status: 400 });
-
-	return Response.json({ advisors }, { status: 200 });
+	try {
+		const result = await getMiscAll("advisors");
+		return new Response(JSON.stringify({ advisors: result }), { status: 200 });
+	} catch (error) {
+		console.error("Erro ao pegar dados:", error);
+    return new Response(JSON.stringify({ error: error.message }), { status: 400 });
+	}
 }

@@ -71,14 +71,14 @@ export default async function IndicarJogo({ params }) {
   if (Object.keys(currentCategory.current || {}).length === 0)
   	notFound();
 
-  const reqgamesid = await fetch(`${protocol}://${host}/api/get-games-by-category`, {
+  const reqgamesid = await fetch(`${protocol}://${host}/api/get-games-by-votes-category`, {
   	method: "POST",
-  	body: JSON.stringify({ category_id: currentCategory.current.id })
+  	body: JSON.stringify({ category_id: currentCategory.current.id, phase: "PHASE_1" })
   });
 
   const gameIDs = await reqgamesid.json();
 
-  const reqclassifiedgamescount = await fetch(`${protocol}://${host}/api/get-games-by-category/count-all`);
+  const reqclassifiedgamescount = await fetch(`${protocol}://${host}/api/get-games-by-votes-category/count-all`);
   const classifiedGamesCount = await reqclassifiedgamescount.json();
 
   const reqgames = await fetch(`${protocol}://${host}/api/crate/search/ids`, {

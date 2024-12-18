@@ -1,7 +1,6 @@
 export async function POST(request) {
   try {
     const { gameIDs } = await request.json();
-    console.log(gameIDs);
 
     if (!gameIDs || gameIDs.length === 0) {
       return new Response(

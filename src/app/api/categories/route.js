@@ -1,10 +1,15 @@
 import supabase from "@/lib/supabase";
+import { getAllCategories } from "@/domain/usecases/get-all-categories-usecase";
 
 export async function GET() {
-	const { data: categories, error } = await supabase.from("categories").select('*').order("created_at", { ascending: true });
-
-	if (error)
-		return Response.json({ error: "Falha ao pegar categorias." }, { status: 400 });
-
-	return Response.json({ categories }, { status: 200 });
+	try {
+		const categories = await getAllCategories();
+		return new Response(JSON.stringify({ categories }), { status: 200 });
+	} catch (error) {
+		console.error(`Falha ao pegar todas as categorias: ${error}`);
+		return new Response(
+			JSON.stringify({ error: error.message }),
+			{ status: 400 }
+		);
+	}
 }

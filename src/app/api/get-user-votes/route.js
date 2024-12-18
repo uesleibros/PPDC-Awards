@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase-ssr";
+import { getUserVotesByPhase } from "@/domain/usecases/get-user-votes-by-phase-usecase";
 
 export async function POST(request) {
 	const { phase } = await request.json();
@@ -16,11 +17,14 @@ export async function POST(request) {
     );
   }
 
-  const { data: votes } = await supabase
-    .from("votes")
-    .select("project_id, category_id")
-    .eq("phase", phase)
-    .eq("author_id", user.id);
-
-  return new Response(JSON.stringify({ votes }), { status: 200 });
+  try {
+    const votes = await getUserVotesByPhase(user.id, phase);
+    return new Response(JSON.stringify({ votes }), { status: 200 });
+  } catch (error) {
+    console.error("Erro no processo de votação:", error);
+    return new Response(
+      JSON.stringify({ error: error.message }),
+      { status: 400 }
+    );
+  }
 }

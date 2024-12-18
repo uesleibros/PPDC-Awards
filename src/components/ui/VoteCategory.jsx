@@ -22,7 +22,7 @@ export default function VoteCategory({ game, preLastVotes, preCategoriesList, pr
 
   useEffect(() => {
     async function fetchBlockedCategories() {
-    	const req = await fetch("/api/classified-categories", {
+    	const req = await fetch("/api/classified-game-categories", {
     		method: "POST",
     		body: JSON.stringify({ project_id: game.id })
     	});
@@ -176,9 +176,9 @@ export default function VoteCategory({ game, preLastVotes, preCategoriesList, pr
 
 										  const handleClick = () => {
 										    if (isBlocked) return;
-										    if (isVoted) {
+										    if (isVoted && !selectedCategory) {
 										      setSelectedRemoveCategory(category.id);
-										    } else if (isClickable && selectedCategory === null) {
+										    } else if (isClickable && selectedCategory === null && !selectedRemoveCategory) {
 										      setSelectedCategory(category.id);
 										    }
 										  };
@@ -200,7 +200,7 @@ export default function VoteCategory({ game, preLastVotes, preCategoriesList, pr
 											    <h3 className={`uppercase font-bold ${isVoted ? "text-yellow-200 line-through" : "text-white"}`}>{category.title}</h3>
 											    {isBlocked && (
 										        <p className="uppercase font-bold text-yellow-200 mt-2">
-										          CLASSIFICADO
+										          [ CLASSIFICADO ]
 										        </p>
 											    )}
 											    {lastVoted && (

@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase-ssr";
+import { getLastUserVotesByPhase } from "@/domain/usecases/get-last-user-votes-by-phase-usecase";
 
 export async function POST(request) {
   const { phase } = await request.json();
@@ -19,56 +20,14 @@ export async function POST(request) {
     );
   }
 
-  const { data: votes, error: votesError } = await supabase
-    .from("votes")
-    .select("project_id, category_id, created_at")
-    .eq("phase", phase)
-    .eq("author_id", user.id)
-    .order("created_at", { ascending: false });
-
-  if (votesError) {
+  try {
+    const lastVotes = await getLastUserVotesByPhase(user.id, phase);
+    return new Response(JSON.stringify({ lastVotes }), { status: 200 });
+  } catch (error) {
+    console.error("Erro no processo de votação:", error);
     return new Response(
-      JSON.stringify({ error: votesError.message }),
+      JSON.stringify({ error: error.message }),
       { status: 400 }
     );
   }
-
-  const lastVotesByCategory = votes.reduce((result, vote) => {
-    if (!result[vote.category_id] || new Date(vote.created_at) > new Date(result[vote.category_id].created_at)) {
-      result[vote.category_id] = vote;
-    }
-    return result;
-  }, {});
-
-  const votesWithTitles = await Promise.all(
-    Object.values(lastVotesByCategory).map(async (vote) => {
-      try {
-        const response = await fetch(
-          `https://pptgamespt.wixsite.com/crate/_functions/api/v3/projects/id/${vote.project_id}`
-        );
-        if (!response.ok) {
-          throw new Error(`Erro ao buscar o título do projeto ${vote.project_id}`);
-        }
-        const projectData = await response.json();
-        return {
-          category_id: vote.category_id,
-          project_id: vote.project_id,
-          title: projectData.title || "Título indisponível",
-          created_at: vote.created_at
-        };
-      } catch (error) {
-        return {
-          category_id: vote.category_id,
-          project_id: vote.project_id,
-          title: "Erro ao buscar título",
-          created_at: vote.created_at
-        };
-      }
-    })
-  );
-
-  return new Response(
-    JSON.stringify({ lastVotes: votesWithTitles }),
-    { status: 200, headers: { "Content-Type": "application/json" } }
-  );
 }
