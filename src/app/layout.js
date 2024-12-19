@@ -2,6 +2,7 @@ import { Open_Sans } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
+import { headers } from "next/headers";
 import "./globals.css";
 
 const font = Open_Sans({ subsets: ["latin"] });
@@ -27,16 +28,20 @@ export const viewport = {
   themeColor: "#000000",
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const headersList = await headers();
+  const url = new URL(headersList.get("referer"));
+  const pathname = url.pathname;
+  const isWinnersPage = pathname === "/vencedores";
   return (
     <html lang="pt-BR">
       <body
         className={`${font.className} antialiased`}
       >
         <NextTopLoader showSpinner={false} color="orange" zIndex="9999" />
-        <Header />
+        {!isWinnersPage && <Header />}
         {children}
-        <Footer />
+        {!isWinnersPage && <Footer />}
       </body>
     </html>
   );

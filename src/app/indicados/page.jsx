@@ -26,7 +26,7 @@ export default async function Indicados() {
           <h1 className="font-extrabold text-5xl lg:text-7xl text-red-500">EVENTO ENCERRADO</h1>
           <h2 className="mt-2 max-w-[700px] text-center mx-auto text-2xl font-bold text-slate-300">Obrigado por participar! Confira os vencedores.</h2>
           <div className="mt-10 flex justify-center items-center gap-4 flex-wrap">
-            <Button className="w-full" url="/indicados/vencedores/o-melhor-jogo" content="VENCEDORES" />
+            <Button className="w-full" url="/indicados/vencedores" content="VENCEDORES" />
           </div>
         </div>
       );
