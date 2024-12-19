@@ -1,8 +1,8 @@
 import { Open_Sans } from "next/font/google";
+import { headers } from "next/headers";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import NextTopLoader from "nextjs-toploader";
-import { headers } from "next/headers";
 import "./globals.css";
 
 const font = Open_Sans({ subsets: ["latin"] });
@@ -30,9 +30,7 @@ export const viewport = {
 
 export default async function RootLayout({ children }) {
   const headersList = await headers();
-  console.log(headersList.get("referer"));
-  const url = new URL(headersList.get("referer"));
-  const pathname = url.pathname;
+  const pathname = headersList.get("x-pathname");
   const isWinnersPage = pathname === "/vencedores";
   return (
     <html lang="pt-BR">
