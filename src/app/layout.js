@@ -30,6 +30,7 @@ export const viewport = {
 
 export default async function RootLayout({ children }) {
   const headersList = await headers();
+  console.log(headersList.get("referer"));
   const url = new URL(headersList.get("referer"));
   const pathname = url.pathname;
   const isWinnersPage = pathname === "/vencedores";
