@@ -1,7 +1,9 @@
 import { updateSession } from "@/lib/supabase-middleware";
 
 export async function middleware(request) {
-  return await updateSession(request)
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-pathname", request.nextUrl.pathname);
+  return await updateSession(request, requestHeaders);
 }
 
 export const config = {
