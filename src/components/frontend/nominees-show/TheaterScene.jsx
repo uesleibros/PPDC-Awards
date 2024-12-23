@@ -189,11 +189,11 @@ export default function TheaterScene() {
     addImageToScene("palco/gamer.png", camera.position.x - 4, camera.position.y, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "UmGamerQualquer - PPDiscord");
     addImageToScene("palco/erick.png", camera.position.x - 3, camera.position.y, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "Erick Luiz VB - PPDiscord");
     addImageToScene("palco/figames.png", camera.position.x - 4, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Figames - PPDiscord");
-    addImageToScene("palco/super_creeper.png", camera.position.x - 5, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Super Creeper - PPDiscord");
-    addImageToScene("palco/miguel_kj.png", camera.position.x - 2, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "MiguelKJ - PPDiscord");
-    addImageToScene("palco/zenon.png", camera.position.x - 1, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Zenon - PPDiscord");
+    addImageToScene("palco/super_creeper.png", camera.position.x - 4.7, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Super Creeper - PPDiscord");
+    addImageToScene("palco/miguel_kj.png", camera.position.x - 1.7, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "MiguelKJ - PPDiscord");
+    addImageToScene("palco/zenon.png", camera.position.x - 0.7, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Zenon - PPDiscord");
     addImageToScene("palco/arthu.png", camera.position.x, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Arthu - PPDiscord");
-    addImageToScene("palco/aten.png", camera.position.x + 1, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Aten - PPDiscord");
+    addImageToScene("palco/aten.png", camera.position.x + 0.7, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Aten - PPDiscord");
 
     // --- Marca ---
     addImageToScene("brand_logo.png", 30, 4, camera.position.z - 5, 15, 5, 0, -2);
