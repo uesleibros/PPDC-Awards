@@ -63,7 +63,7 @@ export default function TheaterScene() {
 
     const sound = new THREE.Audio(listener);
     const audioLoader = new THREE.AudioLoader();
-    audioLoader.setPath("sounds/").load("waiting-theme.ogg", function (buffer) {
+    audioLoader.load("sounds/waiting-theme.ogg", function (buffer) {
       sound.setBuffer(buffer);
       sound.setLoop(true);
       sound.setVolume(0.4);
