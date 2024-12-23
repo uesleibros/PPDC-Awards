@@ -268,6 +268,7 @@ export default function TheaterScene() {
           const left = new THREE.Vector3();
           camera.getWorldDirection(left);
           left.cross(camera.up).normalize();
+          left.negate();
 
           velocity.set(0, 0, 0);
           velocity.addScaledVector(left, moveSpeed);
