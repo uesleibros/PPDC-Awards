@@ -4,6 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import Image from "next/image";
 import * as THREE from "three";
 
 export default function TheaterScene() {
@@ -11,7 +12,10 @@ export default function TheaterScene() {
   const sceneRef = useRef(null);
   const rendererRef = useRef(null);
   const cameraRef = useRef(null);
+  const raycasterRef = useRef(new THREE.Raycaster());
+  const selectableObjects = useRef([]);
   const [isLocked, setIsLocked] = useState(false);
+  const [highlightedObject, setHighlightedObject] = useState(null);
 
   useEffect(() => {
     const geometries = {};
@@ -49,6 +53,10 @@ export default function TheaterScene() {
       1000
     );
     cameraRef.current = camera;
+
+    camera.position.set(6.2, 1, 14.3);
+    camera.lookAt(0, 0, -4);
+    scene.add(camera);
     
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.6/");
@@ -61,7 +69,6 @@ export default function TheaterScene() {
     const loadTexture = (url) => {
       if (!textures[url]) {
         textures[url] = textureLoader.load(url);
-        textures[url].encoding = THREE.sRGBEncoding;
         textures[url].generateMipmaps = true;
         textures[url].minFilter = THREE.LinearMipmapLinearFilter;
         textures[url].magFilter = THREE.LinearFilter;
@@ -69,27 +76,50 @@ export default function TheaterScene() {
       return textures[url];
     };
 
-    const addImageToScene = (imageUrl, x, y, z, width = 2, height = 2, rotationX = 0, rotationY = 0) => {
+    const addImageToScene = (imageUrl, x, y, z, width = 2, height = 2, rotationX = 0, rotationY = 0, rotationZ = 0, name = null) => {
       const geometryKey = `${width}-${height}`;
       if (!geometries[geometryKey]) {
         geometries[geometryKey] = new THREE.PlaneGeometry(width, height);
       }
 
       const texture = loadTexture(imageUrl);
-      const materialKey = imageUrl;
-      if (!materials[materialKey]) {
-        materials[materialKey] = new THREE.MeshStandardMaterial({
+      const frontMaterialKey = `front-${imageUrl}`;
+      const backMaterialKey = `back-${imageUrl}`;
+
+      if (!materials[frontMaterialKey]) {
+        materials[frontMaterialKey] = new THREE.MeshStandardMaterial({
           map: texture,
           transparent: true,
           depthWrite: false,
           alphaTest: 0.1,
+          side: THREE.FrontSide,
         });
       }
 
-      const plane = new THREE.Mesh(geometries[geometryKey], materials[materialKey]);
-      plane.position.set(x, y, z);
-      plane.rotation.set(rotationX, rotationY, 0);
-      scene.add(plane);
+      if (!materials[backMaterialKey]) {
+        materials[backMaterialKey] = new THREE.MeshBasicMaterial({
+          map: texture,
+          transparent: true,
+          depthWrite: false,
+          alphaTest: 0.1,
+          color: 0x000000,
+          side: THREE.BackSide,
+        });
+      }
+
+      const frontPlane = new THREE.Mesh(geometries[geometryKey], materials[frontMaterialKey]);
+      const backPlane = new THREE.Mesh(geometries[geometryKey], materials[backMaterialKey]);
+
+      const planeGroup = new THREE.Group();
+      planeGroup.add(frontPlane);
+      planeGroup.add(backPlane);
+
+      planeGroup.position.set(x, y, z);
+      planeGroup.rotation.set(rotationX, rotationY, rotationZ);
+      planeGroup.userData.name = name;
+      planeGroup.userData.imgSrc = imageUrl;
+      scene.add(planeGroup);
+      selectableObjects.current.push(planeGroup);
     };
 
     const loadModel = (path, fileName, callback) => {
@@ -100,7 +130,6 @@ export default function TheaterScene() {
           
           model.traverse((node) => {
             if (node.isMesh) {
-              console.log(node)
               if (node.geometry) {
                 node.geometry.computeBoundingSphere();
                 node.geometry.computeBoundingBox();
@@ -132,47 +161,141 @@ export default function TheaterScene() {
     });
 
     loadModel("models/gltf/", "starbucks_coffee.glb", (cup) => {
-      cup.position.set(0.3, -0.4, -0.4);
+      cup.position.set(0.4, -0.5, -0.5);
       camera.add(cup);
     });
 
-    addImageToScene("palco/daniel.png", 0, 1.7, -4);
-    addImageToScene("palco/jantar-donut_policia.png", 18, 1.7, 0);
+    // --- Jantar ---
+    addImageToScene("palco/jantar/donut_policia.png", 18, 1.7, -4, 2, 2, 0, 0, 0, "Donut Polícia - Jantar");
+    addImageToScene("palco/jantar/mostarda.png", camera.position.x + 1.5, camera.position.y - 0.3, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "Mostarda - Jantar");
+    addImageToScene("palco/jantar/repolho.png", camera.position.x + 2.5, camera.position.y - 0.3, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "Repolho - Jantar");
+    addImageToScene("palco/jantar/agua.png", camera.position.x - 10, camera.position.y, camera.position.z - 5, 1.4, 1.4, 0, Math.PI, 0, "Água - Jantar");
+    addImageToScene("palco/jantar/algodao_doce.png", camera.position.x - 3, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Algodão Doce - Jantar");
 
-    camera.position.set(6.2, 1, 14.3);
-    camera.lookAt(0, 0, -4);
-    scene.add(camera);
+    addImageToScene("palco/jantar/0_lactose.png", camera.position.x - 7.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "0 Lactose - Jantar");
+    addImageToScene("palco/jantar/cenoura.png", camera.position.x - 8.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Cenoura - Jantar");
+    addImageToScene("palco/jantar/milkzonho.png", camera.position.x - 9.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Milkzonho - Jantar");
+    addImageToScene("palco/jantar/queijo.png", camera.position.x - 10.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Queijo - Jantar");
+    addImageToScene("palco/jantar/ketchupdt_mais_ou_menos_do_tamanho_do_leite.png", camera.position.x - 11.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Ketchup Amongus - Jantar");
+    addImageToScene("palco/jantar/leite.png", camera.position.x - 12.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Leite - Jantar");
+    addImageToScene("palco/jantar/uva.png", camera.position.x - 13.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Uva - Jantar");
+    addImageToScene("palco/jantar/metal_leite.png", camera.position.x - 14.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Metal Leite - Jantar");
+    addImageToScene("palco/jantar/amiga_do_leite.png", camera.position.x - 15.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Amiga do Leite - Jantar");
 
-    addImageToScene("palco/jantar-mostarda.png", camera.position.x + 1.5, camera.position.y - 0.3, camera.position.z - 1, 1.4, 1.4);
-    addImageToScene("palco/jantar-repolho.png", camera.position.x + 2.5, camera.position.y - 0.3, camera.position.z - 1, 1.4, 1.4);
-    addImageToScene("palco/pedro.png", camera.position.x - 10, camera.position.y, camera.position.z - 1, 1.4, 1.4);
-    addImageToScene("palco/gamer.png", camera.position.x - 4, camera.position.y, camera.position.z - 1, 1.4, 1.4);
-    addImageToScene("palco/erick.png", camera.position.x - 3, camera.position.y, camera.position.z - 1, 1.4, 1.4);
-    addImageToScene("palco/figames.png", camera.position.x - 4, camera.position.y, camera.position.z - 0.01, 1.4, 1.4, 0, 1.5);
-    addImageToScene("palco/primagi.png", camera.position.x + 5, camera.position.y, camera.position.z - 3, 1.4, 1.4);
-    addImageToScene("palco/jantar-agua.png", camera.position.x - 10, camera.position.y, camera.position.z - 5, 1.4, 1.4);
+    // --- PPDiscord ---
+    addImageToScene("palco/daniel.png", 0, 1.7, -4, 2, 2, 0, 0, 0, "Daniel Clímaco - PPDiscord");
+    addImageToScene("palco/pedro.png", camera.position.x - 10, camera.position.y, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "Peedroplays - PPDiscord");
+    addImageToScene("palco/gamer.png", camera.position.x - 4, camera.position.y, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "UmGamerQualquer - PPDiscord");
+    addImageToScene("palco/erick.png", camera.position.x - 3, camera.position.y, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "Erick Luiz VB - PPDiscord");
+    addImageToScene("palco/figames.png", camera.position.x - 4, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Figames - PPDiscord");
+
+    // --- Marca ---
     addImageToScene("brand_logo.png", 30, 4, camera.position.z - 5, 15, 5, 0, -2);
     addImageToScene("brand_logo.png", -30, 4, camera.position.z - 5, 15, 5, 0, 2);
 
     const euler = new THREE.Euler(0, 0, 0, "YXZ");
     let frameId = null;
+    let isFreeCameraMode = false;
+    let isMovementMode = false;
+    
+    const velocity = new THREE.Vector3();
+    const moveSpeed = 0.1;
+    const direction = new THREE.Vector3();
+    let prevTime = performance.now();
+
+    function toggleFreeCameraMode() {
+      isFreeCameraMode = !isFreeCameraMode;
+    }
+
+    function toggleFreeMovementMode() {
+      isMovementMode = !isMovementMode;
+    }
 
     const onMouseMove = (event) => {
       if (document.pointerLockElement === mountRef.current) {
         euler.setFromQuaternion(camera.quaternion);
-        
+
         const newX = euler.x - event.movementY * 0.002;
         euler.x = Math.max(-Math.PI / 4, Math.min(Math.PI / 4, newX));
         
-        const newY = euler.y - event.movementX * 0.002;
-        euler.y = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, newY));
-        
+        if (isFreeCameraMode) {
+          euler.y -= event.movementX * 0.002;
+        } else {
+          const newY = euler.y - event.movementX * 0.002;
+          euler.y = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, newY));
+        }
+
         camera.quaternion.setFromEuler(euler);
+
+        raycasterRef.current.setFromCamera({ x: 0, y: 0 }, camera);
+        const intersects = raycasterRef.current.intersectObjects(selectableObjects.current, true);
+
+        if (intersects.length > 0) {
+          const selectedObject = intersects[0].object.parent;
+          if (selectedObject.userData.name && !highlightedObject) {
+            setHighlightedObject({ name: selectedObject.userData.name || null, imgSrc: selectedObject.userData.imgSrc || null });
+          }
+        } else {
+          setHighlightedObject(null);
+        }
       }
+    };
+
+    const onKeyDown = (event) => {
+      if (event.key === 'o' || event.key === 'O') {
+        toggleFreeCameraMode();
+      }
+
+      if (event.key === 'm' || event.key === 'M') {
+        toggleFreeMovementMode();
+      }
+
+      if (isMovementMode) {
+        const cameraDirection = new THREE.Vector3();
+        camera.getWorldDirection(cameraDirection);
+        cameraDirection.y = 0;
+
+        if (event.key === 'w' || event.key === 'W') {
+          velocity.set(0, 0, 0);
+          velocity.addScaledVector(cameraDirection, moveSpeed);
+        }
+        if (event.key === 's' || event.key === 'S') {
+          velocity.set(0, 0, 0);  
+          velocity.addScaledVector(cameraDirection, -moveSpeed);
+        }
+
+        if (event.key === 'a' || event.key === 'A') {
+          const left = new THREE.Vector3();
+          camera.getWorldDirection(left);
+          left.cross(camera.up).normalize();
+
+          velocity.set(0, 0, 0);
+          velocity.addScaledVector(left, moveSpeed);
+        }
+        if (event.key === 'd' || event.key === 'D') {
+          const right = new THREE.Vector3();
+          camera.getWorldDirection(right);
+          right.cross(camera.up).normalize();
+
+          velocity.set(0, 0, 0);
+          velocity.addScaledVector(right, moveSpeed);
+        }
+      }
+    };
+
+    const onKeyUp = (event) => {
+      if (event.key === 'w' || event.key === 's' || event.key === 'a' || event.key === 'd') {
+        velocity.set(0, 0, 0);
+      }
+    };
+
+    const moveCamera = () => {
+      camera.position.add(velocity);
     };
 
     const animate = () => {
       frameId = requestAnimationFrame(animate);
+      moveCamera();
       renderer.render(scene, camera);
     };
 
@@ -180,6 +303,8 @@ export default function TheaterScene() {
       if (frameId) cancelAnimationFrame(frameId);
       document.removeEventListener("pointerlockchange", onPointerLockChange);
       document.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keyup", onKeyUp);
       window.removeEventListener("resize", handleResize);
       
       Object.values(geometries).forEach(geometry => geometry.dispose());
@@ -203,6 +328,8 @@ export default function TheaterScene() {
 
     document.addEventListener("pointerlockchange", onPointerLockChange);
     document.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keyup", onKeyUp);
     window.addEventListener("resize", handleResize);
 
     return cleanup;
@@ -214,7 +341,7 @@ export default function TheaterScene() {
       onClick={() => mountRef.current.requestPointerLock()} 
       style={{ width: "100%", height: "100vh" }}
     >
-      {!isLocked && (
+      {!isLocked ? (
         <div style={{
           position: "absolute",
           top: "50%",
@@ -224,10 +351,63 @@ export default function TheaterScene() {
           color: "white",
           background: "rgba(0,0,0,0.7)",
           padding: "20px",
-          borderRadius: "10px"
+          borderRadius: "10px",
+          userSelect: "none"
         }}>
           CLIQUE NA TELA PARA OLHAR AO REDOR
         </div>
+      ) : (
+        <>
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: "20px",
+              height: "20px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                backgroundColor: "white",
+                width: "2px",
+                height: "100%",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                backgroundColor: "white",
+                width: "100%",
+                height: "2px",
+              }}
+            />
+          </div>
+          {highlightedObject && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: "10%",
+                left: "50%",
+                transform: "translateX(-50%)",
+                color: "white",
+                background: "rgba(0,0,0,0.7)",
+                padding: "10px",
+                borderRadius: "5px",
+              }}
+            >
+              <p>
+                {highlightedObject.name}
+              </p>
+              <Image className="mx-auto mt-1" src={`/${highlightedObject.imgSrc}`} alt={highlightedObject.name} width={40} height={40} quality={100} />
+            </div>
+          )}
+        </>
       )}
     </div>
   );
