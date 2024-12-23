@@ -155,7 +155,6 @@ export default function TheaterScene() {
     stageLight.position.set(0, 5, 0);
     scene.add(stageLight);
 
-
     loadModel("models/gltf/", "venue_stage_for_great_events.glb", (stage) => {
       scene.add(stage);
     });
@@ -181,6 +180,8 @@ export default function TheaterScene() {
     addImageToScene("palco/jantar/uva.png", camera.position.x - 13.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Uva - Jantar");
     addImageToScene("palco/jantar/metal_leite.png", camera.position.x - 14.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Metal Leite - Jantar");
     addImageToScene("palco/jantar/amiga_do_leite.png", camera.position.x - 15.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Amiga do Leite - Jantar");
+    addImageToScene("palco/jantar/maca.png", camera.position.x - 16.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Maçã - Jantar");
+    addImageToScene("palco/jantar/ameixa_seca.png", camera.position.x - 17.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Ameixa Seca - Jantar");
 
     // --- PPDiscord ---
     addImageToScene("palco/daniel.png", 0, 1.7, -4, 2, 2, 0, 0, 0, "Daniel Clímaco - PPDiscord");
