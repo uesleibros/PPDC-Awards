@@ -57,6 +57,18 @@ export default function TheaterScene() {
     camera.position.set(6.2, 1, 14.3);
     camera.lookAt(0, 0, -4);
     scene.add(camera);
+
+    const listener = new THREE.AudioListener();
+    camera.add(listener);
+
+    const sound = new THREE.Audio(listener);
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.setPath("sounds/").load("waiting-theme.ogg", function (buffer) {
+      sound.setBuffer(buffer);
+      sound.setLoop(true);
+      sound.setVolume(0.4);
+      sound.play();
+    });
     
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.6/");
