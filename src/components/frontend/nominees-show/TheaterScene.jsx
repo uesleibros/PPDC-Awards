@@ -4,7 +4,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
-import Image from "next/image";
 import * as THREE from "three";
 
 export default function TheaterScene() {
@@ -58,7 +57,7 @@ export default function TheaterScene() {
     camera.lookAt(0, 0, -4);
     scene.add(camera);
 
-    const listener = new THREE.AudioListener();
+    /*const listener = new THREE.AudioListener();
     camera.add(listener);
 
     const sound = new THREE.Audio(listener);
@@ -68,7 +67,7 @@ export default function TheaterScene() {
       sound.setLoop(true);
       sound.setVolume(0.4);
       sound.play();
-    });
+    });*/
     
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.6/");
@@ -178,33 +177,52 @@ export default function TheaterScene() {
 
     // --- Jantar ---
     addImageToScene("palco/jantar/donut_policia.png", 18, 1.7, -4, 2, 2, 0, 0, 0, "Donut Polícia - Jantar");
-    addImageToScene("palco/jantar/mostarda.png", camera.position.x + 1.5, camera.position.y - 0.3, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "Mostarda - Jantar");
-    addImageToScene("palco/jantar/repolho.png", camera.position.x + 2.5, camera.position.y - 0.3, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "Repolho - Jantar");
-    addImageToScene("palco/jantar/agua.png", camera.position.x - 10, camera.position.y, camera.position.z - 5, 1.4, 1.4, 0, Math.PI, 0, "Água - Jantar");
+    addImageToScene("palco/jantar/mostarda.png", camera.position.x + 1.5, camera.position.y - 0.3, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Mostarda - Jantar");
+    addImageToScene("palco/jantar/repolho.png", camera.position.x + 2.2, camera.position.y - 0.3, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Repolho - Jantar");
     addImageToScene("palco/jantar/algodao_doce.png", camera.position.x - 3, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Algodão Doce - Jantar");
     addImageToScene("palco/jantar/0_lactose.png", camera.position.x - 7.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "0 Lactose - Jantar");
-    addImageToScene("palco/jantar/cenoura.png", camera.position.x - 8.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Cenoura - Jantar");
-    addImageToScene("palco/jantar/milkzonho.png", camera.position.x - 9.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Milkzonho - Jantar");
-    addImageToScene("palco/jantar/queijo.png", camera.position.x - 10.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Queijo - Jantar");
-    addImageToScene("palco/jantar/ketchupdt_mais_ou_menos_do_tamanho_do_leite.png", camera.position.x - 11.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Ketchup Amongus - Jantar");
-    addImageToScene("palco/jantar/leite.png", camera.position.x - 12.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Leite - Jantar");
-    addImageToScene("palco/jantar/uva.png", camera.position.x - 13.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Uva - Jantar");
-    addImageToScene("palco/jantar/metal_leite.png", camera.position.x - 14.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Metal Leite - Jantar");
-    addImageToScene("palco/jantar/amiga_do_leite.png", camera.position.x - 15.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Amiga do Leite - Jantar");
-    addImageToScene("palco/jantar/maca.png", camera.position.x - 16.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Maçã - Jantar");
-    addImageToScene("palco/jantar/ameixa_seca.png", camera.position.x - 17.6, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Ameixa Seca - Jantar");
+    addImageToScene("palco/jantar/cenoura.png", camera.position.x - 8.2, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Cenoura - Jantar");
+    addImageToScene("palco/jantar/milkzonho.png", camera.position.x - 9.2, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Milkzonho - Jantar");
+    addImageToScene("palco/jantar/queijo.png", camera.position.x - 9.7, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Queijo - Jantar");
+    addImageToScene("palco/jantar/ketchupdt_mais_ou_menos_do_tamanho_do_leite.png", camera.position.x - 10.4, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Ketchup Amongus - Jantar");
+    addImageToScene("palco/jantar/leite.png", camera.position.x - 11.2, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Leite - Jantar");
+    addImageToScene("palco/jantar/uva.png", camera.position.x - 11.9, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Uva - Jantar");
+    addImageToScene("palco/jantar/metal_leite.png", camera.position.x - 12.7, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Metal Leite - Jantar");
+    addImageToScene("palco/jantar/amiga_do_leite.png", camera.position.x - 13.3, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Amiga do Leite - Jantar");
+    addImageToScene("palco/jantar/maca.png", camera.position.x - 14, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Maçã - Jantar");
+    addImageToScene("palco/jantar/ameixa_seca.png", camera.position.x - 14.8, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Ameixa Seca - Jantar");
+    addImageToScene("palco/jantar/mae_do_leite.png", camera.position.x - 15.7, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Mãe do Leite - Jantar");
+    addImageToScene("palco/jantar/requeijao.png", camera.position.x - 16.2, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Requeijão - Jantar");
+    addImageToScene("palco/jantar/coisa_nossa_bot.png", camera.position.x - 16.8, camera.position.y - 0.3, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Coisa Nossa BOT - Jantar");
 
     // --- PPDiscord ---
     addImageToScene("palco/daniel.png", 0, 1.7, -4, 2, 2, 0, 0, 0, "Daniel Clímaco - PPDiscord");
-    addImageToScene("palco/pedro.png", camera.position.x - 10, camera.position.y, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "Peedroplays - PPDiscord");
-    addImageToScene("palco/gamer.png", camera.position.x - 4, camera.position.y, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "UmGamerQualquer - PPDiscord");
-    addImageToScene("palco/erick.png", camera.position.x - 3, camera.position.y, camera.position.z - 1, 1.4, 1.4, 0, Math.PI, 0, "Erick Luiz VB - PPDiscord");
-    addImageToScene("palco/figames.png", camera.position.x - 4, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Figames - PPDiscord");
-    addImageToScene("palco/super_creeper.png", camera.position.x - 4.5, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Super Creeper - PPDiscord");
-    addImageToScene("palco/miguel_kj.png", camera.position.x - 2.5, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "MiguelKJ - PPDiscord");
-    addImageToScene("palco/zenon.png", camera.position.x - 1.5, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Zenon - PPDiscord");
-    addImageToScene("palco/arthu.png", camera.position.x, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Arthu - PPDiscord");
-    addImageToScene("palco/aten.png", camera.position.x + 0.5, camera.position.y, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Aten - PPDiscord");
+    addImageToScene("palco/pedro.png", camera.position.x - 10, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Peedroplays - PPDiscord");
+    addImageToScene("palco/gamer.png", camera.position.x - 3.9, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "UmGamerQualquer - PPDiscord");
+    addImageToScene("palco/erick.png", camera.position.x - 3.1, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Erick Luiz VB - PPDiscord");
+    addImageToScene("palco/davimac.png", camera.position.x - 2.4, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "DaviMac - PPDiscord");
+    addImageToScene("palco/gabb.png", camera.position.x - 1.5, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Gabb - PPDiscord");
+    addImageToScene("palco/fabinho.png", camera.position.x - 0.8, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Fabinho - PPDiscord");
+    addImageToScene("palco/fefe.png", camera.position.x - 0.2, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Fefe PPMations - PPDiscord");
+    addImageToScene("palco/erico.png", camera.position.x + 0.5, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Erico (Cockers) - PPDiscord");
+    addImageToScene("palco/mr_morian.png", camera.position.x + 2.7, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "MRMorian - PPDiscord");
+    addImageToScene("palco/tet.png", camera.position.x + 3.4, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "O Tet - PPDiscord");
+    addImageToScene("palco/rafael_espinheiro.png", camera.position.x + 4.2, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Rafael Espinheiro - PPDiscord");
+    addImageToScene("palco/richard.png", camera.position.x + 4.8, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Richard (ZMaster) - PPDiscord");
+    addImageToScene("palco/enzo.png", camera.position.x - 4.45, camera.position.y - 0.2, camera.position.z - 1.2, 1.4, 1.4, 0, Math.PI, 0, "Enzo da Órbita da Jogatina - PPDiscord");
+    addImageToScene("palco/figames.png", camera.position.x - 3.7, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Figames - PPDiscord");
+    addImageToScene("palco/super_creeper.png", camera.position.x - 4.4, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Super Creeper - PPDiscord");
+    addImageToScene("palco/miguel_kj.png", camera.position.x - 2.3, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "MiguelKJ - PPDiscord");
+    addImageToScene("palco/zenon.png", camera.position.x - 1.6, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Zenon - PPDiscord");
+    addImageToScene("palco/arthu.png", camera.position.x - 0.7, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Arthu - PPDiscord");
+    addImageToScene("palco/aten.png", camera.position.x + 0.1, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Aten - PPDiscord");
+    addImageToScene("palco/arfur.png", camera.position.x + 0.8, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Arfur - PPDiscord");
+    addImageToScene("palco/luscao.png", camera.position.x + 1.4, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Luscao - PPDiscord");
+    addImageToScene("palco/neutrico.png", camera.position.x + 1.9, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Apenas o Neutrico - PPDiscord");
+    addImageToScene("palco/luidy.png", camera.position.x + 2.7, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Luidy - PPDiscord");
+    addImageToScene("palco/taszite.png", camera.position.x + 3.4, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Taszite - PPDiscord");
+    addImageToScene("palco/cati.png", camera.position.x + 4.1, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "Cati - PPDiscord");
+    addImageToScene("palco/artur_sla.png", camera.position.x + 4.9, camera.position.y - 0.2, camera.position.z + 1.4, 1.4, 1.4, 0, Math.PI, 0, "ArturSLA - PPDiscord");
 
     // --- Marca ---
     addImageToScene("brand_logo.png", 30, 4, camera.position.z - 5, 15, 5, 0, -2);
@@ -249,7 +267,8 @@ export default function TheaterScene() {
 
         if (intersects.length > 0) {
           const selectedObject = intersects[0].object.parent;
-          if (selectedObject.userData.name && !highlightedObject) {
+          if (selectedObject.userData.name && selectedObject.userData.name !== highlightedObject?.name) {
+            console.log(selectedObject.userData.imgSrc)
             setHighlightedObject({ name: selectedObject.userData.name || null, imgSrc: selectedObject.userData.imgSrc || null });
           }
         } else {
@@ -422,7 +441,7 @@ export default function TheaterScene() {
               <p>
                 {highlightedObject.name}
               </p>
-              <Image className="mx-auto mt-1" src={`/${highlightedObject.imgSrc}`} alt={highlightedObject.name} width={40} height={40} quality={100} />
+              <img className="mx-auto mt-1 w-[40px] h-[40px]" src={`/${highlightedObject.imgSrc}`} alt={highlightedObject.name} />
             </div>
           )}
         </>
