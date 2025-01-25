@@ -43,21 +43,19 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
 			<div className="max-w-7xl w-full mx-auto">
 			  <div className="mt-10 p-5 lg:p-10">
 			    <div>
-			      <h1 className="uppercase text-6xl text-yellow-200 font-extrabold max-w-2xl">{selectedCategory.current.title}</h1>
+			      <h1 className="uppercase text-6xl text-yellow-200 font-extrabold max-w-2xl break-words">{selectedCategory.current.title}</h1>
 			      <p className="mt-5 text-xl text-white font-semibold max-w-2xl">{selectedCategory.current.description}</p>
 			    </div>
 			  </div>
 			  <div className="p-5 lg:p-10">
 			  	{games_pretty.length > 0 ? (
 			  		<div className="relative mt-5 w-full">
-              <div className="my-5 gap-4 w-full items-center grid gap-4 grid-cols-1 lg:grid-cols-5">
+              <div className="my-5 w-full items-center grid gap-20 grid-cols-1 lg:grid-cols-5">
               	{games_pretty.map((game, index) => (
               		<div key={index} className="mb-auto">
               			{game.most_votes && (
-              				<figure className="absolute left-5/4 -translate-x-5/4 -top-20 w-3/2">
-              					<img src="https://thegameawards.com/3d/confetti.gif" alt="Vencedor"className="mx-auto w-full" />
-              				</figure>
-              			)}
+						          <img src="https://thegameawards.com/3d/confetti.gif" alt="Vencedor" className="absolute invisible lg:visible -translate-x-[23%] -translate-y-[20%] z-[-1] w-1/3" />
+						        )}
               		  <div className={`lg:-ml-2 w-full mb-auto lg:w-[245px] h-auto ${game.most_votes ? "glow-card--hover" : "hover:glow-card--hover"} glow-card glow-card--mobile shadow-sm transition duration-200 group ${game.most_votes && "-translate-y-4"}`}>
               		    <div className="shadow-sm">
               		      <Image className={`lg:object-cover w-full lg:h-[245px] ${!game.most_votes && "filter grayscale"}`} src={game.icon} width={1000} height={1000} alt={game.title} quality={100} />

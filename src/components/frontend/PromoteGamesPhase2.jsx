@@ -94,14 +94,14 @@ export default function PromoteGamesPhase2({ games, classifiedGamesCount, select
       <div className="max-w-7xl w-full mx-auto">
         <div className="mt-10 p-5 lg:p-10">
           <div>
-            <h1 className="uppercase text-6xl text-yellow-200 font-extrabold max-w-2xl">{selectedCategory.current.title}</h1>
+            <h1 className="uppercase text-6xl text-yellow-200 font-extrabold max-w-2xl break-words">{selectedCategory.current.title}</h1>
             <p className="mt-5 text-xl text-white font-semibold max-w-2xl">{selectedCategory.current.description}</p>
           </div>
         </div>
         <div className="p-5 lg:p-10">
           {games.length > 0 ? (
             <div className="relative mt-5 w-full">
-              <div className="my-5 gap-4 w-full items-center grid gap-4 grid-cols-1 lg:grid-cols-5">
+              <div className="my-5 w-full items-center grid gap-20 grid-cols-1 lg:grid-cols-5">
                 {games.map((game, index) => {
                   const isVoted = votedCategories.some(
                     (vote) => vote.category_id === selectedCategory.current.id && vote.project_id === game.id

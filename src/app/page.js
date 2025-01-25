@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Button from "@/components/ui/Button";
+import { checkEventStatus } from "@/domain/usecases/check-status-programing-usecase";
 
-export default function Home() {
+export default async function Home() {
   const funFacts = [
     "Sabia que o PPDC Awards é tão épico que até o Crate Awards fica com ciúmes?",
     "Erickssen criou mais premiações do que o PowerPoint pode aguentar!",
@@ -108,6 +109,8 @@ export default function Home() {
   ];
   const randomFactIndex = Math.floor(Math.random() * funFacts.length);
   const randomFact = funFacts[randomFactIndex];
+  const programming = await checkEventStatus();
+  console.log(programming)
 
   return (
     <div className="min-h-screen w-full">
@@ -129,11 +132,27 @@ export default function Home() {
         <div className="relative z-10 min-h-[700px] w-full">
           <div className="z-10 p-5 lg:p-[20vh]">
             <Image src="/brand_logo.png" alt="PPDC Awards Brand Logo" width={500} height={500} quality={100} className="mb-5 lg:mb-0" />
-            <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-white">EM DEZEMBRO</h1>
+            <h1 className="-mt-10 font-extrabold text-5xl lg:text-7xl text-white">
+              {programming.event_ended
+                ? "CONHEÇA OS VENCEDORES"
+                : programming.first_stage_status === "não iniciado"
+                ? "EM BREVE"
+                : "COMECE A VOTAR"}
+              </h1>
             <h2 className="mt-2 text-4xl font-bold text-yellow-100">POWERPOINT DISCORD</h2>
             <div className="mt-10 flex items-center gap-4 flex-wrap">
               <Button url="/sobre#conselho-consultivo" variant={true} content="CONHEÇA O NOSSO CONSELHO CONSULTIVO" />
-              <Button url="/indicados" content="VOTE AGORA" />
+              {programming.first_stage_status !== "não iniciado" && (
+                <Button
+                  url="/indicados"
+                  content={
+                    programming.event_ended
+                      ? "CONHEÇA OS VENCEDORES"
+                      : programming.first_stage_status !== "não iniciado"
+                      && "VOTE AGORA"
+                  }
+                />
+              )}
             </div>
           </div>
           <div className="relative mt-[20vh] lg:mt-0 p-4 flex flex-col justify-center min-h-[100px] text-center backdrop-blur-lg bg-black/30">

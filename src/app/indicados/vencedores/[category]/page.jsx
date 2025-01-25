@@ -51,7 +51,7 @@ export default async function IndicadoVencedores({ params }) {
 
   if (!status.event_ended) {
   	return (
-  		<WaitingRoom status={status.event_ended} phase="Fim do Evento" />
+  		<WaitingRoom status="não iniciado" phase="Fim do Evento" />
   	);
   }
 
