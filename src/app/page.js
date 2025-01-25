@@ -110,7 +110,6 @@ export default async function Home() {
   const randomFactIndex = Math.floor(Math.random() * funFacts.length);
   const randomFact = funFacts[randomFactIndex];
   const programming = await checkEventStatus();
-  console.log(programming)
 
   return (
     <div className="min-h-screen w-full">

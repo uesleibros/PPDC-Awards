@@ -24,17 +24,24 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
 	}, []);
 
 	function addMostVotesFlag(games, gamesVotes) {
-	  return games.map((game) => {
-	    const hasMostVotes = gamesVotes.some(
-	      (vote) => vote.project_id === game.id && vote.vote_count > 0
-	    );
+	  const gameWithMostVotes = gamesVotes.reduce((maxVoteGame, vote) => {
+	    const currentGame = games.find(game => game.id === vote.project_id);
+	    if (!currentGame) return maxVoteGame;
+	    if (vote.vote_count > (maxVoteGame ? maxVoteGame.vote_count : -1)) {
+	      return { game: currentGame, vote_count: vote.vote_count };
+	    }
+	    return maxVoteGame;
+	  }, null);
 
+	  return games.map((game) => {
+	    const hasMostVotes = gameWithMostVotes && gameWithMostVotes.game.id === game.id;
 	    return {
 	      ...game,
 	      most_votes: hasMostVotes,
 	    };
 	  });
 	}
+
 	const games_pretty = addMostVotesFlag(games, gamesVotes);
 
 	return (
@@ -54,11 +61,18 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
               	{games_pretty.map((game, index) => (
               		<div key={index} className="mb-auto">
               			{game.most_votes && (
-						          <img src="https://thegameawards.com/3d/confetti.gif" alt="Vencedor" className="absolute invisible lg:visible -translate-x-[23%] -translate-y-[20%] z-[-1] w-1/3" />
+						          <img src="https://thegameawards.com/3d/confetti.gif" alt="Vencedor" className="select-none absolute invisible lg:visible -translate-x-[23%] -translate-y-[20%] z-[-1] w-1/3" />
 						        )}
               		  <div className={`lg:-ml-2 w-full mb-auto lg:w-[245px] h-auto ${game.most_votes ? "glow-card--hover" : "hover:glow-card--hover"} glow-card glow-card--mobile shadow-sm transition duration-200 group ${game.most_votes && "-translate-y-4"}`}>
               		    <div className="shadow-sm">
-              		      <Image className={`lg:object-cover w-full lg:h-[245px] ${!game.most_votes && "filter grayscale"}`} src={game.icon} width={1000} height={1000} alt={game.title} quality={100} />
+              		      <Image className={`select-none lg:object-cover w-full lg:h-[245px] ${!game.most_votes && "filter grayscale"}`} src={game.icon} width={1000} height={1000} alt={game.title} quality={100} />
+              		      {(game.most_votes && selectedCategory.current.title === "O Melhor Jogo") && (
+              		      	<Image className="select-none absolute -translate-y-[99%] right-[3%] w-3/5 z-10" src="/trofeu-mj.png" width={1000} height={1000} quality={100} alt="Troféu de Melhor Jogo" />
+              		      )}
+
+              		      {(game.most_votes && selectedCategory.current.title !== "O Melhor Jogo") && (
+              		      	<Image className="select-none absolute -translate-y-[220%] left-[10%] w-1/3 z-10" src="/medalha-derivados.png" width={1000} height={1000} quality={100} alt={`Medalha de ${selectedCategory.current.title}`} />
+              		      )}
               		      <div
               		        className={`w-full text-center p-6 ${
                             game.most_votes

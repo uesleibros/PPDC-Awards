@@ -12,7 +12,7 @@ export default class VoteRepository {
   async findAll(phase) {
     const { data, error } = await this.supabase
       .from("votes")
-      .select("project_id")
+      .select("project_id, category_id")
       .eq("phase", phase);
 
     if (error) {

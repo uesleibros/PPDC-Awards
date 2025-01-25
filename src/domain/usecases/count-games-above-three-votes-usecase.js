@@ -8,14 +8,16 @@ export async function countGamesAboveThreeVotes(phase) {
 
   const voteCounts = {};
   votes.forEach(vote => {
-    if (voteCounts[vote.project_id]) {
-      voteCounts[vote.project_id] += 1;
+    if (voteCounts[`${vote.project_id}${vote.category_id}`]) {
+      voteCounts[`${vote.project_id}${vote.category_id}`] += 1;
     } else {
-      voteCounts[vote.project_id] = 1;
+      voteCounts[`${vote.project_id}${vote.category_id}`] = 1;
     }
   });
 
-  const projectsAboveThreeVotes = Object.values(voteCounts).filter(count => count > 3);
+  console.log(voteCounts)
+
+  const projectsAboveThreeVotes = Object.values(voteCounts).filter(count => count >= 3);
 
   return {
     count: projectsAboveThreeVotes.length
