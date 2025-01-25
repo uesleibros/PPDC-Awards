@@ -1,7 +1,7 @@
 import Link from "next/link";
 import SeeCategories from "@/components/ui/SeeCategories";
 
-export default function VotingStatusBar({ votedCategories, classifiedGamesCount, selectedCategory }) {
+export default function VotingStatusBar({ votedCategories, classifiedGamesCount, selectedCategory, endEvent = false }) {
 	return (
 		<div className="bg-slate-700 flex flex-col items-center justify-center w-full p-5 shrink-nav">
 		  <div className="container flex flex-col gap-10 lg:gap-0 lg:flex-row items-center justify-between">
@@ -23,7 +23,7 @@ export default function VotingStatusBar({ votedCategories, classifiedGamesCount,
 		          Anterior
 		        </p>
 		      )}
-		      <SeeCategories minimalist={true} />
+		      <SeeCategories endEvent={endEvent} minimalist={true} />
 		      {selectedCategory.next ? ( 
 		        <Link className="uppercase hover:underline transition-colors hover:text-slate-300 flex items-center gap-2 font-bold text-white text-lg" href={`/indicados/votar/${selectedCategory.next.title.toLowerCase().replaceAll(' ', '-')}`}>
 		          Próximo

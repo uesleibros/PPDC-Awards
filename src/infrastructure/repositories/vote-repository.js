@@ -77,15 +77,20 @@ export default class VoteRepository {
     return !!existingVote;
   }
 
-  async getVoteCount(project_id, phase) {
-    const { data, error } = await this.supabase
-      .from("votes")
-      .select("id", { count: "exact" })
-      .eq("project_id", project_id)
-      .eq("phase", phase);
+  async getVoteCount(project_id, phase, category_id = null) {
+    let query = this.supabase
+        .from("votes")
+        .select("id", { count: "exact" })
+        .eq("project_id", project_id)
+        .eq("phase", phase);
+
+    if (category_id !== null)
+      query = query.eq("category_id", category_id);
+
+    const { data, error } = await query;
 
     if (error) throw new Error(`Erro ao contar votos: ${error.message}`);
-    return data.count;
+    return data.length;
   }
 
   async insertVote(project_id, category_id, phase, author_id) {

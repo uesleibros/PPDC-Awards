@@ -1,4 +1,4 @@
-import TheaterScene from "@/components/frontend/nominees-show/TheaterScene";
+//import TheaterScene from "@/components/frontend/nominees-show/TheaterScene";
 
 export const metadata = {
 	title: "Vencedores - PPDC Awards"
@@ -7,7 +7,7 @@ export const metadata = {
 export default function Vencedores() {
 	return (
 		<div>
-			<TheaterScene />
+			??? mistério, oh my god
 		</div>
 	);
 }

@@ -6,8 +6,6 @@ export async function getGamesByVotesAndCategory(category_id, phase) {
   
   const votes = await voteRepo.getVotesByCategory(category_id, phase);
 
-  console.log(votes)
-
   const voteCounts = {};
   votes.forEach(vote => {
     if (voteCounts[vote.project_id]) {
