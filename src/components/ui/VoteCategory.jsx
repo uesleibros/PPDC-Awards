@@ -95,6 +95,18 @@ export default function VoteCategory({ game, preLastVotes, preCategoriesList, pr
 	  }
 	};
 
+	useEffect(() => {
+	  if (openedChooseCategory) {
+	    document.body.style.overflow = "hidden";
+	  } else {
+	    document.body.style.overflow = "auto";
+	  }
+
+	  return () => {
+	    document.body.style.overflow = "auto";
+	  };
+	}, [openedChooseCategory]);
+
   const handleCancel = () => {
     setSelectedCategory(null);
   };
@@ -117,8 +129,8 @@ export default function VoteCategory({ game, preLastVotes, preCategoriesList, pr
             {children}
           </div>
           {openedChooseCategory && (
-            <div className="fixed inset-0 z-50 top-0 left-0 w-full h-full p-10 lg:px-[22vh] overflow-y-auto overscroll-contain">
-              <div>
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+              <div className="w-full h-full overflow-y-scroll p-10 lg:px-[22vh]">
                 <div className="mb-20 flex justify-end">
                   <h2
                     onClick={() => setOpenedChooseCategory(false)}
