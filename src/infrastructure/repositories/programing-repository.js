@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase-ssr";
+import supabase from "@/lib/supabase";
 
 export default class ProgramingRepository {
   constructor() {
@@ -7,7 +7,7 @@ export default class ProgramingRepository {
   }
 
   async init() {
-    this.supabase = await createClient();
+    this.supabase = supabase;
   }
 
   adjustToBrazilianTime(utcTimestamp) {
