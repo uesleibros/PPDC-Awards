@@ -16,7 +16,9 @@ export default async function ClassificadosFase1Debug() {
 
 	if (!authorizedList.includes(user?.user_metadata?.sub)) {
 		return (
-			"Você não é digno."
+			<div className="min-h-screen flex items-center justify-center text-red-500 text-xl">
+        Você não é digno.
+      </div>
 		);
 	}
 
