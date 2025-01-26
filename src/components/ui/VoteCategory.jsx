@@ -203,7 +203,7 @@ export default function VoteCategory({ game, preLastVotes, preCategoriesList, pr
 										          [ CLASSIFICADO ]
 										        </p>
 											    )}
-											    {lastVoted && (
+											    {(lastVoted && !isBlocked) && (
 							    					<p className="uppercase font-bold text-xs text-yellow-200 mt-2">
 							    	          {lastVoted.title}
 							    	        </p>
