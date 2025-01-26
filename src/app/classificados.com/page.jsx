@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default async function ClassificadosFase1Debug() {
-	const authorizedList = ["764259870563631114", "808627555027910676", "616386370063302686", "480338857724739594"];
+	const authorizedList = ["764259870563631114", "808627555027910676", "616386370063302686", "480338857724739594", "532970259422904340"];
 	const supabase = await createClient();
 	const { data: { user } } = await supabase.auth.getUser();
 
