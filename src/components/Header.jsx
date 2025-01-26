@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import AccountMenu from "@/components/ui/AccountMenu";
 import supabase from "@/lib/supabase-ssr-client";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +9,7 @@ import Link from "next/link";
 export default function Header() {
 	const [account, setAccount] = useState(null);
 	const [loaded, setLoaded] = useState(false);
+	const [openedAccount, setOpenedAccount] = useState(false);
 
 	useEffect(() => {
 		async function getLogin() {
@@ -33,7 +35,10 @@ export default function Header() {
 			<div className="mt-5 lg:mt-0">
 				{loaded ? (
 					account ? (
-						<Image className="rounded-full" src={account.user_metadata.avatar_url} alt={account.user_metadata.full_name} width={50} height={50} />
+						<div>
+							<Image onClick={() => setOpenedAccount(true)} className="cursor-pointer rounded-full" src={account.user_metadata.avatar_url} alt={account.user_metadata.full_name} width={50} height={50} />
+							{openedAccount && <AccountMenu me={account} setOpenedAccount={setOpenedAccount} />}
+						</div>
 					) : (
 						<a href="/api/auth/discord" className="cursor-pointer uppercase font-extrabold text-white text-lg">Entrar com o Discord</a>
 					)
