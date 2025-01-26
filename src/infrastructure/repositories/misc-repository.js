@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase-ssr";
+import supabase from "@/lib/supabase";
 
 export default class MiscRepository {
   constructor() {
@@ -6,7 +6,7 @@ export default class MiscRepository {
   }
 
   async init() {
-    this.supabase = await createClient();
+    this.supabase = supabase;
   }
 
   async findAll(name) {

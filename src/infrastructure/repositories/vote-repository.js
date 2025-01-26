@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase-ssr";
+import supabase from "@/lib/supabase";
 
 export default class VoteRepository {
   constructor() {
@@ -6,7 +6,7 @@ export default class VoteRepository {
   }
 
   async init() {
-    this.supabase = await createClient();
+    this.supabase = supabase;
   }
 
   async findAll(phase) {

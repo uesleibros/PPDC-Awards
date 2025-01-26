@@ -1,3 +1,5 @@
+import { getCrateProjectsByIDs } from "@/domain/usecases/get-crate-projects-by-ids-usecase";
+
 export async function POST(request) {
   try {
     const { gameIDs } = await request.json();
@@ -9,18 +11,7 @@ export async function POST(request) {
       );
     }
 
-    const fetchPromises = gameIDs.map(id =>
-      fetch(`https://pptgamespt.wixsite.com/crate/_functions/api/v3/projects/id/${id}`)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          return { error: `Falhou ao buscar o jogo ${id}` };
-        })
-        .catch(() => ({ error: `Erro ao buscar o jogo ${id}` }))
-    );
-
-    const gamesData = await Promise.all(fetchPromises);
+    const gamesData = await getCrateProjectsByIDs(gameIDs);
     return new Response(JSON.stringify(gamesData), { status: 200 });
   } catch (error) {
     console.error("Erro interno:", error);

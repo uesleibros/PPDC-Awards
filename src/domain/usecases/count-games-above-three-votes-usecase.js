@@ -15,8 +15,6 @@ export async function countGamesAboveThreeVotes(phase) {
     }
   });
 
-  console.log(voteCounts)
-
   const projectsAboveThreeVotes = Object.values(voteCounts).filter(count => count >= 3);
 
   return {
