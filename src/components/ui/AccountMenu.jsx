@@ -1,10 +1,15 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import supabase from "@/lib/supabase-ssr-client";
+/*import { getUserVotesByPhase } from "@/domain/usecases/get-user-votes-by-phase-usecase";
+import { getCrateProjectsByIDs } from "@/domain/usecases/get-crate-projects-by-ids-usecase";*/
 
 export default function AccountMenu({ me, setOpenedAccount }) {
+	const [log, setLogs] = useState([]);
+
 	async function signOutUser() {
 		await supabase.auth.signOut();
 		setOpenedAccount(false);
@@ -14,7 +19,7 @@ export default function AccountMenu({ me, setOpenedAccount }) {
 	return (
 		<div className="fixed inset-0 z-50 top-0 left-0 w-full h-full p-10 lg:px-[22vh] overflow-y-auto">
 			<div>
-				<div className="mb-20 flex justify-end">
+				<div className="mb-10 flex justify-end">
 					<h2 onClick={() => setOpenedAccount(false)} className="text-xl w-[max-content] font-bold text-right text-white cursor-pointer">FECHAR</h2>
 				</div>
 				<div className="grid grid-cols-1 lg:grid-cols-3">
