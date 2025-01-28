@@ -36,7 +36,7 @@ export default function Header() {
 				{loaded ? (
 					account ? (
 						<div>
-							<Image onClick={() => setOpenedAccount(true)} className="cursor-pointer rounded-full" src={account.user_metadata.avatar_url} alt={account.user_metadata.full_name} width={50} height={50} />
+							<Image onClick={() => setOpenedAccount(true)} className="cursor-pointer border-2 border-gray-300 rounded-full" src={account.user_metadata.avatar_url} alt={account.user_metadata.full_name} width={50} height={50} />
 							{openedAccount && <AccountMenu me={account} setOpenedAccount={setOpenedAccount} />}
 						</div>
 					) : (
