@@ -14,7 +14,6 @@ export default async function ClassificadosFase1Debug() {
   const protocol = headersList.get("x-forwarded-proto");
   const host = headersList.get("host");
 	const authorizedList = ["764259870563631114", "808627555027910676", "616386370063302686", "480338857724739594", "532970259422904340"];
-	const supabase = await createClient();
 	const response = await fetch(`${protocol}://${host}/api/auth`, {
     method: "GET"
   });
