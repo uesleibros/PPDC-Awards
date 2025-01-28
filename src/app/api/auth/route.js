@@ -1,9 +1,8 @@
-import { createClient } from "@/lib/supabase-ssr";
+import { createServerClient } from "@/lib/supabase-ssr";
 
 export async function GET(request) {
-  const supabase = await createClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
-  console.log(user);
 
   if (!user) {
     return new Response(
