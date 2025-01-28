@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase-ssr";
 export async function GET(request) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  console.log(user);
 
   if (!user) {
     return new Response(
