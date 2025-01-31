@@ -1,4 +1,5 @@
 import supabase from "@/lib/supabase";
+import { checkEventStatus } from "@/domain/usecases/check-status-programing-usecase";
 
 export default class VoteRepository {
   constructor() {
@@ -94,13 +95,15 @@ export default class VoteRepository {
   }
 
   async insertVote(project_id, category_id, phase, author_id) {
+    const { edition } = await checkEventStatus();
     const { error: insertError } = await this.supabase
       .from("votes")
       .insert({
         project_id,
         category_id,
         phase,
-        author_id
+        author_id,
+        edition
       });
 
     if (insertError)
@@ -108,12 +111,14 @@ export default class VoteRepository {
   }
 
   async removeVote(project_id, category_id, phase, author_id) {
+    const { edition } = await checkEventStatus();
     const { error: deleteError } = await this.supabase
       .from("votes")
       .delete()
       .eq("project_id", project_id)
       .eq("category_id", category_id)
       .eq("phase", phase)
+      .eq("edition", edition)
       .eq("author_id", author_id);
 
     if (deleteError)

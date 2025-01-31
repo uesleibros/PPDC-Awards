@@ -5,7 +5,7 @@ export async function checkEventStatus() {
 	await programingRepo.init();
 
 	const programing = await programingRepo.findProgramming();
-	const { first_stage, last_stage, end_event } = programing;
+	const { first_stage, last_stage, end_event, edition } = programing;
 
 	let first_stage_status = "não iniciado";
 	let last_stage_status = "não iniciado";
@@ -28,6 +28,7 @@ export async function checkEventStatus() {
 	return {
 	  first_stage_status,
 	  last_stage_status,
-	  event_ended
+	  event_ended,
+	  edition
 	};
 }

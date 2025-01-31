@@ -19,16 +19,24 @@ export default class ProgramingRepository {
   async findProgramming() {
   	const { data: programing, error } = await this.supabase
       .from("programing")
-      .select("first_stage, last_stage, end_event")
+      .select("first_stage, last_stage, end_event, edition")
+      .eq("active", true)
       .single();
 
-    if (error || !programing)
-      throw new Error("Nenhum registro encontrado.");
+    if (error || !programing) {
+      return {
+        first_stage: null,
+        last_stage: null,
+        end_event: null,
+        edition: null
+      }
+    }
 
     return {
       first_stage: programing.first_stage ? this.adjustToBrazilianTime(programing.first_stage) : null,
       last_stage: programing.last_stage ? this.adjustToBrazilianTime(programing.last_stage) : null,
       end_event: programing.end_event ? this.adjustToBrazilianTime(programing.end_event) : null,
+      edition: programing.edition
     };
   }
 }
