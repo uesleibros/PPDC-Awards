@@ -32,15 +32,6 @@ export default async function Indicados() {
       );
     }
 
-    if (status.end_phase_brutal === "PHASE_1") {
-      return (
-        <div className="text-center text-white">
-          <h1 className="font-extrabold text-5xl lg:text-7xl text-yellow-200">FASE 1 ENCERRADA</h1>
-          <h2 className="mt-2 max-w-[700px] mx-auto text-center text-2xl font-bold text-slate-300">A fase 1 foi encerrada, aguarde para que a fase 2 seja liberada.</h2>
-        </div>
-      );
-    }
-
     if (status.end_phase_brutal === "PHASE_2") {
       return (
         <div className="text-center text-white">
@@ -59,6 +50,15 @@ export default async function Indicados() {
             <SeeCategories />
             <Button className="w-full" url="/indicados/votar/o-melhor-jogo" content="COMECE A VOTAR" />
           </div>
+        </div>
+      );
+    }
+
+    if (status.end_phase_brutal === "PHASE_1") {
+      return (
+        <div className="text-center text-white">
+          <h1 className="font-extrabold text-5xl lg:text-7xl text-yellow-200">FASE 1 ENCERRADA</h1>
+          <h2 className="mt-2 max-w-[700px] mx-auto text-center text-2xl font-bold text-slate-300">A fase 1 foi encerrada, aguarde para que a fase 2 seja liberada.</h2>
         </div>
       );
     }
