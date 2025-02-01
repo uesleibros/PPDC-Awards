@@ -5,7 +5,7 @@ export async function checkEventStatus() {
 	await programingRepo.init();
 
 	const programing = await programingRepo.findProgramming();
-	const { first_stage, last_stage, end_event, edition } = programing;
+	const { first_stage, last_stage, end_event, end_phase_brutal, edition } = programing;
 
 	let first_stage_status = "não iniciado";
 	let last_stage_status = "não iniciado";
@@ -25,10 +25,16 @@ export async function checkEventStatus() {
 	  last_stage_status = "encerrado";
 	}
 
+	if (end_phase_brutal === "PHASE_1")
+		first_stage_status = "encerrado";
+	else if (end_phase_brutal === "PHASE_2")
+		last_stage_status = "encerrado";
+
 	return {
 	  first_stage_status,
 	  last_stage_status,
 	  event_ended,
+	  end_phase_brutal,
 	  edition
 	};
 }

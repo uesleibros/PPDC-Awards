@@ -19,7 +19,7 @@ export default class ProgramingRepository {
   async findProgramming() {
   	const { data: programing, error } = await this.supabase
       .from("programing")
-      .select("first_stage, last_stage, end_event, edition")
+      .select("first_stage, last_stage, end_event, end_phase_brutal, edition")
       .eq("active", true)
       .single();
 
@@ -28,6 +28,7 @@ export default class ProgramingRepository {
         first_stage: null,
         last_stage: null,
         end_event: null,
+        end_phase_brutal: null,
         edition: null
       }
     }
@@ -36,6 +37,7 @@ export default class ProgramingRepository {
       first_stage: programing.first_stage ? this.adjustToBrazilianTime(programing.first_stage) : null,
       last_stage: programing.last_stage ? this.adjustToBrazilianTime(programing.last_stage) : null,
       end_event: programing.end_event ? this.adjustToBrazilianTime(programing.end_event) : null,
+      end_phase_brutal: programing.end_phase_brutal,
       edition: programing.edition
     };
   }
