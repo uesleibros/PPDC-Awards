@@ -50,10 +50,9 @@ async function validateGame(project_id, category_id, isRemoving, phase) {
       throw new Error("Você não pode votar em outras categorias além de 'Mais Aguardado' para jogos não lançados.");
     }
 
-    const releaseYear = new Date(game.publishedDate).getFullYear();
-    const currentYear = new Date().getFullYear();
-
     if (phase === "PHASE_1") {
+      const releaseYear = new Date(game.publishedDate).getFullYear();
+      const currentYear = new Date().getFullYear();
       if (currentYear - releaseYear > 3) {
         throw new Error("O jogo foi lançado há mais de 3 anos.");
       }
