@@ -14,6 +14,12 @@ export async function vote(project_id, category_id, phase, author_id) {
   if (existingVote)
     throw new Error("Você já votou nesse jogo.");
 
+  if (phase === "PHASE_2") {
+    const alreadyLimitedQuotaPhase2 = await voteRepo.limitedVotesPhase2(category_id, author_id);
+    if (alreadyLimitedQuotaPhase2)
+      throw new Error("VOcê só pode votar em até 2 jogos por categoria.");
+  }
+
   await voteRepo.insertVote(project_id, category_id, phase, author_id);
 }
 
