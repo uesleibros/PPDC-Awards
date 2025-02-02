@@ -2,15 +2,17 @@ import VoteRepository from "@/infrastructure/repositories/vote-repository";
 import { detectCategoryIdExists } from "@/domain/usecases/detect-category-id-exists-usecase";
 import { checkEventStatus } from "@/domain/usecases/check-status-programing-usecase";
 
-export default async function getProjectsVotesPhase2(projectIds, category_id) {
+export default async function getProjectsVotesPhase2(projectIds, category_id, debugMode = false) {
   const voteRepo = new VoteRepository();
   await voteRepo.init();
 
   await detectCategoryIdExists(category_id);
   const status = await checkEventStatus();
 
-  if (!status.event_ended) {
-    throw new Error("O evento não acabou.");
+  if (!debugMode) {
+    if (!status.event_ended) {
+      throw new Error("O evento não acabou.");
+    }
   }
 
   const votes = await Promise.all(

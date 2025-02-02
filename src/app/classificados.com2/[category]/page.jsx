@@ -81,7 +81,7 @@ export default async function ClassificadosFase2Debug({ params }) {
 
   const reqgamesvotes = await fetch(`${protocol}://${host}/api/classified-game-categories/get-votes`, {
     method: "POST",
-    body: JSON.stringify({ gameIDs, category_id: currentCategory.current.id }),
+    body: JSON.stringify({ gameIDs, category_id: currentCategory.current.id, debugMode: true }),
   });
 
   const bodygamesvotes = await reqgamesvotes.json();

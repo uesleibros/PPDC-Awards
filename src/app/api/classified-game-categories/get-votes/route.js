@@ -2,7 +2,7 @@ import getProjectsVotesPhase2 from "@/domain/usecases/get-projects-votes-phase2-
 
 export async function POST(request) {
 	try {
-		const { gameIDs, category_id } = await request.json();
+		const { gameIDs, category_id, debugMode } = await request.json();
 
 		if (!gameIDs || !category_id) {
 		  return new Response(
@@ -18,7 +18,7 @@ export async function POST(request) {
 		  );
 		}
 
-		const votes = await getProjectsVotesPhase2(gameIDs, category_id);
+		const votes = await getProjectsVotesPhase2(gameIDs, category_id, debugMode || false);
 		return new Response(
 			JSON.stringify(votes),
 			{ status: 200 }
