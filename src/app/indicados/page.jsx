@@ -19,6 +19,8 @@ export default async function Indicados() {
     status = body;
   }
 
+  console.log(status)
+
   const getContent = () => {
     if (status.event_ended) {
       return (
