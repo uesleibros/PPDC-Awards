@@ -88,6 +88,8 @@ export default function PromoteGamesPhase2({ games, classifiedGamesCount, select
     }
   };
 
+  const sortedGames = [...games].sort((a, b) => a.title.localeCompare(b.title));
+
   return (
     <div>
       <VotingStatusBar votedCategories={votedCategories} classifiedGamesCount={classifiedGamesCount} selectedCategory={selectedCategory} />
@@ -99,10 +101,10 @@ export default function PromoteGamesPhase2({ games, classifiedGamesCount, select
           </div>
         </div>
         <div className="p-5 lg:p-10">
-          {games.length > 0 ? (
+          {sortedGames.length > 0 ? (
             <div className="relative mt-5 w-full">
               <div className="my-5 w-full items-center grid gap-20 grid-cols-1 lg:grid-cols-5">
-                {games.map((game, index) => {
+                {sortedGames.map((game, index) => {
                   const isVoted = votedCategories.some(
                     (vote) => vote.category_id === selectedCategory.current.id && vote.project_id === game.id
                   );
