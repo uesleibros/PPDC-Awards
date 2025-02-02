@@ -4,7 +4,7 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import { useState, useEffect } from "react";
 
-export default function SeeCategories({ minimalist, endEvent = false }) {
+export default function SeeCategories({ minimalist, debugMode = false, endEvent = false }) {
 	const [openedCategories, setOpenedCategories] = useState(false);
 	const [categoriesList, setCategoriesList] = useState([]);
 	const [searchCategory, setSearchCategory] = useState('');
@@ -60,7 +60,7 @@ export default function SeeCategories({ minimalist, endEvent = false }) {
 
 							<div className="mt-10 grid grid-cols-1 lg:grid-cols-5 gap-4">
 								{categoriasFiltradas.map((category, index) => (
-									<Link key={index} href={`/indicados/${endEvent ? "vencedores/" : "votar/"}${category.title.toLowerCase().replaceAll(' ', '-')}`}>
+									<Link key={index} href={`${debugMode ? "/classificados.com2/" : `/indicados/${endEvent ? "vencedores/" : "votar/"}`}${category.title.toLowerCase().replaceAll(' ', '-')}`}>
 										<div className="h-full lg:aspect-square cursor-pointer flex flex-col lg:justify-center border border-[#6588ba] p-4 lg:py-14 lg:px-17 lg:text-center lg:min-h-[100px] min-w-[100px] bg-[#0a0e13b3] transition-colors hover:bg-[#1e2938] hover:border-[#1e2938]">
 											<h3 className="uppercase text-white font-bold">{category.title}</h3>
 										</div>

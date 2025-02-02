@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import VotingStatusBar from "@/components/ui/VotingStatusBar";
 
-export default function ResultPromotedGames({ games, gamesVotes, classifiedGamesCount, selectedCategory }) {
+export default function ResultPromotedGames({ games, gamesVotes, classifiedGamesCount, selectedCategory, debugMode = false }) {
 	const [votedCategories, setVotedCategories] = useState([]);
 
 	useEffect(() => {
@@ -46,7 +46,7 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
 
 	return (
 		<div>
-			<VotingStatusBar endEvent={true} votedCategories={votedCategories} classifiedGamesCount={classifiedGamesCount} selectedCategory={selectedCategory} />
+			<VotingStatusBar debugMode={debugMode} endEvent={true} votedCategories={votedCategories} classifiedGamesCount={classifiedGamesCount} selectedCategory={selectedCategory} />
 			<div className="max-w-7xl w-full mx-auto">
 			  <div className="mt-10 p-5 lg:p-10">
 			    <div>
