@@ -1,4 +1,4 @@
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import PromoteGamesPhase2 from "@/components/frontend/PromoteGamesPhase2";
 import ResultPromotedGames from "@/components/frontend/ResultPromotedGames";
