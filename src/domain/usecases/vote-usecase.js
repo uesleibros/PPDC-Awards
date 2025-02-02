@@ -22,7 +22,7 @@ export async function removeVote(project_id, category_id, phase, author_id) {
   await voteRepo.init();
 
   await detectCategoryIdExists(category_id);
-  await validateGame(project_id, category_id, true);
+  await validateGame(project_id, category_id, true, phase);
   await validatePhase(phase, project_id, voteRepo, true);
 
   const existingVote = await voteRepo.existingVote(project_id, category_id, phase, author_id);
@@ -32,7 +32,7 @@ export async function removeVote(project_id, category_id, phase, author_id) {
   await voteRepo.removeVote(project_id, category_id, phase, author_id);
 }
 
-async function validateGame(project_id, category_id, isRemoving) {
+async function validateGame(project_id, category_id, isRemoving, phase) {
   const req = await fetch(`https://pptgamespt.wixsite.com/crate/_functions/api/v3/projects/id/${project_id}`);
   if (!req.ok) {
     throw new Error("Projeto não encontrado.");
@@ -53,8 +53,10 @@ async function validateGame(project_id, category_id, isRemoving) {
     const releaseYear = new Date(game.publishedDate).getFullYear();
     const currentYear = new Date().getFullYear();
 
-    if (currentYear - releaseYear > 3) {
-      throw new Error("O jogo foi lançado há mais de 3 anos.");
+    if (phase === "PHASE_1") {
+      if (currentYear - releaseYear > 3) {
+        throw new Error("O jogo foi lançado há mais de 3 anos.");
+      }
     }
   }
 }
