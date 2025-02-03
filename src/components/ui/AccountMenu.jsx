@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import supabase from "@/lib/supabase-ssr-client";
-/*import { getUserVotesByPhase } from "@/domain/usecases/get-user-votes-by-phase-usecase";
-import { getCrateProjectsByIDs } from "@/domain/usecases/get-crate-projects-by-ids-usecase";*/
 
 export default function AccountMenu({ me, setOpenedAccount }) {
 	const [log, setLogs] = useState([]);
@@ -33,7 +31,7 @@ export default function AccountMenu({ me, setOpenedAccount }) {
 				<div className="grid gap-10 grid-cols-1 lg:grid-cols-3">
 					<div className="flex flex-col items-center mx-auto">
 						<h2 className="uppercase text-4xl font-bold text-white mb-10 text-yellow-200">Meu Perfil</h2>
-						<Image className="rounded-full" src={me.user_metadata.avatar_url} alt={me.user_metadata.full_name} width={200} height={200} />
+						<Image className="rounded-full" src={`/api/discord-profile?id=${me.user_metadata.sub}`} alt={me.user_metadata.full_name} quality={100} width={200} height={200} />
 						<h2 className="uppercase text-2xl font-bold text-white mt-5">{me.user_metadata.full_name}</h2>
 						<Button onClick={signOutUser} variant={true} className="mt-10 w-full" content="Desconectar" />
 					</div>

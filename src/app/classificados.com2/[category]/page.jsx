@@ -1,5 +1,6 @@
 import { headers, cookies } from "next/headers";
 import { notFound } from "next/navigation";
+import { authorizedList } from "@/utils/helpers";
 import PromoteGamesPhase2 from "@/components/frontend/PromoteGamesPhase2";
 import ResultPromotedGames from "@/components/frontend/ResultPromotedGames";
 
@@ -13,7 +14,6 @@ export default async function ClassificadosFase2Debug({ params }) {
 	const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto");
   const host = headersList.get("host");
-	const authorizedList = ["764259870563631114", "808627555027910676", "616386370063302686", "480338857724739594", "532970259422904340"];
 	const cookiesList = await cookies();
 	const cookieHeader = cookiesList.toString();
 	const response = await fetch(`${protocol}://${host}/api/auth`, {
@@ -81,6 +81,10 @@ export default async function ClassificadosFase2Debug({ params }) {
 
   const reqgamesvotes = await fetch(`${protocol}://${host}/api/classified-game-categories/get-votes`, {
     method: "POST",
+    credentials: "include",
+    headers: {
+      Cookie: cookieHeader
+    },
     body: JSON.stringify({ gameIDs, category_id: currentCategory.current.id, debugMode: true }),
   });
 
@@ -90,10 +94,21 @@ export default async function ClassificadosFase2Debug({ params }) {
   if (reqgamesvotes.ok)
     gamesVotes = bodygamesvotes;
 
+  const reqgamesuservotes = await fetch(`${protocol}://${host}/api/get-user-votes/all-phase2`, {
+    method: "POST",
+    body: JSON.stringify({ category_id: currentCategory.current.id }),
+  });
+
+  const bodygamesuservotes = await reqgamesuservotes.json();
+  let gamesUserVotes = [];
+
+  if (reqgamesuservotes.ok)
+    gamesUserVotes = bodygamesuservotes;
+
 	return (
 		<div className="min-h-screen w-full">
 			<div className="relative">
-				<ResultPromotedGames debugMode={true} games={games} gamesVotes={gamesVotes} classifiedGamesCount={classifiedGamesCount} selectedCategory={currentCategory} />
+				<ResultPromotedGames debugMode={true} games={games} gamesVotes={gamesVotes} gamesUserVotes={gamesUserVotes?.votes} classifiedGamesCount={classifiedGamesCount} selectedCategory={currentCategory} />
 				<div className="top-0 left-0 z-[-10] h-screen w-full bg-[url('https://cdn.thegameawards.com/frontend/jpegs/mid-section-bg_24.jpg')] bg-center bg-cover bg-no-repeat pointer-events-none fixed">
 	        <div className="absolute inset-0 bg-black opacity-70" />
 	      </div>

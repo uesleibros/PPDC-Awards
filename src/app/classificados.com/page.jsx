@@ -4,6 +4,7 @@ import { getAllCategories } from "@/domain/usecases/get-all-categories-usecase";
 import { countGamesAboveThreeVotes } from "@/domain/usecases/count-games-above-three-votes-usecase";
 import { getCrateProjectsByIDs } from "@/domain/usecases/get-crate-projects-by-ids-usecase";
 import { headers, cookies } from "next/headers";
+import { authorizedList } from "@/utils/helpers";
 
 export const metadata = {
   title: "PPDC Awards - Classificados.com"
@@ -13,7 +14,6 @@ export default async function ClassificadosFase1Debug() {
 	const headersList = await headers();
   const protocol = headersList.get("x-forwarded-proto");
   const host = headersList.get("host");
-	const authorizedList = ["764259870563631114", "808627555027910676", "616386370063302686", "480338857724739594", "532970259422904340"];
 	const cookiesList = await cookies();
 	const cookieHeader = cookiesList.toString();
 	const response = await fetch(`${protocol}://${host}/api/auth`, {

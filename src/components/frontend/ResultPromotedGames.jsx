@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import VotingStatusBar from "@/components/ui/VotingStatusBar";
 
-export default function ResultPromotedGames({ games, gamesVotes, classifiedGamesCount, selectedCategory, debugMode = false }) {
+export default function ResultPromotedGames({ games, gamesVotes, classifiedGamesCount, selectedCategory, gamesUserVotes = null, debugMode = false }) {
 	const [votedCategories, setVotedCategories] = useState([]);
 
 	useEffect(() => {
@@ -59,7 +59,7 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
 			  		<div className="relative mt-5 w-full">
               <div className="my-5 w-full items-center grid gap-20 grid-cols-1 lg:grid-cols-5">
               	{games_pretty.map((game, index) => (
-              		<div key={index} className="mb-auto">
+              		<div key={index} className="mb-auto overflow-visible">
               			{game.most_votes && (
 						          <img src="https://thegameawards.com/3d/confetti.gif" alt="Vencedor" className="select-none absolute invisible lg:visible -translate-x-[23%] -translate-y-[20%] z-[-1] w-1/3" />
 						        )}
@@ -67,7 +67,7 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
               		    <div className="shadow-sm">
               		      <Image className={`select-none lg:object-cover w-full lg:h-[245px] ${!game.most_votes && "filter grayscale"}`} src={game.icon} width={1000} height={1000} alt={game.title} quality={100} />
               		      {(game.most_votes && selectedCategory.current.title === "O Melhor Jogo") && (
-              		      	<Image className="select-none absolute -translate-y-[99%] right-[3%] w-3/5 z-10" src="/trofeu-mj.png" width={1000} height={1000} quality={100} alt="Troféu de Melhor Jogo" />
+              		      	<Image className="select-none absolute -translate-y-[280%] right-[18%] w-3/5 z-10" src="/trofeu-mj.png" width={1000} height={1000} quality={100} alt="Troféu de Melhor Jogo" />
               		      )}
 
               		      {(game.most_votes && selectedCategory.current.title !== "O Melhor Jogo") && (
@@ -92,6 +92,22 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
               		      <h1 className="font text-lg text-zinc-200">
               		        {game.author.name}
               		      </h1>
+              		      {debugMode && (
+              		      	<div className="mt-2 flex items-center gap-2 flex-wrap">
+              		      		{gamesUserVotes.filter(gameUserVote => gameUserVote.project_id === game.id).map((gameUserVote, index) => (
+              		      			<div key={index} className="relative overflow-visible">
+												        <img
+												          src={`/api/discord-profile?id=${gameUserVote.author.raw_user_meta_data.sub}`}
+												          className="w-8 h-8 rounded-full peer"
+												        />
+												        {/* Tooltip */}
+												        <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 peer-hover:opacity-100 transition-opacity duration-300 bg-gray-800 text-white text-xs rounded py-1 px-2 pointer-events-none w-[max-content]">
+												          {gameUserVote.author.raw_user_meta_data.full_name} || {gameUserVote.author.raw_user_meta_data.custom_claims.global_name}
+												        </span>
+												      </div>
+              		      		))}
+              		      	</div>
+              		      )}
               		    </div>
               		  </div>
               		</div>

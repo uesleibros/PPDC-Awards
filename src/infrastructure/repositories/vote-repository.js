@@ -93,6 +93,25 @@ export default class VoteRepository {
     return count >= 2;
   }
 
+  async getUserVotesPhase2(category_id) {
+    const { data: votes, error: voteError } = await this.supabase
+      .from("votes")
+      .select(`
+        id,
+        author_id,
+        project_id,
+        author:user_profiles (email, raw_user_meta_data)
+      `, { count: "exact" })
+      .eq("category_id", category_id)
+      .eq("phase", "PHASE_2")
+
+    if (voteError) {
+      throw new Error(voteError.message);
+    }
+
+    return votes;
+  }
+
   async getVoteCount(project_id, phase, category_id = null) {
     let query = this.supabase
         .from("votes")

@@ -11,3 +11,5 @@ export async function fetchProjectDetails(project_id) {
   const projectData = await response.json();
   return projectData;
 }
+
+export const authorizedList = ["764259870563631114", "808627555027910676", "616386370063302686", "480338857724739594", "532970259422904340"];
