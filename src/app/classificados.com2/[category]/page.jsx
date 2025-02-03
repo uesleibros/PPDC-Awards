@@ -108,7 +108,7 @@ export default async function ClassificadosFase2Debug({ params }) {
 	return (
 		<div className="min-h-screen w-full">
 			<div className="relative">
-				<ResultPromotedGames debugMode={true} games={games} gamesVotes={gamesVotes} gamesUserVotes={gamesUserVotes?.votes} classifiedGamesCount={classifiedGamesCount} selectedCategory={currentCategory} />
+				<ResultPromotedGames debugMode={true} games={games} gamesVotes={gamesVotes} preGamesUserVotes={gamesUserVotes?.votes} classifiedGamesCount={classifiedGamesCount} selectedCategory={currentCategory} />
 				<div className="top-0 left-0 z-[-10] h-screen w-full bg-[url('https://cdn.thegameawards.com/frontend/jpegs/mid-section-bg_24.jpg')] bg-center bg-cover bg-no-repeat pointer-events-none fixed">
 	        <div className="absolute inset-0 bg-black opacity-70" />
 	      </div>

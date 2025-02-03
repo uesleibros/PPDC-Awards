@@ -100,6 +100,8 @@ export default class VoteRepository {
         id,
         author_id,
         project_id,
+        category_id,
+        phase,
         author:user_profiles (email, raw_user_meta_data)
       `, { count: "exact" })
       .eq("category_id", category_id)

@@ -4,9 +4,22 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import VotingStatusBar from "@/components/ui/VotingStatusBar";
+import Notification from "@/components/ui/Notification";
 
-export default function ResultPromotedGames({ games, gamesVotes, classifiedGamesCount, selectedCategory, gamesUserVotes = null, debugMode = false }) {
+export default function ResultPromotedGames({ games, gamesVotes, classifiedGamesCount, selectedCategory, preGamesUserVotes = null, debugMode = false }) {
 	const [votedCategories, setVotedCategories] = useState([]);
+	const [openedVote, setOpenedVote] = useState(false);
+	const [selectedState, setSelectedState] = useState({ game: null, user: null });
+	const [notifications, setNotifications] = useState([]);
+	const [gamesUserVotes, setGamesUserVotes] = useState(preGamesUserVotes);
+
+	const addNotification = (message, type, position) => {
+	  const id = Math.random().toString(36).substring(2, 9);
+	  setNotifications((prev) => [...prev, { id, message, type, position }]);
+	  setTimeout(() => {
+	    setNotifications((prev) => prev.filter((n) => n.id !== id));
+	  }, 4000);
+	};
 
 	useEffect(() => {
 	  async function fetchUserVotes() {
@@ -42,10 +55,37 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
 	  });
 	}
 
+	async function handleBruteForceRemoveVote() {
+		const req = await fetch("/api/brute-force/remove-phase2-vote", {
+			method: "POST",
+			body: JSON.stringify({
+				project_id: selectedState.user.project_id,
+				phase: selectedState.user.phase,
+				category_id: selectedState.user.category_id,
+				author_id: selectedState.user.author_id
+			})
+		});
+
+		if (req.ok) {
+			addNotification(
+			  `Voto removido de ${selectedState.user.author.raw_user_meta_data.full_name}${selectedState.user.author.raw_user_meta_data.custom_claims.global_name && ` (${selectedState.user.author.raw_user_meta_data.custom_claims.global_name})`} no jogo ${selectedState.game.title}.`,
+			  "success",
+			  "bottom-right"
+			);
+			setGamesUserVotes((prevVotes) =>
+	      prevVotes.filter((vote) => vote.id !== selectedState.user.id)
+	    );
+			setSelectedState({ game: null, user: null });
+			setOpenedVote(false);
+		} else {
+			addNotification(body.error, "warning", "bottom-right");
+		}
+	}
+
 	const games_pretty = addMostVotesFlag(games, gamesVotes);
 
 	return (
-		<div>
+		<div className="overflow-x-hidden">
 			<VotingStatusBar debugMode={debugMode} endEvent={true} votedCategories={votedCategories} classifiedGamesCount={classifiedGamesCount} selectedCategory={selectedCategory} />
 			<div className="max-w-7xl w-full mx-auto">
 			  <div className="mt-10 p-5 lg:p-10">
@@ -59,7 +99,7 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
 			  		<div className="relative mt-5 w-full">
               <div className="my-5 w-full items-center grid gap-20 grid-cols-1 lg:grid-cols-5">
               	{games_pretty.map((game, index) => (
-              		<div key={index} className="mb-auto overflow-visible">
+              		<div key={index} className="mb-auto">
               			{game.most_votes && (
 						          <img src="https://thegameawards.com/3d/confetti.gif" alt="Vencedor" className="select-none absolute invisible lg:visible -translate-x-[23%] -translate-y-[20%] z-[-1] w-1/3" />
 						        )}
@@ -98,11 +138,17 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
               		      			<div key={index} className="relative overflow-visible">
 												        <img
 												          src={`/api/discord-profile?id=${gameUserVote.author.raw_user_meta_data.sub}`}
-												          className="w-8 h-8 rounded-full peer"
+												          className="cursor-pointer w-8 h-8 rounded-full peer"
+												          onClick={() => {
+												          	setOpenedVote(true);
+												          	setSelectedState({
+												          		game,
+												          		user: gameUserVote
+												          	})
+												          }}
 												        />
-												        {/* Tooltip */}
 												        <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 peer-hover:opacity-100 transition-opacity duration-300 bg-gray-800 text-white text-xs rounded py-1 px-2 pointer-events-none w-[max-content]">
-												          {gameUserVote.author.raw_user_meta_data.full_name} || {gameUserVote.author.raw_user_meta_data.custom_claims.global_name}
+												          {gameUserVote.author.raw_user_meta_data.full_name}{gameUserVote.author.raw_user_meta_data.custom_claims.global_name && ` || ${gameUserVote.author.raw_user_meta_data.custom_claims.global_name}`}
 												        </span>
 												      </div>
               		      		))}
@@ -126,6 +172,43 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
 			  	)}
 			  </div>
 			</div>
+			{openedVote && selectedState && (
+			  <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-60 backdrop-blur-md p-5 lg:p-0">
+			    <div className="bg-slate-900 border border-yellow-200 shadow-lg max-w-[700px] w-full p-8">
+			      <h1 className="text-yellow-200 font-extrabold text-3xl mb-6">REMOVE VOTO DE {selectedState.user.author.raw_user_meta_data.full_name}{selectedState.user.author.raw_user_meta_data.custom_claims.global_name && ` (${selectedState.user.author.raw_user_meta_data.custom_claims.global_name})`}</h1>
+			      <p className="text-white text-lg mb-6">
+			        <strong>Após remover o voto dele do jogo <strong>{selectedState.game.title}</strong>, essa ação não poderá ser desfeita. Com muito cuidado, prossiga e escolha sua decisão.</strong>
+			      </p>
+			      <div className="flex justify-end gap-4">
+			      	<button
+			      	  onClick={handleBruteForceRemoveVote}
+			      	  className="px-6 py-3 text-sm font-bold text-black bg-red-400 rounded-md hover:bg-red-500 transition"
+			      	>
+			      	  REMOVER
+			      	</button>
+			        <button
+			          onClick={() => setOpenedVote(false)}
+			          className="px-6 py-3 text-sm font-bold text-black bg-yellow-200 rounded-md hover:bg-yellow-300 transition"
+			        >
+			          DEIXA PRA LÁ
+			        </button>
+			      </div>
+			    </div>
+			  </div>
+			)}
+			{debugMode && (
+				notifications.map((notif) => (
+				  <Notification
+				    key={notif.id}
+				    message={notif.message}
+				    type={notif.type}
+				    position={notif.position}
+				    onClose={() =>
+				      setNotifications((prev) => prev.filter((n) => n.id !== notif.id))
+				    }
+				  />
+				))
+			)}
 		</div>
 	);
 }
