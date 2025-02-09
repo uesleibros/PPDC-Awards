@@ -106,13 +106,6 @@ export default function ResultPromotedGames({ games, gamesVotes, classifiedGames
               		  <div className={`lg:-ml-2 w-full mb-auto lg:w-[245px] h-auto ${game.most_votes ? "glow-card--hover" : "hover:glow-card--hover"} glow-card glow-card--mobile shadow-sm transition duration-200 group ${game.most_votes && "-translate-y-4"}`}>
               		    <div className="shadow-sm">
               		      <Image className={`select-none lg:object-cover w-full lg:h-[245px] ${!game.most_votes && "filter grayscale"}`} src={game.icon} width={1000} height={1000} alt={game.title} quality={100} />
-              		      {(game.most_votes && selectedCategory.current.title === "O Melhor Jogo") && (
-              		      	<Image className="select-none absolute -translate-y-[280%] right-[18%] w-3/5 z-10" src="/trofeu-mj.png" width={1000} height={1000} quality={100} alt="Troféu de Melhor Jogo" />
-              		      )}
-
-              		      {(game.most_votes && selectedCategory.current.title !== "O Melhor Jogo") && (
-              		      	<Image className="select-none absolute -translate-y-[220%] left-[10%] w-1/3 z-10" src="/medalha-derivados.png" width={1000} height={1000} quality={100} alt={`Medalha de ${selectedCategory.current.title}`} />
-              		      )}
               		      <div
               		        className={`w-full text-center p-6 ${
                             game.most_votes
